@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import routers from './routes/routes.js';
 import authrouter from './routes/Authroutes.js';
+import path from 'path';
 
 dotenv.config();
 const app = express();
@@ -25,8 +26,26 @@ app.use(cors());
 app.use('/api', routers);
 app.use('/api/auth', authrouter);
 
+const PORT = process.env.PORT || 4000;
 
+// Serve static files in production
+if (process.env.NODE_ENV === 'production') {
+    const staticPath = path.resolve('client', 'dist');
+    app.use(express.static(staticPath));
+    console.log(`Serving static files from ${staticPath}`);
 
-app.listen(process.env.PORT, () => {
-    console.log(`Server is running on port ${process.env.PORT}`);
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(staticPath, 'index.html'), (err) => {
+            if (err) {
+                console.error('Error serving index.html:', err.message);
+                res.status(500).send('Internal Server Error');
+            }
+        });
+    });
+} else {
+    console.log('Running in development mode');
+}
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
