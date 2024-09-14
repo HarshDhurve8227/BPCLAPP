@@ -30,11 +30,20 @@ const PORT = process.env.PORT || 4000;
 
 // Serve static files in production
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.resolve('client', 'dist')));
+    const staticPath = path.resolve('client', 'dist');
+    app.use(express.static(staticPath));
+    console.log(`Serving static files from ${staticPath}`);
 
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve('client', 'dist', 'index.html'));
+        res.sendFile(path.resolve(staticPath, 'index.html'), (err) => {
+            if (err) {
+                console.error('Error serving index.html:', err.message);
+                res.status(500).send('Internal Server Error');
+            }
+        });
     });
+} else {
+    console.log('Running in development mode');
 }
 
 app.listen(PORT, () => {
