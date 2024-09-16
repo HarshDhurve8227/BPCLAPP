@@ -12,7 +12,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://bpcl-927d463771fb.herokuapp.com/api/auth/login', {
+      const response = await fetch('https://bpcl2024-a36b07a626d7.herokuapp.com/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
