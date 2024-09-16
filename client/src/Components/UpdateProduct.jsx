@@ -82,7 +82,7 @@ export default function UpdateProduct() {
             setLoading(true);
             setError("");
 
-            const response = await axios.put(`http://localhost:4000/api/${department}/update/${id}`, value);
+            const response = await axios.put(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/${department}/update/${id}`, value);
 
             if (response.data.success) {
                 toast.success(response.data.Message);

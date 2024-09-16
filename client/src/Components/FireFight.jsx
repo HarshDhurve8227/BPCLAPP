@@ -42,7 +42,7 @@ export default function FireFight() {
         console.log(`Deleting product with id: ${id}`);
 
         try {
-            const response = await axios.delete(`http://localhost:4000/api/${department}/delete/${id}`);
+            const response = await axios.delete(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/${department}/delete/${id}`);
 
             if (response.data.success) {
                 console.log(response.data.message);
