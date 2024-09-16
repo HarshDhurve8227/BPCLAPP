@@ -20,7 +20,7 @@ const Signup = () => {
     }
 
     try {
-      const { data } = await axios.post('http://localhost:4000/api/auth/register', { email, password }, {
+      const { data } = await axios.post('https://bpcl2024-a36b07a626d7.herokuapp.com/api/auth/register', { email, password }, {
         headers: {
           'Content-Type': 'application/json'
         }

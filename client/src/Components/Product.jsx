@@ -11,7 +11,7 @@ export default function Products() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const fetchUser = await axios.get(`http://localhost:4000/api/${department}/product`);
+                const fetchUser = await axios.get(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/${department}/product`);
                 const response = fetchUser.data;
                 console.log('API Response:', response); // Log the response to check its structure
                 

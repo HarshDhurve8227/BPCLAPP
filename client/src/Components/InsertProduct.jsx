@@ -65,7 +65,7 @@ export default function InsertProduct() {
             }
 
             // Construct the endpoint based on department
-            const endpoint = `http://localhost:4000/api/${department}/create`;
+            const endpoint = `https://bpcl2024-a36b07a626d7.herokuapp.com/api/${department}/create`;
             console.log('Constructed Endpoint:', endpoint); // For debugging
 
             // Perform the POST request
