@@ -9,7 +9,7 @@ const Signup = () => {
   const [error, setError] = useState(''); // State for error message
 
   // Define the correct security code
-  const correctSecurityCode = '12345'; // Replace with your actual security code
+  const correctSecurityCode = '24093412'; // Replace with your actual security code
 
   const handleSubmit = async (e) => {
     e.preventDefault();

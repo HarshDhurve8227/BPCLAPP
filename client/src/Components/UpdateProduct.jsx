@@ -50,21 +50,15 @@ export default function UpdateProduct() {
     useEffect(() => {
         const availableStock = parseFloat(value.AvailableStock) || 0;
         const minStock = parseFloat(value.MinStock) || 0;
-        const excessShortFall =  availableStock - minStock;
+        const excessShortFall = availableStock - minStock;
 
         setValue(prevValue => ({
             ...prevValue,
-            ExcessShortFall: excessShortFall
+            ExcessShortFall: excessShortFall,
+            // Optional: Update StatusofOrder based on new ExcessShortFall
+            StatusofOrder: excessShortFall <= 0 ? 'Order to place' : prevValue.StatusofOrder
         }));
     }, [value.AvailableStock, value.MinStock]);
-
-    // Update StatusofOrder based on ExcessShortFall
-    useEffect(() => {
-        setValue(prevValue => ({
-            ...prevValue,
-            StatusofOrder: prevValue.ExcessShortFall <= 0 ? 'Order to place' : 'Available'
-        }));
-    }, [value.ExcessShortFall]);
 
     // Handle input changes
     const changeHandler = (e) => {
@@ -208,6 +202,7 @@ export default function UpdateProduct() {
                     <input
                         type="text"
                         name='StatusofOrder'
+                        onChange={changeHandler} // Allow user to edit
                         value={value.StatusofOrder || ""}
                         className="form-control fs-5"
                         id="StatusofOrder"
