@@ -8,11 +8,11 @@ export default function About(){
 
 <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
         RACK 01
       </button>
     </h2>
-    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingOne">
       <div class="accordion-body">
         <strong>Table </strong>
       </div>
@@ -21,11 +21,11 @@ export default function About(){
 
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
         RACK 02
       </button>
     </h2>
-    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
+    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingTwo">
       <div class="accordion-body">
         <strong>Table </strong>
       </div>
@@ -34,11 +34,11 @@ export default function About(){
 
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true" aria-controls="panelsStayOpen-collapseThree">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
         RACK 03
       </button>
     </h2>
-    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
+    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingThree">
       <div class="accordion-body">
         <strong>Table </strong>
       </div>
@@ -48,11 +48,11 @@ export default function About(){
 
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingFour">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="true" aria-controls="panelsStayOpen-collapseFour">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
         RACK 04
       </button>
     </h2>
-    <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingFour">
+    <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingFour">
       <div class="accordion-body">
         <strong>Table </strong>
       </div>
@@ -61,11 +61,11 @@ export default function About(){
 
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingFive">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="true" aria-controls="panelsStayOpen-collapseFive">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
         RACK 05
       </button>
     </h2>
-    <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingFive">
+    <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingFive">
       <div class="accordion-body">
         <strong>Table </strong>
       </div>
@@ -75,11 +75,11 @@ export default function About(){
 
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingSix">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="true" aria-controls="panelsStayOpen-collapseSix">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false" aria-controls="panelsStayOpen-collapseSix">
         RACK 06
       </button>
     </h2>
-    <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingSix">
+    <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingSix">
       <div class="accordion-body">
         <strong>Table </strong>
       </div>
@@ -89,11 +89,11 @@ export default function About(){
 
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingSeven">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="true" aria-controls="panelsStayOpen-collapseSeven">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="false" aria-controls="panelsStayOpen-collapseSeven">
         RACK 07
       </button>
     </h2>
-    <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingSeven">
+    <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingSeven">
       <div class="accordion-body">
         <strong>Table </strong>
       </div>
@@ -107,7 +107,7 @@ export default function About(){
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#panelsStayOpen-collapseEight"
-      aria-expanded="true"
+      aria-expanded="false"
       aria-controls="panelsStayOpen-collapseEight"
     >
       RACK 08
@@ -115,7 +115,7 @@ export default function About(){
   </h2>
   <div
     id="panelsStayOpen-collapseEight"
-    className="accordion-collapse collapse show"
+    className="accordion-collapse collapse "
     aria-labelledby="panelsStayOpen-headingEight"
   >
     <div className="accordion-body">
@@ -132,7 +132,7 @@ export default function About(){
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#panelsStayOpen-collapseNine"
-      aria-expanded="true"
+      aria-expanded="false"
       aria-controls="panelsStayOpen-collapseNine"
     >
       RACK 09
@@ -140,7 +140,7 @@ export default function About(){
   </h2>
   <div
     id="panelsStayOpen-collapseNine"
-    className="accordion-collapse collapse show"
+    className="accordion-collapse collapse "
     aria-labelledby="panelsStayOpen-headingNine"
   >
     <div className="accordion-body">
@@ -158,7 +158,7 @@ export default function About(){
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#panelsStayOpen-collapseTen"
-      aria-expanded="true"
+      aria-expanded="false"
       aria-controls="panelsStayOpen-collapseTen"
     >
       RACK 10
@@ -166,7 +166,7 @@ export default function About(){
   </h2>
   <div
     id="panelsStayOpen-collapseTen"
-    className="accordion-collapse collapse show"
+    className="accordion-collapse collapse "
     aria-labelledby="panelsStayOpen-headingTen"
   >
     <div className="accordion-body">
@@ -184,7 +184,7 @@ export default function About(){
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#panelsStayOpen-collapseEleven"
-      aria-expanded="true"
+      aria-expanded="false"
       aria-controls="panelsStayOpen-collapseEleven"
     >
       RACK 11
@@ -192,7 +192,7 @@ export default function About(){
   </h2>
   <div
     id="panelsStayOpen-collapseEleven"
-    className="accordion-collapse collapse show"
+    className="accordion-collapse collapse "
     aria-labelledby="panelsStayOpen-headingEleven"
   >
     <div className="accordion-body">
@@ -212,7 +212,7 @@ export default function About(){
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#panelsStayOpen-collapseTwelve"
-      aria-expanded="true"
+      aria-expanded="false"
       aria-controls="panelsStayOpen-collapseTwelve"
     >
       RACK 12
@@ -220,7 +220,7 @@ export default function About(){
   </h2>
   <div
     id="panelsStayOpen-collapseTwelve"
-    className="accordion-collapse collapse show"
+    className="accordion-collapse collapse "
     aria-labelledby="panelsStayOpen-headingTwelve"
   >
     <div className="accordion-body">
@@ -237,7 +237,7 @@ export default function About(){
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#panelsStayOpen-collapseThirteen"
-      aria-expanded="true"
+      aria-expanded="false"
       aria-controls="panelsStayOpen-collapseThirteen"
     >
       RACK 13
@@ -245,7 +245,7 @@ export default function About(){
   </h2>
   <div
     id="panelsStayOpen-collapseThirteen"
-    className="accordion-collapse collapse show"
+    className="accordion-collapse collapse "
     aria-labelledby="panelsStayOpen-headingThirteen"
   >
     <div className="accordion-body">
@@ -262,7 +262,7 @@ export default function About(){
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#panelsStayOpen-collapseFourteen"
-      aria-expanded="true"
+      aria-expanded="false"
       aria-controls="panelsStayOpen-collapseFourteen"
     >
       RACK 14
@@ -270,7 +270,7 @@ export default function About(){
   </h2>
   <div
     id="panelsStayOpen-collapseFourteen"
-    className="accordion-collapse collapse show"
+    className="accordion-collapse collapse "
     aria-labelledby="panelsStayOpen-headingFourteen"
   >
     <div className="accordion-body">
@@ -287,7 +287,7 @@ export default function About(){
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#panelsStayOpen-collapseFifteen"
-      aria-expanded="true"
+      aria-expanded="false"
       aria-controls="panelsStayOpen-collapseFifteen"
     >
       RACK 15
@@ -295,7 +295,7 @@ export default function About(){
   </h2>
   <div
     id="panelsStayOpen-collapseFifteen"
-    className="accordion-collapse collapse show"
+    className="accordion-collapse collapse "
     aria-labelledby="panelsStayOpen-headingFifteen"
   >
     <div className="accordion-body">
@@ -312,7 +312,7 @@ export default function About(){
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#panelsStayOpen-collapseSixteen"
-      aria-expanded="true"
+      aria-expanded="false"
       aria-controls="panelsStayOpen-collapseSixteen"
     >
       RACK 16
@@ -320,7 +320,7 @@ export default function About(){
   </h2>
   <div
     id="panelsStayOpen-collapseSixteen"
-    className="accordion-collapse collapse show"
+    className="accordion-collapse collapse "
     aria-labelledby="panelsStayOpen-headingSixteen"
   >
     <div className="accordion-body">
@@ -337,7 +337,7 @@ export default function About(){
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#panelsStayOpen-collapseSeventeen"
-      aria-expanded="true"
+      aria-expanded="false"
       aria-controls="panelsStayOpen-collapseSeventeen"
     >
       RACK 17
@@ -345,7 +345,7 @@ export default function About(){
   </h2>
   <div
     id="panelsStayOpen-collapseSeventeen"
-    className="accordion-collapse collapse show"
+    className="accordion-collapse collapse "
     aria-labelledby="panelsStayOpen-headingSeventeen"
   >
     <div className="accordion-body">
@@ -362,7 +362,7 @@ export default function About(){
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#panelsStayOpen-collapseEighteen"
-      aria-expanded="true"
+      aria-expanded="false"
       aria-controls="panelsStayOpen-collapseEighteen"
     >
       RACK 18
@@ -370,7 +370,7 @@ export default function About(){
   </h2>
   <div
     id="panelsStayOpen-collapseEighteen"
-    className="accordion-collapse collapse show"
+    className="accordion-collapse collapse "
     aria-labelledby="panelsStayOpen-headingEighteen"
   >
     <div className="accordion-body">
@@ -387,7 +387,7 @@ export default function About(){
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#panelsStayOpen-collapseNineteen"
-      aria-expanded="true"
+      aria-expanded="false"
       aria-controls="panelsStayOpen-collapseNineteen"
     >
       RACK 19
@@ -395,7 +395,7 @@ export default function About(){
   </h2>
   <div
     id="panelsStayOpen-collapseNineteen"
-    className="accordion-collapse collapse show"
+    className="accordion-collapse collapse "
     aria-labelledby="panelsStayOpen-headingNineteen"
   >
     <div className="accordion-body">
@@ -412,7 +412,7 @@ export default function About(){
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#panelsStayOpen-collapseTwenty"
-      aria-expanded="true"
+      aria-expanded="false"
       aria-controls="panelsStayOpen-collapseTwenty"
     >
       RACK 20
@@ -420,7 +420,7 @@ export default function About(){
   </h2>
   <div
     id="panelsStayOpen-collapseTwenty"
-    className="accordion-collapse collapse show"
+    className="accordion-collapse collapse "
     aria-labelledby="panelsStayOpen-headingTwenty"
   >
     <div className="accordion-body">
@@ -438,7 +438,7 @@ export default function About(){
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#panelsStayOpen-collapseTwentyone"
-      aria-expanded="true"
+      aria-expanded="false"
       aria-controls="panelsStayOpen-collapseTwentyone"
     >
       RACK 21
@@ -446,7 +446,7 @@ export default function About(){
   </h2>
   <div
     id="panelsStayOpen-collapseTwentyone"
-    className="accordion-collapse collapse show"
+    className="accordion-collapse collapse"
     aria-labelledby="panelsStayOpen-headingTwentyone"
   >
     <div className="accordion-body">
@@ -463,7 +463,7 @@ export default function About(){
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#panelsStayOpen-collapseTwentytwo"
-      aria-expanded="true"
+      aria-expanded="false"
       aria-controls="panelsStayOpen-collapseTwentytwo"
     >
       RACK 22
@@ -471,7 +471,7 @@ export default function About(){
   </h2>
   <div
     id="panelsStayOpen-collapseTwentytwo"
-    class="accordion-collapse collapse show"
+    class="accordion-collapse collapse "
     aria-labelledby="panelsStayOpen-headingTwentytwo"
   >
     <div class="accordion-body">
@@ -489,7 +489,7 @@ export default function About(){
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#panelsStayOpen-collapseTwentythree"
-      aria-expanded="true"
+      aria-expanded="false"
       aria-controls="panelsStayOpen-collapseTwentythree"
     >
       RACK 23
@@ -497,7 +497,7 @@ export default function About(){
   </h2>
   <div
     id="panelsStayOpen-collapseTwentythree"
-    class="accordion-collapse collapse show"
+    class="accordion-collapse collapse "
     aria-labelledby="panelsStayOpen-headingTwentythree"
   >
     <div class="accordion-body">
@@ -515,7 +515,7 @@ export default function About(){
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#panelsStayOpen-collapseTwentyfour"
-      aria-expanded="true"
+      aria-expanded="false"
       aria-controls="panelsStayOpen-collapseTwentyfour"
     >
       RACK 24
@@ -525,7 +525,7 @@ export default function About(){
   </h2>
   <div
     id="panelsStayOpen-collapseTwentyfour"
-    class="accordion-collapse collapse show"
+    class="accordion-collapse collapse "
     aria-labelledby="panelsStayOpen-headingTwentyfour"
   >
     <div class="accordion-body">
