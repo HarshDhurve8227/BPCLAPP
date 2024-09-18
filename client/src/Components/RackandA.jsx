@@ -1,6 +1,22 @@
 import React from "react";
+import './Product.css'
+
+
+
+
 
 export default function About(){
+
+
+
+
+
+
+
+
+
+
+
   return(
     <div class="accordion" id="accordionPanelsStayOpenExample">
 
@@ -14,7 +30,38 @@ export default function About(){
     </h2>
     <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingOne">
       <div class="accordion-body">
-        <strong>Table </strong>
+        
+
+      <div className='container-fluid p-5'>
+                
+                <div className='add_button'>
+                    inserting button
+                </div>
+                <div className="table-container">
+                   
+                            <div className="table-wrapper">
+                                <table className="table table-striped table-hover mt-3 fs-5">
+                                    <thead>
+                                        <tr className="custom-table-head">
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Material name</th>
+                                            <th scope="col">Available Stock</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">Reciet </th>
+                                            <th scope="col">Closing Stock</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody className='custom-table-body'>
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        
+                    
+                </div>
+            </div>
       </div>
     </div>
   </div>
@@ -199,7 +246,7 @@ export default function About(){
       <strong>Table </strong>
     </div>
   </div>
-</div>
+</div>                                                                                                                                                         yyyyyy
 
 
 
@@ -420,7 +467,7 @@ export default function About(){
   </h2>
   <div
     id="panelsStayOpen-collapseTwenty"
-    className="accordion-collapse collapse "
+    className="accordion-collapse collapse"
     aria-labelledby="panelsStayOpen-headingTwenty"
   >
     <div className="accordion-body">
@@ -446,7 +493,7 @@ export default function About(){
   </h2>
   <div
     id="panelsStayOpen-collapseTwentyone"
-    className="accordion-collapse collapse"
+    className="accordion-collapse collapse "
     aria-labelledby="panelsStayOpen-headingTwentyone"
   >
     <div className="accordion-body">
