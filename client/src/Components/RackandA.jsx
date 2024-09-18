@@ -30,7 +30,7 @@ export default function About(){
     </h2>
     <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingOne">
       <div class="accordion-body">
-        
+      
 
       <div className='container-fluid p-5'>
                 
@@ -58,10 +58,13 @@ export default function About(){
                                     </tbody>
                                 </table>
                             </div>
-                        
-                    
-                </div>
-            </div>
+                        </div>
+
+                        </div>
+            
+        
+
+            
       </div>
     </div>
   </div>
@@ -74,10 +77,47 @@ export default function About(){
     </h2>
     <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingTwo">
       <div class="accordion-body">
-        <strong>Table </strong>
+
+      <div className='container-fluid p-5'>
+                
+                <div className='add_button'>
+                    inserting button
+                </div>
+                <div className="table-container">
+                   
+                            <div className="table-wrapper">
+                                <table className="table table-striped table-hover mt-3 fs-5">
+                                    <thead>
+                                        <tr className="custom-table-head">
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Material name</th>
+                                            <th scope="col">Available Stock</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">Reciet </th>
+                                            <th scope="col">Closing Stock</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody className='custom-table-body'>
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+            
+
+
+      
+      
+                    
+                </div>
+            </div>
       </div>
-    </div>
-  </div>
+      
+    
 
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingThree">
@@ -87,7 +127,40 @@ export default function About(){
     </h2>
     <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingThree">
       <div class="accordion-body">
-        <strong>Table </strong>
+
+
+      <div className='container-fluid p-5'>
+                
+                <div className='add_button'>
+                    inserting button
+                </div>
+                <div className="table-container">
+                   
+                            <div className="table-wrapper">
+                                <table className="table table-striped table-hover mt-3 fs-5">
+                                    <thead>
+                                        <tr className="custom-table-head">
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Material name</th>
+                                            <th scope="col">Available Stock</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">Reciet </th>
+                                            <th scope="col">Closing Stock</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody className='custom-table-body'>
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+            
+        
+     
       </div>
     </div>
   </div>
@@ -101,7 +174,40 @@ export default function About(){
     </h2>
     <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingFour">
       <div class="accordion-body">
-        <strong>Table </strong>
+
+
+      <div className='container-fluid p-5'>
+                
+                <div className='add_button'>
+                    inserting button
+                </div>
+                <div className="table-container">
+                   
+                            <div className="table-wrapper">
+                                <table className="table table-striped table-hover mt-3 fs-5">
+                                    <thead>
+                                        <tr className="custom-table-head">
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Material name</th>
+                                            <th scope="col">Available Stock</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">Reciet </th>
+                                            <th scope="col">Closing Stock</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody className='custom-table-body'>
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+            
+        
+       
       </div>
     </div>
   </div>
@@ -114,7 +220,38 @@ export default function About(){
     </h2>
     <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingFive">
       <div class="accordion-body">
-        <strong>Table </strong>
+        
+      <div className='container-fluid p-5'>
+                
+                <div className='add_button'>
+                    inserting button
+                </div>
+                <div className="table-container">
+                   
+                            <div className="table-wrapper">
+                                <table className="table table-striped table-hover mt-3 fs-5">
+                                    <thead>
+                                        <tr className="custom-table-head">
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Material name</th>
+                                            <th scope="col">Available Stock</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">Reciet </th>
+                                            <th scope="col">Closing Stock</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody className='custom-table-body'>
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+            
+
       </div>
     </div>
   </div>
@@ -128,7 +265,36 @@ export default function About(){
     </h2>
     <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingSix">
       <div class="accordion-body">
-        <strong>Table </strong>
+      <div className='container-fluid p-5'>
+                
+                <div className='add_button'>
+                    inserting button
+                </div>
+                <div className="table-container">
+                   
+                            <div className="table-wrapper">
+                                <table className="table table-striped table-hover mt-3 fs-5">
+                                    <thead>
+                                        <tr className="custom-table-head">
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Material name</th>
+                                            <th scope="col">Available Stock</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">Reciet </th>
+                                            <th scope="col">Closing Stock</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody className='custom-table-body'>
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+            
       </div>
     </div>
   </div>
@@ -142,7 +308,37 @@ export default function About(){
     </h2>
     <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingSeven">
       <div class="accordion-body">
-        <strong>Table </strong>
+            
+      <div className='container-fluid p-5'>
+                
+                <div className='add_button'>
+                    inserting button
+                </div>
+                <div className="table-container">
+                   
+                            <div className="table-wrapper">
+                                <table className="table table-striped table-hover mt-3 fs-5">
+                                    <thead>
+                                        <tr className="custom-table-head">
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Material name</th>
+                                            <th scope="col">Available Stock</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">Reciet </th>
+                                            <th scope="col">Closing Stock</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody className='custom-table-body'>
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+            
       </div>
     </div>
   </div>
@@ -166,7 +362,38 @@ export default function About(){
     aria-labelledby="panelsStayOpen-headingEight"
   >
     <div className="accordion-body">
-      <strong>Table </strong>
+      
+    <div className='container-fluid p-5'>
+                
+                <div className='add_button'>
+                    inserting button
+                </div>
+                <div className="table-container">
+                   
+                            <div className="table-wrapper">
+                                <table className="table table-striped table-hover mt-3 fs-5">
+                                    <thead>
+                                        <tr className="custom-table-head">
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Material name</th>
+                                            <th scope="col">Available Stock</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">Reciet </th>
+                                            <th scope="col">Closing Stock</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody className='custom-table-body'>
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+            
+
     </div>
   </div>
 </div>
@@ -191,7 +418,39 @@ export default function About(){
     aria-labelledby="panelsStayOpen-headingNine"
   >
     <div className="accordion-body">
-      <strong>Table </strong>
+
+
+    <div className='container-fluid p-5'>
+                
+                <div className='add_button'>
+                    inserting button
+                </div>
+                <div className="table-container">
+                   
+                            <div className="table-wrapper">
+                                <table className="table table-striped table-hover mt-3 fs-5">
+                                    <thead>
+                                        <tr className="custom-table-head">
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Material name</th>
+                                            <th scope="col">Available Stock</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">Reciet </th>
+                                            <th scope="col">Closing Stock</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody className='custom-table-body'>
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+            
+        
     </div>
   </div>
 </div>
@@ -217,7 +476,38 @@ export default function About(){
     aria-labelledby="panelsStayOpen-headingTen"
   >
     <div className="accordion-body">
-      <strong>Table </strong>
+      
+    <div className='container-fluid p-5'>
+                
+                <div className='add_button'>
+                    inserting button
+                </div>
+                <div className="table-container">
+                   
+                            <div className="table-wrapper">
+                                <table className="table table-striped table-hover mt-3 fs-5">
+                                    <thead>
+                                        <tr className="custom-table-head">
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Material name</th>
+                                            <th scope="col">Available Stock</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">Reciet </th>
+                                            <th scope="col">Closing Stock</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody className='custom-table-body'>
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+            
+
     </div>
   </div>
 </div>
@@ -243,7 +533,38 @@ export default function About(){
     aria-labelledby="panelsStayOpen-headingEleven"
   >
     <div className="accordion-body">
-      <strong>Table </strong>
+      
+    <div className='container-fluid p-5'>
+                
+                <div className='add_button'>
+                    inserting button
+                </div>
+                <div className="table-container">
+                   
+                            <div className="table-wrapper">
+                                <table className="table table-striped table-hover mt-3 fs-5">
+                                    <thead>
+                                        <tr className="custom-table-head">
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Material name</th>
+                                            <th scope="col">Available Stock</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">Reciet </th>
+                                            <th scope="col">Closing Stock</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody className='custom-table-body'>
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+            
+
     </div>
   </div>
 </div>                                                                                                                                                         yyyyyy
@@ -271,7 +592,38 @@ export default function About(){
     aria-labelledby="panelsStayOpen-headingTwelve"
   >
     <div className="accordion-body">
-      <strong>Table </strong>
+       
+    <div className='container-fluid p-5'>
+                
+                <div className='add_button'>
+                    inserting button
+                </div>
+                <div className="table-container">
+                   
+                            <div className="table-wrapper">
+                                <table className="table table-striped table-hover mt-3 fs-5">
+                                    <thead>
+                                        <tr className="custom-table-head">
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Material name</th>
+                                            <th scope="col">Available Stock</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">Reciet </th>
+                                            <th scope="col">Closing Stock</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody className='custom-table-body'>
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+            
+
     </div>
   </div>
 </div>
@@ -296,7 +648,38 @@ export default function About(){
     aria-labelledby="panelsStayOpen-headingThirteen"
   >
     <div className="accordion-body">
-      <strong>Table </strong>
+      
+    <div className='container-fluid p-5'>
+                
+                <div className='add_button'>
+                    inserting button
+                </div>
+                <div className="table-container">
+                   
+                            <div className="table-wrapper">
+                                <table className="table table-striped table-hover mt-3 fs-5">
+                                    <thead>
+                                        <tr className="custom-table-head">
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Material name</th>
+                                            <th scope="col">Available Stock</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">Reciet </th>
+                                            <th scope="col">Closing Stock</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody className='custom-table-body'>
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+            
+
     </div>
   </div>
 </div>
@@ -321,7 +704,38 @@ export default function About(){
     aria-labelledby="panelsStayOpen-headingFourteen"
   >
     <div className="accordion-body">
-      <strong>Table </strong>
+      
+    <div className='container-fluid p-5'>
+                
+                <div className='add_button'>
+                    inserting button
+                </div>
+                <div className="table-container">
+                   
+                            <div className="table-wrapper">
+                                <table className="table table-striped table-hover mt-3 fs-5">
+                                    <thead>
+                                        <tr className="custom-table-head">
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Material name</th>
+                                            <th scope="col">Available Stock</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">Reciet </th>
+                                            <th scope="col">Closing Stock</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody className='custom-table-body'>
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+            
+
     </div>
   </div>
 </div>
@@ -346,7 +760,38 @@ export default function About(){
     aria-labelledby="panelsStayOpen-headingFifteen"
   >
     <div className="accordion-body">
-      <strong>Table </strong>
+      
+    <div className='container-fluid p-5'>
+                
+                <div className='add_button'>
+                    inserting button
+                </div>
+                <div className="table-container">
+                   
+                            <div className="table-wrapper">
+                                <table className="table table-striped table-hover mt-3 fs-5">
+                                    <thead>
+                                        <tr className="custom-table-head">
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Material name</th>
+                                            <th scope="col">Available Stock</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">Reciet </th>
+                                            <th scope="col">Closing Stock</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody className='custom-table-body'>
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+            
+
     </div>
   </div>
 </div>
@@ -371,7 +816,38 @@ export default function About(){
     aria-labelledby="panelsStayOpen-headingSixteen"
   >
     <div className="accordion-body">
-      <strong>Table </strong>
+      
+    <div className='container-fluid p-5'>
+                
+                <div className='add_button'>
+                    inserting button
+                </div>
+                <div className="table-container">
+                   
+                            <div className="table-wrapper">
+                                <table className="table table-striped table-hover mt-3 fs-5">
+                                    <thead>
+                                        <tr className="custom-table-head">
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Material name</th>
+                                            <th scope="col">Available Stock</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">Reciet </th>
+                                            <th scope="col">Closing Stock</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody className='custom-table-body'>
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+            
+
     </div>
   </div>
 </div>
@@ -396,7 +872,38 @@ export default function About(){
     aria-labelledby="panelsStayOpen-headingSeventeen"
   >
     <div className="accordion-body">
-      <strong>Table </strong>
+      
+    <div className='container-fluid p-5'>
+                
+                <div className='add_button'>
+                    inserting button
+                </div>
+                <div className="table-container">
+                   
+                            <div className="table-wrapper">
+                                <table className="table table-striped table-hover mt-3 fs-5">
+                                    <thead>
+                                        <tr className="custom-table-head">
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Material name</th>
+                                            <th scope="col">Available Stock</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">Reciet </th>
+                                            <th scope="col">Closing Stock</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody className='custom-table-body'>
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+            
+
     </div>
   </div>
 </div>
@@ -421,7 +928,38 @@ export default function About(){
     aria-labelledby="panelsStayOpen-headingEighteen"
   >
     <div className="accordion-body">
-      <strong>Table </strong>
+      
+    <div className='container-fluid p-5'>
+                
+                <div className='add_button'>
+                    inserting button
+                </div>
+                <div className="table-container">
+                   
+                            <div className="table-wrapper">
+                                <table className="table table-striped table-hover mt-3 fs-5">
+                                    <thead>
+                                        <tr className="custom-table-head">
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Material name</th>
+                                            <th scope="col">Available Stock</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">Reciet </th>
+                                            <th scope="col">Closing Stock</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody className='custom-table-body'>
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+            
+
     </div>
   </div>
 </div>
@@ -446,7 +984,38 @@ export default function About(){
     aria-labelledby="panelsStayOpen-headingNineteen"
   >
     <div className="accordion-body">
-      <strong>Table </strong>
+      
+    <div className='container-fluid p-5'>
+                
+                <div className='add_button'>
+                    inserting button
+                </div>
+                <div className="table-container">
+                   
+                            <div className="table-wrapper">
+                                <table className="table table-striped table-hover mt-3 fs-5">
+                                    <thead>
+                                        <tr className="custom-table-head">
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Material name</th>
+                                            <th scope="col">Available Stock</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">Reciet </th>
+                                            <th scope="col">Closing Stock</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody className='custom-table-body'>
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+            
+
     </div>
   </div>
 </div>
@@ -471,7 +1040,38 @@ export default function About(){
     aria-labelledby="panelsStayOpen-headingTwenty"
   >
     <div className="accordion-body">
-      <strong>Table </strong>
+      
+    <div className='container-fluid p-5'>
+                
+                <div className='add_button'>
+                    inserting button
+                </div>
+                <div className="table-container">
+                   
+                            <div className="table-wrapper">
+                                <table className="table table-striped table-hover mt-3 fs-5">
+                                    <thead>
+                                        <tr className="custom-table-head">
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Material name</th>
+                                            <th scope="col">Available Stock</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">Reciet </th>
+                                            <th scope="col">Closing Stock</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody className='custom-table-body'>
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+            
+
     </div>
   </div>
 </div>
@@ -497,7 +1097,38 @@ export default function About(){
     aria-labelledby="panelsStayOpen-headingTwentyone"
   >
     <div className="accordion-body">
-      <strong>Table </strong>
+      
+    <div className='container-fluid p-5'>
+                
+                <div className='add_button'>
+                    inserting button
+                </div>
+                <div className="table-container">
+                   
+                            <div className="table-wrapper">
+                                <table className="table table-striped table-hover mt-3 fs-5">
+                                    <thead>
+                                        <tr className="custom-table-head">
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Material name</th>
+                                            <th scope="col">Available Stock</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">Reciet </th>
+                                            <th scope="col">Closing Stock</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody className='custom-table-body'>
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+            
+
     </div>
   </div>
 </div>
@@ -522,7 +1153,38 @@ export default function About(){
     aria-labelledby="panelsStayOpen-headingTwentytwo"
   >
     <div class="accordion-body">
-      <strong>Table </strong>
+       
+    <div className='container-fluid p-5'>
+                
+                <div className='add_button'>
+                    inserting button
+                </div>
+                <div className="table-container">
+                   
+                            <div className="table-wrapper">
+                                <table className="table table-striped table-hover mt-3 fs-5">
+                                    <thead>
+                                        <tr className="custom-table-head">
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Material name</th>
+                                            <th scope="col">Available Stock</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">Reciet </th>
+                                            <th scope="col">Closing Stock</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody className='custom-table-body'>
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+            
+
     </div>
   </div>
 </div>
@@ -548,7 +1210,38 @@ export default function About(){
     aria-labelledby="panelsStayOpen-headingTwentythree"
   >
     <div class="accordion-body">
-      <strong>Table </strong>
+      
+    <div className='container-fluid p-5'>
+                
+                <div className='add_button'>
+                    inserting button
+                </div>
+                <div className="table-container">
+                   
+                            <div className="table-wrapper">
+                                <table className="table table-striped table-hover mt-3 fs-5">
+                                    <thead>
+                                        <tr className="custom-table-head">
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Material name</th>
+                                            <th scope="col">Available Stock</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">Reciet </th>
+                                            <th scope="col">Closing Stock</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody className='custom-table-body'>
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+            
+
     </div>
   </div>
 </div>
@@ -576,7 +1269,38 @@ export default function About(){
     aria-labelledby="panelsStayOpen-headingTwentyfour"
   >
     <div class="accordion-body">
-      <strong>Table </strong>
+      
+    <div className='container-fluid p-5'>
+                
+                <div className='add_button'>
+                    inserting button
+                </div>
+                <div className="table-container">
+                   
+                            <div className="table-wrapper">
+                                <table className="table table-striped table-hover mt-3 fs-5">
+                                    <thead>
+                                        <tr className="custom-table-head">
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Material name</th>
+                                            <th scope="col">Available Stock</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">Reciet </th>
+                                            <th scope="col">Closing Stock</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody className='custom-table-body'>
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+            
+
     </div>
   </div>
 </div>
