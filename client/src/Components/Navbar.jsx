@@ -121,19 +121,10 @@ export default function Navbar(props) {
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <li>
                       <a className="dropdown-item" href="/about">
-                        -
+                        Click Here !
                       </a>
                     </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        -
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        -
-                      </a>
-                    </li>
+                   
                   </ul>
                 </li>
 
