@@ -567,7 +567,7 @@ export default function About(){
 
     </div>
   </div>
-</div>                                                                                                                                                         yyyyyy
+</div> 
 
 
 <div className="accordion-item">
