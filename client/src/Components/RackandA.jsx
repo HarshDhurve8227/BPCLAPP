@@ -25,7 +25,7 @@ export default function About(){
 <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingOne">
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
-        RACK 01
+        RACK 01 - TECHNICIAN / KOSAN
       </button>
     </h2>
     <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingOne">
@@ -72,7 +72,7 @@ export default function About(){
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-        RACK 02
+        RACK 02 - TECHNICIAN / KOSAN
       </button>
     </h2>
     <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingTwo">
@@ -122,7 +122,7 @@ export default function About(){
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingThree">
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-        RACK 03
+        RACK 03 - TECHNICIAN
       </button>
     </h2>
     <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingThree">
@@ -169,7 +169,7 @@ export default function About(){
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingFour">
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
-        RACK 04
+        RACK 04 - TECHNICIAN
       </button>
     </h2>
     <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingFour">
@@ -215,7 +215,7 @@ export default function About(){
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingFive">
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
-        RACK 05
+        RACK 05 - TECHNICIAN
       </button>
     </h2>
     <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingFive">
@@ -260,7 +260,7 @@ export default function About(){
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingSix">
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false" aria-controls="panelsStayOpen-collapseSix">
-        RACK 06
+        RACK 06 - TECHNICIAN
       </button>
     </h2>
     <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingSix">
@@ -303,7 +303,7 @@ export default function About(){
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingSeven">
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="false" aria-controls="panelsStayOpen-collapseSeven">
-        RACK 07
+        RACK 07 - ELECTRICIAN
       </button>
     </h2>
     <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingSeven">
@@ -353,7 +353,7 @@ export default function About(){
       aria-expanded="false"
       aria-controls="panelsStayOpen-collapseEight"
     >
-      RACK 08
+      RACK 08 - ELECTRICIAN
     </button>
   </h2>
   <div
@@ -409,7 +409,7 @@ export default function About(){
       aria-expanded="false"
       aria-controls="panelsStayOpen-collapseNine"
     >
-      RACK 09
+      RACK 09 - ELECTRICIAN
     </button>
   </h2>
   <div
@@ -467,7 +467,7 @@ export default function About(){
       aria-expanded="false"
       aria-controls="panelsStayOpen-collapseTen"
     >
-      RACK 10
+      RACK 10 - ELECTRICIAN
     </button>
   </h2>
   <div
@@ -524,7 +524,7 @@ export default function About(){
       aria-expanded="false"
       aria-controls="panelsStayOpen-collapseEleven"
     >
-      RACK 11
+      RACK 11 - FIREFIGHTING
     </button>
   </h2>
   <div
@@ -580,7 +580,7 @@ export default function About(){
       aria-expanded="false"
       aria-controls="panelsStayOpen-collapseTwelve"
     >
-      RACK 12
+      RACK 12 - FIREFIGHTING
     </button>
   </h2>
   <div
@@ -636,7 +636,7 @@ export default function About(){
       aria-expanded="false"
       aria-controls="panelsStayOpen-collapseThirteen"
     >
-      RACK 13
+      RACK 13 - FIREFIGHTING
     </button>
   </h2>
   <div
@@ -692,7 +692,7 @@ export default function About(){
       aria-expanded="false"
       aria-controls="panelsStayOpen-collapseFourteen"
     >
-      RACK 14
+      RACK 14 - TECHNICIAN
     </button>
   </h2>
   <div
@@ -748,7 +748,7 @@ export default function About(){
       aria-expanded="false"
       aria-controls="panelsStayOpen-collapseFifteen"
     >
-      RACK 15
+      RACK 15 - TECHNICIAN
     </button>
   </h2>
   <div
@@ -804,7 +804,7 @@ export default function About(){
       aria-expanded="false"
       aria-controls="panelsStayOpen-collapseSixteen"
     >
-      RACK 16
+      RACK 16 - TECHNICIAN
     </button>
   </h2>
   <div
@@ -860,7 +860,7 @@ export default function About(){
       aria-expanded="false"
       aria-controls="panelsStayOpen-collapseSeventeen"
     >
-      RACK 17
+      RACK 17 - TECHNICIAN
     </button>
   </h2>
   <div
@@ -916,7 +916,7 @@ export default function About(){
       aria-expanded="false"
       aria-controls="panelsStayOpen-collapseEighteen"
     >
-      RACK 18
+      RACK 18 - ELECTRICIAN
     </button>
   </h2>
   <div
@@ -972,7 +972,7 @@ export default function About(){
       aria-expanded="false"
       aria-controls="panelsStayOpen-collapseNineteen"
     >
-      RACK 19
+      RACK 19 - FIREFIGHTING
     </button>
   </h2>
   <div
@@ -1028,7 +1028,7 @@ export default function About(){
       aria-expanded="false"
       aria-controls="panelsStayOpen-collapseTwenty"
     >
-      RACK 20
+      RACK 20 - FIREFIGHTING
     </button>
   </h2>
   <div
@@ -1085,7 +1085,7 @@ export default function About(){
       aria-expanded="false"
       aria-controls="panelsStayOpen-collapseTwentyone"
     >
-      RACK 21
+      RACK 21 - ELECTRICIAN
     </button>
   </h2>
   <div
@@ -1141,7 +1141,7 @@ export default function About(){
       aria-expanded="false"
       aria-controls="panelsStayOpen-collapseTwentytwo"
     >
-      RACK 22
+      RACK 22 - ELECTRICIAN
     </button>
   </h2>
   <div
@@ -1198,7 +1198,7 @@ export default function About(){
       aria-expanded="false"
       aria-controls="panelsStayOpen-collapseTwentythree"
     >
-      RACK 23
+      RACK 23 - TECHNICIAN
     </button>
   </h2>
   <div
@@ -1255,7 +1255,7 @@ export default function About(){
       aria-expanded="false"
       aria-controls="panelsStayOpen-collapseTwentyfour"
     >
-      RACK 24
+      RACK 24 - TECHNICIAN
    
   </button>
 
