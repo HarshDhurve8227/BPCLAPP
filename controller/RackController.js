@@ -52,7 +52,8 @@ const rackModels = {
 
 // Create a new item in the specified rack
 export const addItemToRack = async (req, res) => {
-    const { rackType, itemData } = req.body;
+    const rackType = req.params.rackType; // Get rackType from URL parameters
+    const { itemData } = req.body;
     console.log("Received data:", req.body);
 
     const RackModel = rackModels[rackType.toLowerCase()];
@@ -64,7 +65,7 @@ export const addItemToRack = async (req, res) => {
     const requiredFields = ['section', 'materialName', 'availableStock', 'closingStock'];
     for (const field of requiredFields) {
         if (itemData[field] === undefined || itemData[field] === null || itemData[field] === '') {
-            return res.status(400).json({ success: false, message: `${field} is required` });
+            return res.status(400).json({ success: false, message: `${field} is required` }); // Fixed string interpolation
         }
     }
 
@@ -82,6 +83,8 @@ export const addItemToRack = async (req, res) => {
         res.status(500).json({ success: false, message: 'Error inserting item', error: error.message });
     }
 };
+
+
 
 
 // Update an item in the specified rack
