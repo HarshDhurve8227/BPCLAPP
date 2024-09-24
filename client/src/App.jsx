@@ -19,6 +19,11 @@ import PrivateRoute from './PrivateRoute';
 import Technician from './Components/Technician';
 import ChecklistForm from './Components/checklistform';
 import SOPadminandsecurity from './Components/SOPadminandSecu';
+import RackInsert from './Components/RackComponents/RackInsert';
+import RackUpdate from './Components/RackComponents/RackUpdate';
+
+
+
 
 function App() {
   return (
@@ -38,9 +43,13 @@ function App() {
             <Route path="/firefight" element={<PrivateRoute element={<FireFight />} />} />
             <Route path="/technician" element={<PrivateRoute element={<Technician />} />} />
             <Route path="/adminandsecurity" element={<PrivateRoute element={<SOPadminandsecurity/>} />} />
-
+               
 
             <Route path="/AS11" element={<PrivateRoute element={<ChecklistForm />} />} />
+
+            <Route path="/insertproducts/:rackType" element={<PrivateRoute element={<RackInsert />} />} />
+            <Route path="/updateproduct/:rack/:id" element={<PrivateRoute element={<RackUpdate />} />} />
+
 
 
           </Routes>

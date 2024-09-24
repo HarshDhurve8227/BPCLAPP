@@ -1,6 +1,5 @@
 
 
-
 import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -64,6 +63,12 @@ export default function InsertProduct() {
                 throw new Error('Department is not specified');
             }
 
+            // Validate all required fields
+            const isValid = Object.values(value).every(x => x !== "" && x !== undefined);
+            if (!isValid) {
+                throw new Error('Please fill all required fields.');
+            }
+
             // Construct the endpoint based on department
             const endpoint = `https://bpcl2024-a36b07a626d7.herokuapp.com/api/${department}/create`;
             console.log('Constructed Endpoint:', endpoint); // For debugging
@@ -74,7 +79,7 @@ export default function InsertProduct() {
             // Handle the response
             if (response.data.success) {
                 toast.success(response.data.Message);
-                navigate('');
+                navigate(`/products/${department}`); // Redirect to products page after success
             } else {
                 setError(response.data.Message || "Failed to insert product.");
             }
@@ -109,6 +114,7 @@ export default function InsertProduct() {
                         className="form-control fs-5" 
                         id="srno" 
                         placeholder="Enter Serial Number" 
+                        required
                     />
                 </div>
 
@@ -122,8 +128,9 @@ export default function InsertProduct() {
                         className="form-control fs-5" 
                         id="Assets" 
                         placeholder="Enter Assets" 
+                        required
                     />
-                </div>
+                </div> 
 
                 <div className="mt-3 mb-5 col-lg-6 col-md-6 col-12 fs-4">
                     <label htmlFor="ComponentsAndEquipments" className="form-label fw-bold custom-table-head">Components and Equipments</label>

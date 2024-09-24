@@ -54,7 +54,7 @@ export default function Navbar(props) {
       <div>
         <div className="container">
           <div className="scrolling-text">
-            <p className='text-danger' style={{ fontSize: '20px', fontWeight: 'bold' }}>Here is some scrolling text... right to left!</p>
+            <p className='text-danger' style={{ fontSize: '20px', fontWeight: 'bold' }}>www.bpspareslpgnagpur.com</p>
           </div>
           <img id="resize-image" src={myLogo} alt="Logo" className="fixed-size-image" />
         </div>
