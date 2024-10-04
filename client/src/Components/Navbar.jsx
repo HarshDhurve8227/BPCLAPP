@@ -88,7 +88,7 @@ export default function Navbar(props) {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    ASSETS AND COMPONENTS
+                    SPARES
                   </button>
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <li>
@@ -116,12 +116,31 @@ export default function Navbar(props) {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    RACK & EQUIPMENTS
+                    AMC
+                  </button>
+                  <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li>
+                      <a className="dropdown-item" href="/amc">
+                        Annual Maintainance Contract 
+                      </a>
+                    </li>
+                   
+                  </ul>
+                </li>
+
+                <li className="dropdown" style={{ padding: '10px', marginBottom: '5px' }}>
+                  <button
+                    id="dropdownMenuButton"
+                    className="btn btn-dark btn-outline-warning dropdown-toggle nav-link active text-dark"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    RACKS
                   </button>
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <li>
                       <a className="dropdown-item" href="/about">
-                        Click Here !
+                        Racks And Equipments
                       </a>
                     </li>
                    
@@ -166,6 +185,9 @@ export default function Navbar(props) {
                   </ul>
                 </li>
               </ul>
+
+
+             
 
               <form className="d-flex" role="search" onSubmit={handleSearch}>
                 <input

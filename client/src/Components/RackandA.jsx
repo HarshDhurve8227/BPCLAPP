@@ -1,15 +1,15 @@
+// About.js
 import React from "react";
 import './Product.css';
 import { NavLink } from "react-router-dom";
+import RackInsert from "./RackComponents/RackInsert"; // You may not need this import anymore
 
 export default function About() {
-  // Define the rack numbers for each category
-  const technicianKosanRacks = [1, 2]; // Technician/Kosan
-  const technicianRacks = [3, 4, 5, 6, 14, 15, 16, 17, 23, 24]; // Technician
-  const electricianRacks = [7, 8, 9, 10, 18, 21, 22]; // Electrician
-  const fireFightingRacks = [11, 12, 13, 19, 20]; // Fire Fighting
+  const technicianKosanRacks = [1, 2];
+  const technicianRacks = [3, 4, 5, 6, 14, 15, 16, 17, 23, 24];
+  const electricianRacks = [7, 8, 9, 10, 18, 21, 22];
+  const fireFightingRacks = [11, 12, 13, 19, 20];
 
-  // Combine all racks
   const allRacks = [
     ...technicianKosanRacks,
     ...technicianRacks,
@@ -39,14 +39,15 @@ export default function About() {
               }`}
             </button>
           </h2>
+
           <div id={`panelsStayOpen-collapse${rackNumber}`} className="accordion-collapse collapse" aria-labelledby={`panelsStayOpen-heading${rackNumber}`}>
             <div className="accordion-body">
               <div className='container-fluid p-5'>
-                <NavLink to={`/insertproducts/rack${rackNumber}`} className='btn btn-primary fs-5 custom-table-head'>
-                  <div className='add_button'>
-                    Insert New Line From Here...
-                  </div>
+                {/* NavLink for inserting new item */}
+                <NavLink to={`/insertproducts/${rackNumber}`} className="btn btn-primary mb-3">
+                  Insert New Item
                 </NavLink>
+
                 <div className="table-container">
                   <div className="table-wrapper">
                     <table className="table table-striped table-hover mt-3 fs-5">

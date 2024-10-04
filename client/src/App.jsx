@@ -21,6 +21,8 @@ import ChecklistForm from './Components/checklistform';
 import SOPadminandsecurity from './Components/SOPadminandSecu';
 import RackInsert from './Components/RackComponents/RackInsert';
 import RackUpdate from './Components/RackComponents/RackUpdate';
+import AMC from './Components/AmcComponents/AMC';
+import AMCInsert from './Components/AmcComponents/AMCInsert';
 
 
 
@@ -47,8 +49,11 @@ function App() {
 
             <Route path="/AS11" element={<PrivateRoute element={<ChecklistForm />} />} />
 
-            <Route path="/insertproducts/:rackType" element={<PrivateRoute element={<RackInsert />} />} />
+            <Route path="/insertproducts/:rackNumber" element={<PrivateRoute element={<RackInsert />} />} />
             <Route path="/updateproduct/:rack/:id" element={<PrivateRoute element={<RackUpdate />} />} />
+            <Route path="/amc" element={<PrivateRoute element={<AMC />} />} />
+
+            <Route path="/amcinsert" element={<PrivateRoute element={<AMCInsert />} />} />
 
 
 

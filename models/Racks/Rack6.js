@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
 
 const rack6Schema = new mongoose.Schema({
-    section : {type : String , required : true },
-    materialName : {type : String , required : true},
-    availableStock : {type : Number , required : true},
-    issue : {type : Number},
+    section : {type : Number , required : false },
+    materialName : {type : String , required : false},
+    availableStock : {type : Number , required : false},
+    issue : {type : Number , required: false},
     receit : {
-        type : String
+        type : Number , required: false
     },
-    closingStock : { type : Number , required : true},
+    closingStock : { type : Number , required : false},
 });
 
 const Rack6 = mongoose.model('Rack6',rack6Schema);

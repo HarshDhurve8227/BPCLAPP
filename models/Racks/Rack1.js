@@ -4,13 +4,14 @@
 import mongoose from 'mongoose';
 
 const rack1Schema = new mongoose.Schema({
-  section: { type: Number, required: true },
-  materialName: { type: String, required: true },
-  availableStock: { type: Number, required: true },
+  section: { type: Number, required: false },
+  materialName: { type: String, required: false },
+  availableStock: { type: Number, required: false },
   issue: { type: Number, required: false }, // Assuming this is optional
   receit: { type: Number, required: false }, // Assuming this is optional
-  closingStock: { type: Number, required: true },
+  closingStock: { type: Number, required: false },
 });
+
 
 const Rack1 = mongoose.model('Rack1', rack1Schema);
 export default Rack1;
