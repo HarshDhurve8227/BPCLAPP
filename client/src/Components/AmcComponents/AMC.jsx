@@ -8,7 +8,7 @@ export default function AMC() {
 
     const fetchEquipments = async () => {
         try {
-            const response = await axios.get('https://bpcl2024-a36b07a626d7.herokuapp.com/api/equipment');
+            const response = await axios.get('https://bpcl2024-a36b07a626d7.herokuapp.com/api/equipment/get');
             setEquipments(response.data);
         } catch (error) {
             setError('Failed to fetch equipment: ' + error.message);
