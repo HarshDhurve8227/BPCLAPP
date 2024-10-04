@@ -9,8 +9,10 @@ export default function AMC() {
     const fetchEquipments = async () => {
         try {
             const response = await axios.get('https://bpcl2024-a36b07a626d7.herokuapp.com/api/equipment/get');
+            console.log('Fetched Equipments:', response.data); // Log the fetched data
             setEquipments(response.data);
         } catch (error) {
+            console.error('Fetch error:', error); // Log the error
             setError('Failed to fetch equipment: ' + error.message);
         }
     };
@@ -58,24 +60,30 @@ export default function AMC() {
                         </tr>
                     </thead>
                     <tbody>
-                        {equipments.map((item, index) => (
-                            <tr key={index}>
-                                <td>{item.equipment}</td>
-                                <td>{item.company}</td>
-                                <td>{item.validity.from}</td>
-                                <td>{item.validity.to}</td>
-                                <td>{item.pms}</td>
-                                <td>{item.vendorCode}</td>
-                                <td>{item.contractNumber}</td>
-                                <td>{item.concernedPerson}</td>
-                                <td>{item.mobileNumber}</td>
-                                <td>{item.lastDateOfChecking}</td>
-                                <td>{item.nextDueDate}</td>
-                                <td>
-                                    {/* Actions such as Edit/Delete can be added here */}
-                                </td>
+                        {equipments.length > 0 ? (
+                            equipments.map((item, index) => (
+                                <tr key={index}>
+                                    <td>{item.equipment}</td>
+                                    <td>{item.company}</td>
+                                    <td>{item.validity?.from || 'N/A'}</td>
+                                    <td>{item.validity?.to || 'N/A'}</td>
+                                    <td>{item.pms}</td>
+                                    <td>{item.vendorCode}</td>
+                                    <td>{item.contractNumber}</td>
+                                    <td>{item.concernedPerson}</td>
+                                    <td>{item.mobileNumber}</td>
+                                    <td>{item.lastDateOfChecking}</td>
+                                    <td>{item.nextDueDate}</td>
+                                    <td>
+                                        {/* Actions such as Edit/Delete can be added here */}
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="12">No equipment data available.</td>
                             </tr>
-                        ))}
+                        )}
                     </tbody>
                 </table>
             </div>
