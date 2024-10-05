@@ -23,6 +23,7 @@ import RackInsert from './Components/RackComponents/RackInsert';
 import RackUpdate from './Components/RackComponents/RackUpdate';
 import AMC from './Components/AmcComponents/AMC';
 import AMCInsert from './Components/AmcComponents/AMCInsert';
+import AMCUpdate from './Components/AmcComponents/AMCUpdate';
 
 
 
@@ -54,6 +55,12 @@ function App() {
             <Route path="/amc" element={<PrivateRoute element={<AMC />} />} />
 
             <Route path="/amcinsert" element={<PrivateRoute element={<AMCInsert />} />} />
+            <Route path="/amcupdate/:id" element={<PrivateRoute element={<AMCUpdate />} />} />
+            
+
+
+            
+
 
 
 
