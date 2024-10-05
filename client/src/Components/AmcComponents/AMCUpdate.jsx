@@ -104,35 +104,35 @@ export default function AMCUpdate() {
                     <div>
                         <label className="custom-table-head">
                             Equipment:
-                            <input type="text" name="equipment" value={equipment.equipment} placeholder="Equipment" onChange={handleChange} required />
+                            <input type="text" name="equipment" value={equipment.equipment} placeholder="Equipment" onChange={handleChange}  />
                         </label>
                     </div>
                     <br />
                     <div>
                         <label className="custom-table-head">
                             Company:
-                            <input type="text" name="company" value={equipment.company} placeholder="Company" onChange={handleChange} required />
+                            <input type="text" name="company" value={equipment.company} placeholder="Company" onChange={handleChange}  />
                         </label>
                     </div>
                     <br />
                     <div>
                         <label className="custom-table-head">
                             Validity From:
-                            <input type="date" name="from" value={equipment.validity.from} onChange={handleChange} required />
+                            <input type="date" name="from" value={equipment.validity.from} onChange={handleChange}  />
                         </label>
                     </div>
                     <br />
                     <div>
                         <label className="custom-table-head">
                             Validity To:
-                            <input type="date" name="to" value={equipment.validity.to} onChange={handleChange} required />
+                            <input type="date" name="to" value={equipment.validity.to} onChange={handleChange} />
                         </label>
                     </div>
                     <br />
                     <div>
                         <label className="custom-table-head">
                             PMS:
-                            <select name="pms" value={equipment.pms} onChange={handleChange} required>
+                            <select name="pms" value={equipment.pms} onChange={handleChange} >
                                 <option value="">Select PMS</option>
                                 <option value="Monthly">Monthly</option>
                                 <option value="Quarterly">Quarterly</option>
@@ -143,42 +143,42 @@ export default function AMCUpdate() {
                     <div>
                         <label className="custom-table-head">
                             Vendor Code:
-                            <input type="text" name="vendorCode" value={equipment.vendorCode} placeholder="Vendor Code" onChange={handleChange} required />
+                            <input type="text" name="vendorCode" value={equipment.vendorCode} placeholder="Vendor Code" onChange={handleChange}  />
                         </label>
                     </div>
                     <br />
                     <div>
                         <label className="custom-table-head">
                             Contract Number:
-                            <input type="text" name="contractNumber" value={equipment.contractNumber} placeholder="Contract Number" onChange={handleChange} required />
+                            <input type="text" name="contractNumber" value={equipment.contractNumber} placeholder="Contract Number" onChange={handleChange}  />
                         </label>
                     </div>
                     <br />
                     <div>
                         <label className="custom-table-head">
                             Concerned Person:
-                            <input type="text" name="concernedPerson" value={equipment.concernedPerson} placeholder="Concerned Person" onChange={handleChange} required />
+                            <input type="text" name="concernedPerson" value={equipment.concernedPerson} placeholder="Concerned Person" onChange={handleChange} />
                         </label>
                     </div>
                     <br />
                     <div>
                         <label className="custom-table-head">
                             Mobile Number:
-                            <input type="text" name="mobileNumber" value={equipment.mobileNumber} placeholder="Mobile Number" onChange={handleChange} required />
+                            <input type="text" name="mobileNumber" value={equipment.mobileNumber} placeholder="Mobile Number" onChange={handleChange}  />
                         </label>
                     </div>
                     <br />
                     <div>
                         <label className="custom-table-head">
                             Last Date of Checking:
-                            <input type="date" name="lastDateOfChecking" value={equipment.lastDateOfChecking} onChange={handleChange} required />
+                            <input type="date" name="lastDateOfChecking" value={equipment.lastDateOfChecking} onChange={handleChange}  />
                         </label>
                     </div>
                     <br />
                     <div>
                         <label className="custom-table-head">
                             Next Due Date:
-                            <input type="date" name="nextDueDate" value={equipment.nextDueDate} onChange={handleChange} required />
+                            <input type="date" name="nextDueDate" value={equipment.nextDueDate} onChange={handleChange} />
                         </label>
                     </div>
                     <br />

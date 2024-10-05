@@ -42,5 +42,6 @@ routers.post('/equipment/add', addEquipment);
 routers.get('/equipment/get', getEquipments);
 routers.put('/equipment/update/:id', updateEquipment);
 routers.delete('/equipment/delete/:id', deleteEquipment);
+routers.get('/equipment/get/:id', getEquipments);
 
 export default routers;
