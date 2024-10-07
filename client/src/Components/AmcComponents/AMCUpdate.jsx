@@ -5,16 +5,22 @@ import './AMCInsert.css'; // Use the same styles as AMCInsert
 
 export default function AMCUpdate() {
     const [equipment, setEquipment] = useState({
+
         equipment: '',
         company: '',
         validity: { from: '', to: '' },
         pms: '',
         vendorCode: '',
         contractNumber: '',
+
         concernedPerson: '',
+
         mobileNumber: '',
+
         lastDateOfChecking: '',
+
         nextDueDate: '',
+
     });
 
     const [error, setError] = useState('');
@@ -27,25 +33,31 @@ export default function AMCUpdate() {
             try {
                 const response = await axios.get(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/equipment/get/${id}`);
 
-                // Ensure the fetched data has the expected structure
-                if (response.data) {
-                    // Log the fetched data to ensure it's structured as expected
-                    console.log('Fetched Equipment Data:', response.data);
+                // Ensure the fetched data is an array and has at least one item
+                if (Array.isArray(response.data) && response.data.length > 0) {
+                    const fetchedData = response.data[0]; // Access the first object in the array
+
+                    console.log('Fetched Equipment Data:', fetchedData);
+
+                    const formatDate = (dateString) => {
+                        return dateString ? dateString.split('T')[0] : ''; // Get the date part only
+                    };
 
                     setEquipment({
-                        equipment: response.data.equipment || '',
-                        company: response.data.company || '',
+                        equipment: fetchedData.equipment || '',
+                        company: fetchedData.company || '',
                         validity: {
-                            from: response.data.validity?.from || '',
-                            to: response.data.validity?.to || ''
+                            from: formatDate(fetchedData.validity?.from) || '',
+                            to: formatDate(fetchedData.validity?.to) || ''
                         },
-                        pms: response.data.pms || '',
-                        vendorCode: response.data.vendorCode || '',
-                        contractNumber: response.data.contractNumber || '',
-                        concernedPerson: response.data.concernedPerson || '',
-                        mobileNumber: response.data.mobileNumber || '',
-                        lastDateOfChecking: response.data.lastDateOfChecking || '',
-                        nextDueDate: response.data.nextDueDate || '',
+                        pms: fetchedData.pms || '',
+                        vendorCode: fetchedData.vendorCode || '',
+                        contractNumber: fetchedData.contractNumber || '',
+                        concernedPerson: fetchedData.concernedPerson || '',
+                        mobileNumber: fetchedData.mobileNumber || '',
+                        lastDateOfChecking: formatDate(fetchedData.lastDateOfChecking) || '',
+                        nextDueDate: formatDate(fetchedData.nextDueDate) || '',
+
                     });
                 } else {
                     setError('No equipment data found.');
@@ -71,13 +83,24 @@ export default function AMCUpdate() {
     };
 
     const handleSubmit = async (e) => {
+
         e.preventDefault();
+
         try {
-            await axios.put(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/equipment/update/${id}`, equipment);
-            navigate('/amc'); // Redirect to the AMC page after successful update
+            await axios.put(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/equipment/updated/${id}`, equipment);
+            navigate('/amc');
+
+             // Redirect to the AMC page after successful update      
         } catch (error) {
+
+
+
+        
+
+
             setError('Failed to update equipment: ' + (error.response?.data?.message || error.message));
         }
+
     };
 
     return (
@@ -104,21 +127,21 @@ export default function AMCUpdate() {
                     <div>
                         <label className="custom-table-head">
                             Equipment:
-                            <input type="text" name="equipment" value={equipment.equipment} placeholder="Equipment" onChange={handleChange}  />
+                            <input type="text" name="equipment" value={equipment.equipment} placeholder="Equipment" onChange={handleChange} />
                         </label>
                     </div>
                     <br />
                     <div>
                         <label className="custom-table-head">
                             Company:
-                            <input type="text" name="company" value={equipment.company} placeholder="Company" onChange={handleChange}  />
+                            <input type="text" name="company" value={equipment.company} placeholder="Company" onChange={handleChange} />
                         </label>
                     </div>
                     <br />
                     <div>
                         <label className="custom-table-head">
                             Validity From:
-                            <input type="date" name="from" value={equipment.validity.from} onChange={handleChange}  />
+                            <input type="date" name="from" value={equipment.validity.from} onChange={handleChange} />
                         </label>
                     </div>
                     <br />
@@ -132,7 +155,7 @@ export default function AMCUpdate() {
                     <div>
                         <label className="custom-table-head">
                             PMS:
-                            <select name="pms" value={equipment.pms} onChange={handleChange} >
+                            <select name="pms" value={equipment.pms} onChange={handleChange}>
                                 <option value="">Select PMS</option>
                                 <option value="Monthly">Monthly</option>
                                 <option value="Quarterly">Quarterly</option>
@@ -143,14 +166,14 @@ export default function AMCUpdate() {
                     <div>
                         <label className="custom-table-head">
                             Vendor Code:
-                            <input type="text" name="vendorCode" value={equipment.vendorCode} placeholder="Vendor Code" onChange={handleChange}  />
+                            <input type="text" name="vendorCode" value={equipment.vendorCode} placeholder="Vendor Code" onChange={handleChange} />
                         </label>
                     </div>
                     <br />
                     <div>
                         <label className="custom-table-head">
                             Contract Number:
-                            <input type="text" name="contractNumber" value={equipment.contractNumber} placeholder="Contract Number" onChange={handleChange}  />
+                            <input type="text" name="contractNumber" value={equipment.contractNumber} placeholder="Contract Number" onChange={handleChange} />
                         </label>
                     </div>
                     <br />
@@ -164,14 +187,14 @@ export default function AMCUpdate() {
                     <div>
                         <label className="custom-table-head">
                             Mobile Number:
-                            <input type="text" name="mobileNumber" value={equipment.mobileNumber} placeholder="Mobile Number" onChange={handleChange}  />
+                            <input type="text" name="mobileNumber" value={equipment.mobileNumber} placeholder="Mobile Number" onChange={handleChange} />
                         </label>
                     </div>
                     <br />
                     <div>
                         <label className="custom-table-head">
                             Last Date of Checking:
-                            <input type="date" name="lastDateOfChecking" value={equipment.lastDateOfChecking} onChange={handleChange}  />
+                            <input type="date" name="lastDateOfChecking" value={equipment.lastDateOfChecking} onChange={handleChange} />
                         </label>
                     </div>
                     <br />
