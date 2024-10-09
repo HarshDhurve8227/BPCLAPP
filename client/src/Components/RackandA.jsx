@@ -1,5 +1,6 @@
 // About.js
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import './Product.css';
 import { NavLink } from "react-router-dom";
 
@@ -15,6 +16,31 @@ export default function About() {
     ...electricianRacks,
     ...fireFightingRacks,
   ];
+
+  // State to hold rack data
+  const [rackData, setRackData] = useState({});
+
+  useEffect(() => {
+    // Fetch data for each rack
+    const fetchRackData = async () => {
+      const data = {};
+      for (const rackNumber of allRacks) {
+        try {
+          const response = await axios.get(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/rack/${rackNumber}`);
+          data[rackNumber] = response.data; // Assuming the API returns an array of items
+        } catch (error) {
+          console.error(`Error fetching data for rack ${rackNumber}:`, error);
+        }
+      }
+      setRackData(data);
+    };
+
+    fetchRackData();
+  }, []);
+
+  const handleDelete = async (id) => {
+    // Handle delete logic here
+  };
 
   return (
     <div className="accordion" id="accordionPanelsStayOpenExample">
@@ -42,7 +68,6 @@ export default function About() {
           <div id={`panelsStayOpen-collapse${rackNumber}`} className="accordion-collapse collapse" aria-labelledby={`panelsStayOpen-heading${rackNumber}`}>
             <div className="accordion-body">
               <div className='container-fluid p-5'>
-                {/* NavLink for inserting new item */}
                 <NavLink to={`/insertproducts/${rackNumber}`} className="btn btn-primary mb-3">
                   Insert New Item
                 </NavLink>
@@ -63,18 +88,22 @@ export default function About() {
                         </tr>
                       </thead>
                       <tbody className='custom-table-body'>
-                        {/* Populate rows dynamically if needed */}
-                        {/* Example row (replace with dynamic data later) */}
-                        <tr>
-                          <td>1</td>
-                          <td>Sample Material</td>
-                          <td>100</td>
-                          <td>5</td>
-                          <td>2</td>
-                          <td>93</td>
-                          <td><button className="btn btn-warning">Update</button></td>
-                          <td><button className="btn btn-danger">Delete</button></td>
-                        </tr>
+                        {rackData[rackNumber] && rackData[rackNumber].map((item) => (
+                          <tr key={item.id}>
+                            <td>{item.section}</td>
+                            <td>{item.materialName}</td>
+                            <td>{item.availableStock}</td>
+                            <td>{item.issue}</td>
+                            <td>{item.receit}</td>
+                            <td>{item.closingStock}</td>
+                            <td>
+                              <NavLink to={`/update/${rackNumber}/${item.id}`} className="btn btn-warning">Update</NavLink>
+                            </td>
+                            <td>
+                              <button className="btn btn-danger" onClick={() => handleDelete(item.id)}>Delete</button>
+                            </td>
+                          </tr>
+                        ))} 
                       </tbody>
                     </table>
                   </div>

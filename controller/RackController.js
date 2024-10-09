@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
-import Rack1 from '../models/Racks/Rack1.js'; // Adjust the path as needed
-
+import Rack1 from '../models/Racks/Rack1.js'; 
 import Rack2 from '../models/Racks/Rack2.js';
 import Rack3 from '../models/Racks/Rack3.js';
 import Rack4 from '../models/Racks/Rack4.js';
@@ -12,8 +11,7 @@ import Rack9 from '../models/Racks/Rack9.js';
 import Rack10 from '../models/Racks/Rack10.js';
 import Rack11 from '../models/Racks/Rack11.js';
 import Rack12 from '../models/Racks/Rack12.js';
-import Rack13 from '../models/Racks/Rack13.js'; // Adjust the path as needed
-
+import Rack13 from '../models/Racks/Rack13.js'; 
 import Rack14 from '../models/Racks/Rack14.js';
 import Rack15 from '../models/Racks/Rack15.js';
 import Rack16 from '../models/Racks/Rack16.js';
@@ -26,11 +24,6 @@ import Rack22 from '../models/Racks/Rack22.js';
 import Rack23 from '../models/Racks/Rack23.js';
 import Rack24 from '../models/Racks/Rack24.js';
 
-
-
-// Import other rack models as needed...
-
-// Map to easily access models by rack number
 const rackModels = {
   '1': Rack1,
   '2': Rack2,
@@ -56,9 +49,6 @@ const rackModels = {
   '22': Rack22,
   '23': Rack23,
   '24': Rack24,
-
-
-  // Add mappings for other rack numbers...
 };
 
 export const insertRackData = async (req, res) => {
@@ -70,18 +60,17 @@ export const insertRackData = async (req, res) => {
   }
 
   console.log('Inserting data for rack:', rackNumber);
-  console.log('Request body:', req.body); // Log the incoming request body
+  console.log('Request body:', req.body);
 
   try {
     const newRack = new RackModel(req.body);
     await newRack.save();
     res.status(201).json(newRack);
   } catch (error) {
-    console.error('Error inserting data:', error); // Log the error
+    console.error('Error inserting data:', error);
     res.status(400).json({ message: error.message });
   }
 };
-
 
 export const getRackData = async (req, res) => {
   const { rackNumber } = req.params;
@@ -95,6 +84,27 @@ export const getRackData = async (req, res) => {
     const racks = await RackModel.find();
     res.status(200).json(racks);
   } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+// New update function
+export const updateRackData = async (req, res) => {
+  const { rackNumber, productId } = req.params;
+  const RackModel = rackModels[rackNumber];
+
+  if (!RackModel) {
+    return res.status(404).json({ message: 'Rack model not found' });
+  }
+
+  try {
+    const updatedRack = await RackModel.findByIdAndUpdate(productId, req.body, { new: true });
+    if (!updatedRack) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+    res.status(200).json(updatedRack);
+  } catch (error) {
+    console.error('Error updating rack data:', error);
     res.status(400).json({ message: error.message });
   }
 };

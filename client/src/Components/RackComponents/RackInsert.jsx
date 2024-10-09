@@ -1,9 +1,12 @@
 // InsertForm.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom'; // Import useParams
 import '../Product.css';
 
-export default function RackInsert({ rackNumber }) {
+export default function RackInsert() {
+  const { rackNumber } = useParams(); // Get rackNumber from route parameters
+
   const [formData, setFormData] = useState({
     section: '',
     materialName: '',
@@ -33,7 +36,6 @@ export default function RackInsert({ rackNumber }) {
         closingStock: '',
       });
     } catch (error) {
-      
       console.error('Error inserting data:', error);
     }
   };
@@ -54,50 +56,44 @@ export default function RackInsert({ rackNumber }) {
         width: '500px', // Adjusted width to 500px
       }}>
         <h3 className='text-primary'>Insert Rack Data</h3>
-        <br></br>
+        <br />
         <div>
           <label className='custom-table-head'>Section     :     </label>
           <input type="number" name="section" value={formData.section} onChange={handleChange} required />
         </div>
-        <br></br>
+        <br />
 
         <div>
           <label className='custom-table-head'>Material Name:</label>
           <input type="text" name="materialName" value={formData.materialName} onChange={handleChange} required />
         </div>
-
-        <br></br>
+        <br />
 
         <div>
           <label className='custom-table-head'>Available Stock:</label>
           <input type="number" name="availableStock" value={formData.availableStock} onChange={handleChange} required />
         </div>
-
-        <br></br>
+        <br />
 
         <div>
           <label className='custom-table-head'>Issue     :     </label>
           <input type="number" name="issue" value={formData.issue} onChange={handleChange} />
         </div>
-
-        <br></br>
+        <br />
 
         <div>
           <label className='custom-table-head'>Receit     :</label>
           <input type="number" name="receit" value={formData.receit} onChange={handleChange} />
         </div>
-
-        <br></br>
+        <br />
 
         <div>
           <label className='custom-table-head'>Closing Stock:</label>
           <input type="number" name="closingStock" value={formData.closingStock} onChange={handleChange} required />
         </div>
-
-        <br></br>
+        <br />
 
         <button type="submit" className='custom-table-head btn btn-outline-success'>Submit</button>
-
       </form>
     </div>
   );

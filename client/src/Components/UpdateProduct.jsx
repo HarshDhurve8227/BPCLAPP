@@ -25,7 +25,7 @@ export default function UpdateProduct() {
         const fetchProduct = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/${department}/product/${id}`);
+                const response = await axios.get(`http://localhost:4000/api/${department}/product/${id}`);
                 if (response.status === 200) {
                     setValue(response.data);
                 } else {
@@ -50,15 +50,21 @@ export default function UpdateProduct() {
     useEffect(() => {
         const availableStock = parseFloat(value.AvailableStock) || 0;
         const minStock = parseFloat(value.MinStock) || 0;
-        const excessShortFall = availableStock - minStock;
+        const excessShortFall =  availableStock - minStock;
 
         setValue(prevValue => ({
             ...prevValue,
-            ExcessShortFall: excessShortFall,
-            // Optional: Update StatusofOrder based on new ExcessShortFall
-            StatusofOrder: excessShortFall <= 0 ? 'Order to place' : prevValue.StatusofOrder
+            ExcessShortFall: excessShortFall
         }));
     }, [value.AvailableStock, value.MinStock]);
+
+    // Update StatusofOrder based on ExcessShortFall
+    useEffect(() => {
+        setValue(prevValue => ({
+            ...prevValue,
+            StatusofOrder: prevValue.ExcessShortFall <= 0 ? 'Order to place' : 'Available'
+        }));
+    }, [value.ExcessShortFall]);
 
     // Handle input changes
     const changeHandler = (e) => {
@@ -202,7 +208,6 @@ export default function UpdateProduct() {
                     <input
                         type="text"
                         name='StatusofOrder'
-                        onChange={changeHandler} // Allow user to edit
                         value={value.StatusofOrder || ""}
                         className="form-control fs-5"
                         id="StatusofOrder"
