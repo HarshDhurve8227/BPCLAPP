@@ -21,7 +21,7 @@ export default function RackInsert({ rackNumber }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`https://bpcl2024-a36b07a626d7.herokuapp.com/rack/${rackNumber}`, formData);
+      const response = await axios.post(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/rack/${rackNumber}`, formData);
       console.log('Data inserted:', response.data);
       // Reset the form or handle success state
       setFormData({
@@ -33,6 +33,7 @@ export default function RackInsert({ rackNumber }) {
         closingStock: '',
       });
     } catch (error) {
+      
       console.error('Error inserting data:', error);
     }
   };

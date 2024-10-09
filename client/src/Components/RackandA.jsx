@@ -2,7 +2,6 @@
 import React from "react";
 import './Product.css';
 import { NavLink } from "react-router-dom";
-import RackInsert from "./RackComponents/RackInsert"; // You may not need this import anymore
 
 export default function About() {
   const technicianKosanRacks = [1, 2];
@@ -54,10 +53,10 @@ export default function About() {
                       <thead>
                         <tr className="custom-table-head">
                           <th scope="col">Section</th>
-                          <th scope="col">Material name</th>
+                          <th scope="col">Material Name</th>
                           <th scope="col">Available Stock</th>
                           <th scope="col">Issue</th>
-                          <th scope="col">Receit</th>
+                          <th scope="col">Receipt</th>
                           <th scope="col">Closing Stock</th>
                           <th scope="col">Update</th>
                           <th scope="col">Delete</th>
@@ -65,6 +64,17 @@ export default function About() {
                       </thead>
                       <tbody className='custom-table-body'>
                         {/* Populate rows dynamically if needed */}
+                        {/* Example row (replace with dynamic data later) */}
+                        <tr>
+                          <td>1</td>
+                          <td>Sample Material</td>
+                          <td>100</td>
+                          <td>5</td>
+                          <td>2</td>
+                          <td>93</td>
+                          <td><button className="btn btn-warning">Update</button></td>
+                          <td><button className="btn btn-danger">Delete</button></td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>

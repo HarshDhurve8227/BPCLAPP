@@ -1,12 +1,25 @@
 import React, { useState, useContext } from 'react';
 import myLogo from './images/1723176521233.png';
-import './Product.css';
+import './Navbar.css';
 import { AuthContext } from '../context/AuthContext';
+import NotificationModal from './NotificationModal';
 
 export default function Navbar(props) {
   const { logout } = useContext(AuthContext);
   const [searchTerm, setSearchTerm] = useState('');
   const [highlighted, setHighlighted] = useState(false);
+
+
+  const [showModal, setShowModal] = useState(false);
+
+  const handleNotificationClick = (e) => {
+      e.preventDefault(); // Prevent default anchor behavior
+      setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+      setShowModal(false);
+  };
 
   // Handle logout
   const handleLogout = () => {
@@ -49,6 +62,9 @@ export default function Navbar(props) {
     });
   };
 
+
+  
+
   return (
     <>
       <div>
@@ -89,6 +105,7 @@ export default function Navbar(props) {
                     aria-expanded="false"
                   >
                     SPARES
+                              
                   </button>
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <li>
@@ -127,6 +144,10 @@ export default function Navbar(props) {
                    
                   </ul>
                 </li>
+
+
+                
+               
 
                 <li className="dropdown" style={{ padding: '10px', marginBottom: '5px' }}>
                   <button
@@ -186,21 +207,82 @@ export default function Navbar(props) {
                 </li>
               </ul>
 
+              
+            <>
+              <ul className="navbar-menu" style={{ display: 'flex', alignItems: 'center', marginLeft: '-20px', marginRight: '200px', marginTop: '10px', listStyle: 'none' }}>
+                <li className="notification" style={{ marginLeft: '15px', position: 'relative' }}>
+                    <a href="#" aria-label="Notifications" style={{ position: 'relative', textDecoration: 'none' }} onClick={handleNotificationClick}>
+                        <i className="fas fa-bell text-warning" style={{ fontSize: '1.8em' }}></i>
+                        <span className="badge" style={{
+                            position: 'absolute',
+                            top: '-10px',
+                            right: '-10px',
+                            backgroundColor: 'red',
+                            color: 'black',
+                            borderRadius: '50%',
+                            padding: '0',
+                            width: '20px',
+                            height: '20px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontSize: '0.8em',
+                            fontWeight: 'bold',
+                            lineHeight: '1',
+                            border: 'none',
+                            boxShadow: 'none'
+                        }}>3</span>
+                    </a>
+                </li>
+            </ul>
+
+            <NotificationModal show={showModal} handleClose={handleCloseModal} />
+        </>
+
+
+
+
+
+
+
+
+             
+
+
+
+              
+              
+
+
+              
+
+
 
              
 
               <form className="d-flex" role="search" onSubmit={handleSearch}>
-                <input
-                  className="form-control me-2"
+
+
+              
+              
+              <input
+                 className="form-control me-2"
                   type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                  value={searchTerm}
-                  onChange={handleChange}
-                />
-                <button className="btn btn-dark fs-5 custom-table-head" type="submit">
+                   placeholder="Search"
+                    aria-label="Search"
+                      value={searchTerm}
+                     onChange={handleChange}
+                     style={{ width: '50%' }} // Set the width to 50%
+              />
+
+
+               <button className="btn btn-dark fs-5 custom-table-head" type="submit">
                   Search
                 </button>
+
+
+              
+                
               </form>
 
               {/* Add the Logout Button */}
