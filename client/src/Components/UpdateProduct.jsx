@@ -25,7 +25,7 @@ export default function UpdateProduct() {
         const fetchProduct = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`http://localhost:4000/api/${department}/product/${id}`);
+                const response = await axios.get(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/${department}/product/${id}`);
                 if (response.status === 200) {
                     setValue(response.data);
                 } else {

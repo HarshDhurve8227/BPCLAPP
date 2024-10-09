@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
 export default function RackUpdate() {
-  const { rackNumber, productId } = useParams(); // Get rackNumber and productId from params
+  const { rackNumber, id } = useParams(); // Get rackNumber and id from params
   const navigate = useNavigate();
   
   const [formData, setFormData] = useState({
@@ -16,10 +16,10 @@ export default function RackUpdate() {
   });
 
   useEffect(() => {
-    console.log('Fetching product data for rack:', rackNumber, 'and product:', productId);
+    console.log('Fetching product data for rack:', rackNumber, 'and product ID:', id);
     const fetchProductData = async () => {
       try {
-        const response = await axios.get(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/rack/${rackNumber}/${productId}`);
+        const response = await axios.get(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/rack/${rackNumber}/${id}`);
         console.log('Fetched data:', response.data); // Check the structure of the response
         setFormData({
           section: response.data.section || '',
@@ -35,7 +35,7 @@ export default function RackUpdate() {
     };
 
     fetchProductData();
-  }, [rackNumber, productId]);
+  }, [rackNumber, id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,7 +45,7 @@ export default function RackUpdate() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/rack/${rackNumber}/${productId}`, formData);
+      await axios.put(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/rack/${rackNumber}/${id}`, formData);
       navigate(`/insertproducts/${rackNumber}`); // Redirect after successful update
     } catch (error) {
       console.error('Error updating product:', error);
