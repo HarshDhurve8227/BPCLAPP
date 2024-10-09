@@ -31,7 +31,7 @@ routers.get('/:department/product/:id', getProductById);
 // Rack routes
 routers.post('/rack/:rackNumber', insertRackData); // Route for inserting rack data
 routers.get('/rack/:rackNumber', getRackData); // Route for fetching rack data
-routers.put('/rack/:rackNumber/:id', updateRackData); // Route for updating rack data
+routers.put('/rackupdate/:rackNumber/:id', updateRackData); // Route for updating rack data
 routers.get('/rack/:rackNumber/:id', getRackData);
 
 // Checklist route

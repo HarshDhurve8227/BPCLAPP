@@ -45,7 +45,7 @@ export default function RackUpdate() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/rack/${rackNumber}/${id}`, formData);
+      await axios.put(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/rackupdate/${rackNumber}/${id}`, formData);
       navigate(`/insertproducts/${rackNumber}`); // Redirect after successful update
     } catch (error) {
       console.error('Error updating product:', error);

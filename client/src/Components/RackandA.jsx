@@ -97,7 +97,7 @@ export default function About() {
                             <td>{item.receit}</td>
                             <td>{item.closingStock}</td>
                             <td>
-                              <NavLink to={`/update/${rackNumber}/${item.id}`} className="btn btn-warning">Update</NavLink>
+                              <NavLink to={`/rackupdate/${rackNumber}/${item.id}`} className="btn btn-warning">Update</NavLink>
                             </td>
                             <td>
                               <button className="btn btn-danger" onClick={() => handleDelete(item.id)}>Delete</button>

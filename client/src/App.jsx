@@ -51,7 +51,7 @@ function App() {
             <Route path="/AS11" element={<PrivateRoute element={<ChecklistForm />} />} />
 
             <Route path="/insertproducts/:rackNumber" element={<PrivateRoute element={<RackInsert />} />} />
-            <Route path="/update/:rackNumber/:id" element={<PrivateRoute element={<RackUpdate />} />} />
+            <Route path="/rackupdate/:rackNumber/:id" element={<PrivateRoute element={<RackUpdate />} />} />
             <Route path="/amc" element={<PrivateRoute element={<AMC />} />} />
 
             <Route path="/amcinsert" element={<PrivateRoute element={<AMCInsert />} />} />
