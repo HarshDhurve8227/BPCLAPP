@@ -17,18 +17,27 @@ export default function RackUpdate() {
 
   useEffect(() => {
     console.log('Fetching product data for rack:', rackNumber, 'and product ID:', id);
+    
     const fetchProductData = async () => {
       try {
         const response = await axios.get(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/rack/${rackNumber}/${id}`);
         console.log('Fetched data:', response.data); // Check the structure of the response
-        setFormData({
-          section: response.data.section || '',
-          materialName: response.data.materialName || '',
-          availableStock: response.data.availableStock || '',
-          issue: response.data.issue || '',
-          receit: response.data.receit || '',
-          closingStock: response.data.closingStock || '',
-        });
+
+        // Check if the response data is an array and has at least one item
+        if (Array.isArray(response.data) && response.data.length > 0) {
+          const fetchedData = response.data[0]; // Access the first object in the array
+
+          setFormData({
+            section: fetchedData.section || '',
+            materialName: fetchedData.materialName || '',
+            availableStock: fetchedData.availableStock || '',
+            issue: fetchedData.issue || '',
+            receit: fetchedData.receit || '',
+            closingStock: fetchedData.closingStock || '',
+          });
+        } else {
+          console.error('No product data found.');
+        }
       } catch (error) {
         console.error('Error fetching product data:', error);
       }
