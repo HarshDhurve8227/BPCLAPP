@@ -98,7 +98,7 @@ export const updateRackData = async (req, res) => {
   }
 
   try {
-    const updatedRack = await RackModel.findByIdAndUpdate(id, req.body, { new: true });
+    const updatedRack = await RackModel.findByIdAndUpdate(id , req.body, { new: true });
     if (!updatedRack) {
       return res.status(404).json({ message: 'Product not found' });
     }
