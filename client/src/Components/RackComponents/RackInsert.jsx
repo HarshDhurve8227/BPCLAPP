@@ -84,7 +84,7 @@ export default function RackInsert() {
         <br />
         <div>
           <label className='custom-table-head'>Section     :     </label>
-          <input type="number" name="section" value={formData.section} onChange={handleChange} required />
+          <input type="text" name="section" value={formData.section} onChange={handleChange} required />
         </div>
         <br />
 
