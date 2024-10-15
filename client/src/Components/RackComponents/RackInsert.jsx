@@ -9,7 +9,7 @@ export default function RackInsert() {
   const navigate = useNavigate(); // Initialize useNavigate
 
   const [formData, setFormData] = useState({
-    section: '',
+    section: '', // Keep this as an empty string
     materialName: '',
     availableStock: '',
     issue: '',
@@ -21,11 +21,11 @@ export default function RackInsert() {
     const { name, value } = e.target;
     let newValue;
 
-    // Convert value to number only for numeric fields
-    if (name === 'section' || name === 'availableStock' || name === 'issue' || name === 'receit') {
+    // Handle numeric fields appropriately
+    if (name === 'availableStock' || name === 'issue' || name === 'receit') {
       newValue = value === '' ? '' : Number(value);
     } else {
-      newValue = value; // Keep materialName as a string
+      newValue = value; // Keep section and materialName as strings
     }
 
     setFormData((prevData) => {
