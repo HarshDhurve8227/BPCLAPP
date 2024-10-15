@@ -1,7 +1,7 @@
 // InsertForm.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom'; // Import useParams and useNavigate
+import { useParams, useNavigate } from 'react-router-dom';
 import '../Product.css';
 
 export default function RackInsert() {
@@ -9,11 +9,11 @@ export default function RackInsert() {
   const navigate = useNavigate(); // Initialize useNavigate
 
   const [formData, setFormData] = useState({
-    section: '', // Keep this as an empty string
+    section: '',
     materialName: '',
     availableStock: '',
     issue: '',
-    receit: 0, // Set default value for receit to 0
+    receit: 0, // Default value for receit
     closingStock: '',
   });
 
@@ -21,7 +21,7 @@ export default function RackInsert() {
     const { name, value } = e.target;
     let newValue;
 
-    // Handle numeric fields appropriately
+    // Handle numeric fields
     if (name === 'availableStock' || name === 'issue' || name === 'receit') {
       newValue = value === '' ? '' : Number(value);
     } else {
@@ -31,13 +31,13 @@ export default function RackInsert() {
     setFormData((prevData) => {
       const updatedData = { ...prevData, [name]: newValue };
 
-      // Calculate closing stock whenever relevant fields change
+      // Calculate closing stock
       if (updatedData.availableStock !== '' && updatedData.issue !== '' && updatedData.receit !== '') {
         updatedData.closingStock = updatedData.availableStock - (updatedData.issue + updatedData.receit);
       } else {
         updatedData.closingStock = ''; // Reset if fields are empty
       }
-      
+
       return updatedData;
     });
   };
@@ -47,11 +47,11 @@ export default function RackInsert() {
     try {
       const response = await axios.post(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/rack/${rackNumber}`, formData);
       console.log('Data inserted:', response.data);
-      
+
       // Navigate to the new route
       navigate(`/insertproducts/${rackNumber}`);
-      
-      // Reset the form or handle success state
+
+      // Reset the form
       setFormData({
         section: '',
         materialName: '',
@@ -83,7 +83,7 @@ export default function RackInsert() {
         <h3 className='text-primary'>Insert Rack Data</h3>
         <br />
         <div>
-          <label className='custom-table-head'>Section     :     </label>
+          <label className='custom-table-head'>Section:</label>
           <input type="text" name="section" value={formData.section} onChange={handleChange} required />
         </div>
         <br />
@@ -101,13 +101,13 @@ export default function RackInsert() {
         <br />
 
         <div>
-          <label className='custom-table-head'>Issue     :     </label>
+          <label className='custom-table-head'>Issue:</label>
           <input type="number" name="issue" value={formData.issue} onChange={handleChange} />
         </div>
         <br />
 
         <div>
-          <label className='custom-table-head'>Receit     :</label>
+          <label className='custom-table-head'>Receit:</label>
           <input type="number" name="receit" value={formData.receit} onChange={handleChange} />
         </div>
         <br />
