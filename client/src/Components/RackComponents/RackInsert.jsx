@@ -49,7 +49,7 @@ export default function RackInsert() {
       console.log('Data inserted:', response.data);
 
       // Navigate to the new route
-      navigate(`/insertproducts/${rackNumber}`);
+      navigate(`/about`);
 
       // Reset the form
       setFormData({
