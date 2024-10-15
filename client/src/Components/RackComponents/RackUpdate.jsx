@@ -49,7 +49,7 @@ export default function RackUpdate() {
     e.preventDefault();
     try {
       await axios.put(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/rackupdate/${rackNumber}/${id}`, formData);
-      navigate(`/insertproducts/${rackNumber}`);
+      navigate(`/about`);
     } catch (error) {
       console.error('Error updating product:', error);
     }

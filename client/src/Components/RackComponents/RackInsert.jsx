@@ -1,12 +1,11 @@
 // InsertForm.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, NavLink } from 'react-router-dom';
 import '../Product.css';
 
 export default function RackInsert() {
   const { rackNumber } = useParams(); // Get rackNumber from route parameters
-  const navigate = useNavigate(); // Initialize useNavigate
 
   const [formData, setFormData] = useState({
     section: '',
@@ -16,6 +15,8 @@ export default function RackInsert() {
     receit: 0, // Default value for receit
     closingStock: '',
   });
+
+  const [isSubmitted, setIsSubmitted] = useState(false); // State to track form submission
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,20 +49,11 @@ export default function RackInsert() {
       const response = await axios.post(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/rack/${rackNumber}`, formData);
       console.log('Data inserted:', response.data);
 
-      // Navigate to the new route
-      navigate(`/about`);
-
-      // Reset the form
-      setFormData({
-        section: '',
-        materialName: '',
-        availableStock: '',
-        issue: '',
-        receit: 0, // Reset receit to 0 on form reset
-        closingStock: '',
-      });
+      // Set submission state to true
+      setIsSubmitted(true);
     } catch (error) {
       console.error('Error inserting data:', error);
+      alert('Failed to insert data. Please try again.'); // Optionally alert the user
     }
   };
 
@@ -70,15 +62,15 @@ export default function RackInsert() {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      height: '100vh', // Full height of the viewport
-      backgroundColor: '#f9f9f9', // Optional: background color
+      height: '100vh',
+      backgroundColor: '#f9f9f9',
     }}>
       <form onSubmit={handleSubmit} style={{
         backgroundColor: 'white',
         padding: '20px',
         borderRadius: '8px',
         boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-        width: '500px', // Adjusted width to 500px
+        width: '500px',
       }}>
         <h3 className='text-primary'>Insert Rack Data</h3>
         <br />
@@ -120,6 +112,13 @@ export default function RackInsert() {
 
         <button type="submit" className='custom-table-head btn btn-outline-success'>Submit</button>
       </form>
+
+      {/* Conditional rendering of NavLink after submission */}
+      {isSubmitted && (
+        <NavLink to={`/abou`} className='btn btn-primary' style={{ marginTop: '20px' }}>
+          Go to Store Racks
+        </NavLink>
+      )}
     </div>
   );
 }
