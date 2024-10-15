@@ -1,5 +1,5 @@
 // InsertForm.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom'; // Import useParams
 import '../Product.css';
@@ -18,7 +18,18 @@ export default function RackInsert() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    const newValue = value === '' ? '' : Number(value); // Convert value to number
+
+    setFormData((prevData) => {
+      const updatedData = { ...prevData, [name]: newValue };
+      // Calculate closing stock whenever relevant fields change
+      if (updatedData.availableStock !== '' && updatedData.issue !== '' && updatedData.receit !== '') {
+        updatedData.closingStock = updatedData.availableStock - (updatedData.issue + updatedData.receit);
+      } else {
+        updatedData.closingStock = ''; // Reset if fields are empty
+      }
+      return updatedData;
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -89,7 +100,7 @@ export default function RackInsert() {
 
         <div>
           <label className='custom-table-head'>Closing Stock:</label>
-          <input type="number" name="closingStock" value={formData.closingStock} onChange={handleChange} required />
+          <input type="number" name="closingStock" value={formData.closingStock} readOnly required />
         </div>
         <br />
 
@@ -97,4 +108,4 @@ export default function RackInsert() {
       </form>
     </div>
   );
-};
+}
