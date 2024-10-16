@@ -35,7 +35,7 @@ export default function AMCInsert() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/equipment/add}`, formData);
+      await axios.post(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/equipment/add`, formData);
       toast.success('Equipment added successfully!'); // Success toast
       // Reset the form
       setFormData({
