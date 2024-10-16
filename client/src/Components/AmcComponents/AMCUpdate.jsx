@@ -1,26 +1,21 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import './AMCInsert.css'; // Use the same styles as AMCInsert
+import { toast, Toaster } from 'react-hot-toast'; // Import toast and Toaster
+import './AMCInsert.css';
 
 export default function AMCUpdate() {
     const [equipment, setEquipment] = useState({
-
         equipment: '',
         company: '',
         validity: { from: '', to: '' },
         pms: '',
         vendorCode: '',
         contractNumber: '',
-
         concernedPerson: '',
-
         mobileNumber: '',
-
         lastDateOfChecking: '',
-
         nextDueDate: '',
-
     });
 
     const [error, setError] = useState('');
@@ -33,14 +28,11 @@ export default function AMCUpdate() {
             try {
                 const response = await axios.get(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/equipment/get/${id}`);
 
-                // Ensure the fetched data is an array and has at least one item
                 if (Array.isArray(response.data) && response.data.length > 0) {
-                    const fetchedData = response.data[0]; // Access the first object in the array
-
-                    console.log('Fetched Equipment Data:', fetchedData);
+                    const fetchedData = response.data[0];
 
                     const formatDate = (dateString) => {
-                        return dateString ? dateString.split('T')[0] : ''; // Get the date part only
+                        return dateString ? dateString.split('T')[0] : '';
                     };
 
                     setEquipment({
@@ -57,7 +49,6 @@ export default function AMCUpdate() {
                         mobileNumber: fetchedData.mobileNumber || '',
                         lastDateOfChecking: formatDate(fetchedData.lastDateOfChecking) || '',
                         nextDueDate: formatDate(fetchedData.nextDueDate) || '',
-
                     });
                 } else {
                     setError('No equipment data found.');
@@ -83,24 +74,16 @@ export default function AMCUpdate() {
     };
 
     const handleSubmit = async (e) => {
-
         e.preventDefault();
 
         try {
             await axios.put(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/equipment/updated/${id}`, equipment);
+            toast.success('Equipment updated successfully!'); // Success toast
             navigate('/amc');
-
-             // Redirect to the AMC page after successful update      
         } catch (error) {
-
-
-
-        
-
-
             setError('Failed to update equipment: ' + (error.response?.data?.message || error.message));
+            toast.error('Update failed. Please try again.'); // Error toast
         }
-
     };
 
     return (
@@ -112,6 +95,7 @@ export default function AMCUpdate() {
             backgroundColor: '#f9f9f9',
             paddingTop: '50px'
         }}>
+            <Toaster /> {/* Place the Toaster component here */}
             <div style={{
                 backgroundColor: 'white',
                 padding: '20px',

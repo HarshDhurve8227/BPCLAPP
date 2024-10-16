@@ -2,41 +2,40 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useParams, NavLink } from 'react-router-dom';
+import { toast, Toaster } from 'react-hot-toast'; // Importing toast and Toaster
 import '../Product.css';
 
 export default function RackInsert() {
-  const { rackNumber } = useParams(); // Get rackNumber from route parameters
+  const { rackNumber } = useParams();
 
   const [formData, setFormData] = useState({
     section: '',
     materialName: '',
     availableStock: '',
     issue: '',
-    receit: 0, // Default value for receit
+    receit: 0,
     closingStock: '',
   });
 
-  const [isSubmitted, setIsSubmitted] = useState(false); // State to track form submission
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     let newValue;
 
-    // Handle numeric fields
     if (name === 'availableStock' || name === 'issue' || name === 'receit') {
       newValue = value === '' ? '' : Number(value);
     } else {
-      newValue = value; // Keep section and materialName as strings
+      newValue = value;
     }
 
     setFormData((prevData) => {
       const updatedData = { ...prevData, [name]: newValue };
 
-      // Calculate closing stock
       if (updatedData.availableStock !== '' && updatedData.issue !== '' && updatedData.receit !== '') {
         updatedData.closingStock = updatedData.availableStock - (updatedData.issue + updatedData.receit);
       } else {
-        updatedData.closingStock = ''; // Reset if fields are empty
+        updatedData.closingStock = '';
       }
 
       return updatedData;
@@ -49,11 +48,13 @@ export default function RackInsert() {
       const response = await axios.post(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/rack/${rackNumber}`, formData);
       console.log('Data inserted:', response.data);
 
-      // Set submission state to true
+      // Show success toast
+      toast.success('Data inserted successfully!');
+
       setIsSubmitted(true);
     } catch (error) {
       console.error('Error inserting data:', error);
-      alert('Failed to insert data. Please try again.'); // Optionally alert the user
+      toast.error('Failed to insert data. Please try again.'); // Show error toast
     }
   };
 
@@ -65,6 +66,7 @@ export default function RackInsert() {
       height: '100vh',
       backgroundColor: '#f9f9f9',
     }}>
+      <Toaster /> {/* Place the Toaster component here to show toast notifications */}
       <form onSubmit={handleSubmit} style={{
         backgroundColor: 'white',
         padding: '20px',
@@ -115,7 +117,7 @@ export default function RackInsert() {
 
       {/* Conditional rendering of NavLink after submission */}
       {isSubmitted && (
-        <NavLink to={`/abou`} className='btn btn-primary' style={{ marginTop: '20px' }}>
+        <NavLink to={`/about`} className='btn btn-primary' style={{ marginTop: '20px' }}>
           Go to Store Racks
         </NavLink>
       )}
