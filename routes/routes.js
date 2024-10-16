@@ -31,8 +31,8 @@ routers.get('/:department/product/:id', getProductById);
 // Rack routes
 routers.post('/rack/:rackNumber', insertRackData); // Route for inserting rack data
 routers.get('/rack/:rackNumber', getRackData); // Route for fetching rack data
-routers.put('/rackupdate/:rackNumber/:id', updateRackData); // Route for updating rack data
-routers.get('/rack/:rackNumber/:id', getRackData);
+routers.put('/rackupdate/:rackNumber/:_id', updateRackData); // Route for updating rack data
+routers.get('/rack/:rackNumber/:_id', getRackData);
 
 // Checklist route
 routers.post('/checklist', (req, res, next) => {
@@ -46,5 +46,6 @@ routers.get('/equipment/get', getEquipments);
 routers.put('/equipment/updated/:id', updateEquipment);
 routers.delete('/equipment/delete/:id', deleteEquipment);
 routers.get('/equipment/get/:id', getEquipments);
+
 
 export default routers;

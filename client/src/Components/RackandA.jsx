@@ -17,17 +17,15 @@ export default function About() {
     ...fireFightingRacks,
   ];
 
-  // State to hold rack data
   const [rackData, setRackData] = useState({});
 
   useEffect(() => {
-    // Fetch data for each rack
     const fetchRackData = async () => {
       const data = {};
       for (const rackNumber of allRacks) {
         try {
           const response = await axios.get(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/rack/${rackNumber}`);
-          data[rackNumber] = response.data; // Assuming the API returns an array of items
+          data[rackNumber] = response.data;
         } catch (error) {
           console.error(`Error fetching data for rack ${rackNumber}:`, error);
         }
@@ -41,7 +39,7 @@ export default function About() {
   const handleDelete = async (id) => {
     // Handle delete logic here
   };
-
+   
   return (
     <div className="accordion" id="accordionPanelsStayOpenExample">
       {allRacks.map((rackNumber) => (
@@ -88,22 +86,25 @@ export default function About() {
                         </tr>
                       </thead>
                       <tbody className='custom-table-body'>
-                        {rackData[rackNumber] && rackData[rackNumber].map((item) => (
-                          <tr key={item.id}>
-                            <td>{item.section}</td>
-                            <td>{item.materialName}</td>
-                            <td>{item.availableStock}</td>
-                            <td>{item.issue}</td>
-                            <td>{item.receit}</td>
-                            <td>{item.closingStock}</td>
-                            <td>
-                              <NavLink to={`/rackupdate/${rackNumber}/${item.id}`} className="btn btn-warning">Update</NavLink>
-                            </td>
-                            <td>
-                              <button className="btn btn-danger" onClick={() => handleDelete(item.id)}>Delete</button>
-                            </td>
-                          </tr>
-                        ))} 
+                        {rackData[rackNumber] && rackData[rackNumber].map((item, index) => {
+                          const key = item._id ? item._id : `fallback-key-${index}`;
+                          return (
+                            <tr key={key}>
+                              <td>{item.section}</td>
+                              <td>{item.materialName}</td>
+                              <td>{item.availableStock}</td>
+                              <td>{item.issue}</td>
+                              <td>{item.receit}</td>
+                              <td>{item.closingStock}</td>
+                              <td>
+                                <NavLink to={`/rackupdate/${rackNumber}/${item._id}`} className="btn btn-warning">Update</NavLink>
+                              </td>
+                              <td>
+                                <button className="btn btn-danger" onClick={() => handleDelete(item._id)}>Delete</button>
+                              </td>
+                            </tr>
+                          );
+                        })} 
                       </tbody>
                     </table>
                   </div>

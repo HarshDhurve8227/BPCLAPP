@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
 export default function RackUpdate() {
-  const { rackNumber, id } = useParams();
+  const { rackNumber, _id } = useParams(); // Updated 'id' to '_id'
   const navigate = useNavigate();
   
   const [formData, setFormData] = useState({
@@ -18,7 +18,7 @@ export default function RackUpdate() {
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        const response = await axios.get(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/rack/${rackNumber}/${id}`);
+        const response = await axios.get(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/rack/${rackNumber}/${_id}`); // Updated 'id' to '_id'
         if (Array.isArray(response.data) && response.data.length > 0) {
           const fetchedData = response.data[0];
           setFormData({
@@ -38,7 +38,7 @@ export default function RackUpdate() {
     };
 
     fetchProductData();
-  }, [rackNumber, id]);
+  }, [rackNumber, _id]); // Updated 'id' to '_id'
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,7 +48,7 @@ export default function RackUpdate() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/rackupdate/${rackNumber}/${id}`, formData);
+      await axios.put(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/rackupdate/${rackNumber}/${_id}`, formData); // Updated 'id' to '_id'
       navigate(`/about`);
     } catch (error) {
       console.error('Error updating product:', error);
@@ -74,14 +74,12 @@ export default function RackUpdate() {
         boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)'
       }}>
         <h2 style={{
-  textAlign: 'center', // Center the text
-  fontSize: '24px',   // Increase the font size
-  marginBottom: '20px' // Add some space below the heading
-}} className='custom-table-head'>
-  Update Product
-</h2>
-
-<br></br>
+          textAlign: 'center',
+          fontSize: '24px',
+          marginBottom: '20px'
+        }} className='custom-table-head'>
+          Update Product
+        </h2>
 
         <form onSubmit={handleSubmit}>
           <div>
@@ -89,36 +87,25 @@ export default function RackUpdate() {
             <input type="text" name="section" value={formData.section} onChange={handleChange} required />
           </div>
           <div>
-
-            <br></br>
             <label className='custom-table-head'>Material Name:</label>
             <input type="text" name="materialName" value={formData.materialName} onChange={handleChange} required />
           </div>
           <div>
-
-          <br></br>
             <label className='custom-table-head'>Available Stock:</label>
             <input type="number" name="availableStock" value={formData.availableStock} onChange={handleChange} required />
           </div>
           <div>
-
-          <br></br>
             <label className='custom-table-head'>Issue:</label>
             <input type="number" name="issue" value={formData.issue} onChange={handleChange} />
           </div>
           <div>
-
-          <br></br>
             <label className='custom-table-head'>Receipt:</label>
             <input type="number" name="receit" value={formData.receit} onChange={handleChange} />
           </div>
           <div>
-
-          <br></br>
             <label className='custom-table-head'>Closing Stock:</label>
             <input type="number" name="closingStock" value={formData.closingStock} onChange={handleChange} required />
           </div>
-          <br></br>
           <button className='custom-table-head' type="submit">Update</button>
         </form>
       </div>
