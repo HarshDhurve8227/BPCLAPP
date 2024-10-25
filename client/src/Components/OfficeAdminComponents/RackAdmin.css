@@ -1,0 +1,20 @@
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0; /* Adjusts the spacing above and below the search bar */
+}
+
+.search-bar {
+    display: flex;
+    gap: 10px; /* Adds spacing between the input and button */
+}
+
+.search-bar input {
+    padding: 8px;
+    width: 300px; /* Adjusts width of the input field */
+}
+
+.search-bar button {
+    padding: 8px 16px; /* Adjusts button padding */
+}

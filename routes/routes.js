@@ -12,12 +12,20 @@ import {
     getRackData,
     updateRackData // Importing the update function
 } from '../controller/RackController.js';
+
 import {
     addEquipment,
     getEquipments,
     updateEquipment,
     deleteEquipment
 } from '../controller/AmcController.js';
+
+import { getRackDataa , insertRackDataa } from '../controller/AdminRackController.js';
+
+
+
+
+
 
 const routers = express.Router();
 
@@ -46,6 +54,14 @@ routers.get('/equipment/get', getEquipments);
 routers.put('/equipment/updated/:id', updateEquipment);
 routers.delete('/equipment/delete/:id', deleteEquipment);
 routers.get('/equipment/get/:id', getEquipments);
+
+
+// Rack routes
+routers.post('/rack/:rackName', insertRackDataa); // Route for inserting rack data
+routers.get('/rack/:rackName', getRackDataa); // Route for fetching rack data
+ // Route for updating rack data
+
+
 
 
 export default routers;
