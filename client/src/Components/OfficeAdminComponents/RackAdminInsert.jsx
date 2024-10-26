@@ -15,7 +15,7 @@ export default function RackAdminInsert({ rackName, onInsert }) {
         setLoading(true); 
 
         try {
-            const response = await fetch(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/rackss/${rackName}`, { 
+            const response = await fetch(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/racks/${rackName}`, { 
                 method: 'POST', 
                 headers: { 
                     'Content-Type': 'application/json', 

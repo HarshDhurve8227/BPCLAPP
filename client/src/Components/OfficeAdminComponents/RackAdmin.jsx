@@ -32,7 +32,7 @@ export default function RackAdmin() {
 
     const fetchRackData = async (rackName) => {
         try {
-            const response = await fetch(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/rackss/${rackName}`);
+            const response = await fetch(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/racks/${rackName}`);
             if (!response.ok) {
                 setError(`Failed to fetch ${rackName}: ${response.statusText}`); // Set error message
                 return []; // Return empty array on error
