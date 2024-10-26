@@ -7,7 +7,8 @@ const rack2DSchema = new mongoose.Schema({
             name: { type: String, required: true }
         }
     ]
-});
+}, { collection: 'Rack2D' }); // Explicitly set the collection name
 
 const Rack2D = mongoose.model('Rack2D', rack2DSchema);
+
 export default Rack2D;

@@ -57,8 +57,8 @@ routers.get('/equipment/get/:id', getEquipments);
 
 
 // Rack routes
-routers.post('/rack/:rackName', insertRackDataa); // Route for inserting rack data
-routers.get('/rack/:rackName', getRackDataa); // Route for fetching rack data
+routers.post('/racks/:rackName', insertRackDataa); // Route for inserting rack data
+routers.get('/racks/:rackName', getRackDataa); // Route for fetching rack data
  // Route for updating rack data
 
 

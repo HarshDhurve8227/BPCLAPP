@@ -7,7 +7,8 @@ const rack1BSchema = new mongoose.Schema({
             name: { type: String, required: true }
         }
     ]
-});
+}, { collection: 'Rack1B' }); // Explicitly set the collection name
 
 const Rack1B = mongoose.model('Rack1B', rack1BSchema);
+
 export default Rack1B;

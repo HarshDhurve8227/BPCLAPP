@@ -7,6 +7,7 @@ export default function RackAdmin() {
     const [openCupboard, setOpenCupboard] = useState(null);
     const [openRack, setOpenRack] = useState(null);
     const [rackData, setRackData] = useState({});
+    const [error, setError] = useState(""); // Error state
 
     useEffect(() => {
         fetchAllRackData();
@@ -16,7 +17,7 @@ export default function RackAdmin() {
         const rackNames = ['Rack1A', 'Rack1B', 'Rack1C', 'Rack1D', 'Rack2A', 'Rack2B', 'Rack2C', 'Rack2D'];
         const rackDataPromises = rackNames.map(rackName => fetchRackData(rackName));
         const racks = await Promise.all(rackDataPromises);
-        
+
         // Combine results into an object
         const combinedRackData = rackNames.reduce((acc, rackName, index) => {
             acc[rackName] = racks[index];
@@ -28,26 +29,28 @@ export default function RackAdmin() {
 
     const fetchRackData = async (rackName) => {
         try {
-            const response = await fetch(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/rack/${rackName}`);
-            if (!response.ok) throw new Error('Network response was not ok');
+            const response = await fetch(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/racks/${rackName}`);
+            if (!response.ok) {
+                setError(`Failed to fetch ${rackName}: ${response.statusText}`); // Set error message
+                return []; // Return empty array on error
+            }
             return await response.json();
         } catch (error) {
             console.error(`Error fetching ${rackName} data:`, error);
-            return []; // Return empty array on error
+            setError(`Error fetching ${rackName}: ${error.message}`); // Set error message
+            return [];
         }
     };
 
     const handleSearchChange = (event) => {
         const term = event.target.value;
         setSearchTerm(term);
-
         if (!term) {
             setOpenRack(null);
             return;
         }
-
         const matchingRacks = Object.keys(rackData).filter(rackName =>
-            rackData[rackName].some(file => file.name.toLowerCase().includes(term.toLowerCase()))
+            rackData[rackName]?.some(file => file.name?.toLowerCase().includes(term.toLowerCase()))
         );
 
         setOpenRack(matchingRacks.length > 0 ? matchingRacks[0] : null);
@@ -60,6 +63,7 @@ export default function RackAdmin() {
 
     return (
         <>
+            {error && <div className="alert alert-danger">{error}</div>} {/* Display error message */}
             <div className="search-container">
                 <div className="search-bar">
                     <input
@@ -200,7 +204,7 @@ export default function RackAdmin() {
 
     function filteredFiles(rackName) {
         return (rackData[rackName] || []).filter(file =>
-            file.name.toLowerCase().includes(searchTerm.toLowerCase())
+            file.name?.toLowerCase().includes(searchTerm.toLowerCase())
         );
     }
 }
