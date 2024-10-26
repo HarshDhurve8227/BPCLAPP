@@ -9,10 +9,18 @@ import path from 'path';
 dotenv.config();
 const app = express();
 
+// CORS configuration
+const corsOptions = {
+    origin: 'https://www.bpspareslpgnagpur.com', // Replace with your frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
+    credentials: true, // Allow credentials if needed
+};
+
 // Initialize the database
 const initializeDatabases = async () => {
     try {
         await dbCon(); // Only initialize the primary database
+        console.log('Database connected successfully');
     } catch (error) {
         console.error('Error initializing the database:', error.message);
         process.exit(1); // Exit process if db connection fails
@@ -22,7 +30,7 @@ const initializeDatabases = async () => {
 initializeDatabases();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions)); // Use the configured CORS options
 app.use('/api', routers);
 app.use('/api/auth', authrouter);
 
