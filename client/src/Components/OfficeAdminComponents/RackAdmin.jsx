@@ -16,16 +16,19 @@ export default function RackAdmin() {
     const fetchAllRackData = async () => {
         const rackNames = ['Rack1A', 'Rack1B', 'Rack1C', 'Rack1D', 'Rack2A', 'Rack2B', 'Rack2C', 'Rack2D'];
         const rackDataPromises = rackNames.map(rackName => fetchRackData(rackName));
-        const racks = await Promise.all(rackDataPromises);
-
-        // Combine results into an object
-        const combinedRackData = rackNames.reduce((acc, rackName, index) => {
-            acc[rackName] = racks[index];
-            return acc;
-        }, {});
-
-        setRackData(combinedRackData);
+        
+        try {
+            const racks = await Promise.all(rackDataPromises);
+            const combinedRackData = rackNames.reduce((acc, rackName, index) => {
+                acc[rackName] = racks[index];
+                return acc;
+            }, {});
+            setRackData(combinedRackData);
+        } catch (error) {
+            setError("Error fetching rack data."); // Set a more general error message
+        }
     };
+    
 
     const fetchRackData = async (rackName) => {
         try {
