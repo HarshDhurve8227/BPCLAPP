@@ -60,17 +60,20 @@ export default function RackAdmin() {
     const handleSearchChange = (event) => {
         const term = event.target.value;
         setSearchTerm(term);
-        if (!term) {
-            setOpenRack(null);  // Reset rack view if search term is cleared
-            return;
-        }
-
-        const matchingRacks = Object.keys(rackData).filter(rackName =>
-            rackData[rackName]?.some(file => file.name?.toLowerCase().includes(term.toLowerCase()))
-        );
-
-        setOpenRack(matchingRacks.length > 0 ? matchingRacks[0] : null);
     };
+
+    // Memoize filtered files to optimize performance and apply search across all racks
+    const filteredFiles = useCallback(() => {
+        return Object.keys(rackData).reduce((acc, rackName) => {
+            const filtered = (rackData[rackName] || []).filter(file =>
+                file.name?.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            if (filtered.length > 0) {
+                acc[rackName] = filtered;
+            }
+            return acc;
+        }, {});
+    }, [rackData, searchTerm]);
 
     // Toggle cupboard open/close
     const toggleCupboard = (cupboardName) => {
@@ -78,16 +81,9 @@ export default function RackAdmin() {
         setOpenRack(null);  // Close rack when cupboard is toggled
     };
 
-    // Memoize filtered files to optimize performance
-    const filteredFiles = useCallback((rackName) => {
-        return (rackData[rackName] || []).filter(file =>
-            file.name?.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-    }, [rackData, searchTerm]);
-
     // Render individual racks
     function renderRack(rackName) {
-        const files = filteredFiles(rackName);
+        const files = (filteredFiles()[rackName] || []);
         const isRackOpen = openRack === rackName;
 
         return (
