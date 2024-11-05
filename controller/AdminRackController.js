@@ -7,26 +7,28 @@ import Rack2B from '../models/CupboardRacks/Rack2B.js';
 import Rack2C from '../models/CupboardRacks/Rack2C.js';
 import Rack2D from '../models/CupboardRacks/Rack2D.js';
 
-// Define your racks with lowercase keys to avoid case sensitivity issues
+// Define your racks with exact casing to match collection names
 const racks = {
-    'rack1a': Rack1A,
-    'rack1b': Rack1B,
-    'rack1c': Rack1C,
-    'rack1d': Rack1D,
-    'rack2a': Rack2A,
-    'rack2b': Rack2B,
-    'rack2c': Rack2C,
-    'rack2d': Rack2D,
+    'Rack1A': Rack1A,
+    'Rack1B': Rack1B,
+    'Rack1C': Rack1C,
+    'Rack1D': Rack1D,
+    'Rack2A': Rack2A,
+    'Rack2B': Rack2B,
+    'Rack2C': Rack2C,
+    'Rack2D': Rack2D,
     // Add other racks here...
 };
 
 // Fetch rack data for a specific rack
 export const getRackDataa = async (req, res) => {
     const { rackName } = req.params;
-    console.log(`Received request for rack: ${rackName}`);
 
-    // Normalize the rack name to lowercase to handle case-insensitivity
-    const RackModel = racks[rackName.toLowerCase()];
+    // Log the raw rack name received from the request
+    console.log(`Received request for rack: '${rackName}'`);
+
+    // Ensure the rack name matches the exact case (no need to modify)
+    const RackModel = racks[rackName];
 
     if (!RackModel) {
         // If the rack model doesn't exist, return a 404 error
@@ -38,7 +40,7 @@ export const getRackDataa = async (req, res) => {
         const data = await RackModel.find();
         res.status(200).json(data); // Return the data if found
     } catch (error) {
-        console.error(`Error fetching rack data for ${rackName}:`, error.message, { rackName });
+        console.error(`Error fetching rack data for ${rackName}:`, error.message);
         res.status(500).json({ message: 'Internal server error' });
     }
 };
@@ -46,10 +48,12 @@ export const getRackDataa = async (req, res) => {
 // Insert data for a specific rack
 export const insertRackDataa = async (req, res) => {
     const { rackName } = req.params;
-    console.log(`Received request to insert into rack: ${rackName}`);
 
-    // Normalize the rack name to lowercase to handle case-insensitivity
-    const RackModel = racks[rackName.toLowerCase()];
+    // Log the raw rack name received from the request
+    console.log(`Received request to insert into rack: '${rackName}'`);
+
+    // Ensure the rack name matches the exact case (no need to modify)
+    const RackModel = racks[rackName];
 
     if (!RackModel) {
         // If the rack model doesn't exist, return a 404 error
@@ -86,7 +90,7 @@ export const insertRackDataa = async (req, res) => {
         await newEntry.save();
         res.status(201).json(newEntry); // Return the newly created entry
     } catch (error) {
-        console.error(`Error inserting rack data for ${rackName}:`, error.message, { rackName });
+        console.error(`Error inserting rack data for ${rackName}:`, error.message);
         res.status(500).json({ message: 'Internal server error' });
     }
 };
