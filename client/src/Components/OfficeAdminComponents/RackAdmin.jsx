@@ -87,7 +87,7 @@ export default function RackAdmin() {
         const isRackOpen = openRack === rackName;
 
         return (
-            <div className="rack">
+            <div className="rack" key={rackName}>
                 <div className="accordion" id={`accordion${rackName}`}>
                     <div className="accordion-item">
                         <h2 className="accordion-header" id={`heading${rackName}`}>
