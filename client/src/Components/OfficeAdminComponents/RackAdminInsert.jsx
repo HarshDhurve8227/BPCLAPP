@@ -20,13 +20,16 @@ export default function RackAdminInsert({ rackName, onInsert }) {
                 headers: { 
                     'Content-Type': 'application/json', 
                 },
-                body: JSON.stringify({ id: Number(fileId), name: newFileName }), 
+                // Send the files as an array containing a single object with id and name
+                body: JSON.stringify({
+                    files: [{ id: Number(fileId), name: newFileName }]
+                }), 
             }); 
 
             if (response.ok) { 
                 setNewFileName(""); 
                 setFileId(""); 
-                onInsert(); 
+                onInsert(); // Callback to handle after successful insertion
             } else {
                 const errorMessage = await response.text();
                 setError(`Error inserting file: ${response.statusText} - ${errorMessage}`);
@@ -59,9 +62,7 @@ export default function RackAdminInsert({ rackName, onInsert }) {
                 onClick={handleInsert}
                 disabled={loading}
             >
-                            
                 {loading ? "Inserting..." : "Insert"}
-
             </button>
             {error && <div className="text-danger mt-2">{error}</div>}
         </div>
