@@ -22,12 +22,15 @@ const racks = {
 
 // Fetch rack data for a specific rack
 export const getRackDataa = async (req, res) => {
-    const { rackName } = req.params;
+    let { rackName } = req.params;
 
     // Log the raw rack name received from the request
     console.log(`Received request for rack: '${rackName}'`);
 
-    // Ensure the rack name matches the exact case (no need to modify)
+    // Trim any extra spaces or newline characters from rackName
+    rackName = rackName.trim();
+
+    // Ensure the rack name matches the exact case (no need to modify, just trim it)
     const RackModel = racks[rackName];
 
     if (!RackModel) {
@@ -47,10 +50,13 @@ export const getRackDataa = async (req, res) => {
 
 // Insert data for a specific rack
 export const insertRackDataa = async (req, res) => {
-    const { rackName } = req.params;
+    let { rackName } = req.params;
 
     // Log the raw rack name received from the request
     console.log(`Received request to insert into rack: '${rackName}'`);
+
+    // Trim any extra spaces or newline characters from rackName
+    rackName = rackName.trim();
 
     // Ensure the rack name matches the exact case (no need to modify)
     const RackModel = racks[rackName];
