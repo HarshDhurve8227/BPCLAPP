@@ -21,7 +21,7 @@ const racks = {
 };
 
 // Fetch rack data for a specific rack
-export const getRackData = async (req, res) => {
+export const getRackDataa = async (req, res) => {
     const { rackName } = req.params;
     console.log(`Received request for rack: ${rackName}`);
     
@@ -41,7 +41,7 @@ export const getRackData = async (req, res) => {
 };
 
 // Insert data for a specific rack
-export const insertRackData = async (req, res) => {
+export const insertRackDataa = async (req, res) => {
     const { rackName } = req.params;
     console.log(`Received request to insert into rack: ${rackName}`);
     
