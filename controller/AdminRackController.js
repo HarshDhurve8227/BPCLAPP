@@ -41,7 +41,14 @@ export const getRackDataa = async (req, res) => {
     try {
         // Fetch data from the appropriate Rack model (mongoose collection)
         const data = await RackModel.find();
-        res.status(200).json(data); // Return the data if found
+
+        // Modify the data to exclude _id and __v fields
+        const modifiedData = data.map(item => {
+            const { _id, __v, ...rest } = item.toObject(); // Convert to plain object and exclude unwanted fields
+            return rest;
+        });
+
+        res.status(200).json(modifiedData); // Return the modified data
     } catch (error) {
         console.error(`Error fetching rack data for ${rackName}:`, error.message);
         res.status(500).json({ message: 'Internal server error' });
