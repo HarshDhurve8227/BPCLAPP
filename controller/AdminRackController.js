@@ -7,6 +7,7 @@ import Rack2B from '../models/CupboardRacks/Rack2B.js';
 import Rack2C from '../models/CupboardRacks/Rack2C.js';
 import Rack2D from '../models/CupboardRacks/Rack2D.js';
 
+// Define your racks with lowercase keys to avoid case sensitivity issues
 const racks = {
     'rack1a': Rack1A,
     'rack1b': Rack1B,
@@ -23,17 +24,19 @@ const racks = {
 export const getRackDataa = async (req, res) => {
     const { rackName } = req.params;
     console.log(`Received request for rack: ${rackName}`);
-    
-    // Normalize the rack name to lowercase
+
+    // Normalize the rack name to lowercase to handle case-insensitivity
     const RackModel = racks[rackName.toLowerCase()];
 
     if (!RackModel) {
+        // If the rack model doesn't exist, return a 404 error
         return res.status(404).json({ message: `Rack model for '${rackName}' not found` });
     }
 
     try {
-        const data = await RackModel.find();  // Fetch all entries from the collection
-        res.status(200).json(data);  // Send the retrieved data as a response
+        // Fetch data from the appropriate Rack model (mongoose collection)
+        const data = await RackModel.find();
+        res.status(200).json(data); // Return the data if found
     } catch (error) {
         console.error(`Error fetching rack data for ${rackName}:`, error.message, { rackName });
         res.status(500).json({ message: 'Internal server error' });
@@ -44,22 +47,23 @@ export const getRackDataa = async (req, res) => {
 export const insertRackDataa = async (req, res) => {
     const { rackName } = req.params;
     console.log(`Received request to insert into rack: ${rackName}`);
-    
-    // Normalize the rack name to lowercase
+
+    // Normalize the rack name to lowercase to handle case-insensitivity
     const RackModel = racks[rackName.toLowerCase()];
 
     if (!RackModel) {
+        // If the rack model doesn't exist, return a 404 error
         return res.status(404).json({ message: `Rack model for '${rackName}' not found` });
     }
 
     const { files } = req.body;
 
-    // Basic validation for files
+    // Validate that files are provided and are in array format
     if (!files || !Array.isArray(files) || files.length === 0) {
         return res.status(400).json({ message: 'Files are required and must be an array' });
     }
 
-    // Validate each file (check structure, id type, and name)
+    // Validate individual files (check if file has a valid id and name)
     const invalidFiles = files.filter(file => {
         if (typeof file.id !== 'number' || typeof file.name !== 'string' || file.name.trim() === '') {
             return true;
@@ -68,6 +72,7 @@ export const insertRackDataa = async (req, res) => {
     });
 
     if (invalidFiles.length > 0) {
+        // Return a 400 error if any file is invalid
         return res.status(400).json({
             message: 'Each file must have a valid id and name',
             invalidFiles
@@ -77,8 +82,9 @@ export const insertRackDataa = async (req, res) => {
     const newEntry = new RackModel({ files });
 
     try {
+        // Save the new rack entry into the database
         await newEntry.save();
-        res.status(201).json(newEntry);  // Send the newly created entry as the response
+        res.status(201).json(newEntry); // Return the newly created entry
     } catch (error) {
         console.error(`Error inserting rack data for ${rackName}:`, error.message, { rackName });
         res.status(500).json({ message: 'Internal server error' });
