@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { toast } from 'react-hot-toast'; // Import React Hot Toast
+
 
 export default function RackAdminInsert({ rackName, onInsert }) { 
     const [newFileName, setNewFileName] = useState(""); 
@@ -6,9 +8,19 @@ export default function RackAdminInsert({ rackName, onInsert }) {
     const [error, setError] = useState(""); 
     const [loading, setLoading] = useState(false); 
 
+    // Toastify success and error messages
+    const showToast = (message, type) => {
+        if (type === 'success') {
+            toast.success(message);  // Success toast
+        } else {
+            toast.error(message);    // Error toast
+        }
+    };
+
     const handleInsert = async () => { 
         if (!newFileName || !fileId) { 
-            setError("Both fields are required."); 
+            setError("Both fields are required.");
+            showToast("Both fields are required.", 'error'); // Show error toast
             return; 
         }
         setError(""); 
@@ -20,7 +32,6 @@ export default function RackAdminInsert({ rackName, onInsert }) {
                 headers: { 
                     'Content-Type': 'application/json', 
                 },
-                // Send the files as an array containing a single object with id and name
                 body: JSON.stringify({
                     files: [{ id: Number(fileId), name: newFileName }]
                 }), 
@@ -30,12 +41,15 @@ export default function RackAdminInsert({ rackName, onInsert }) {
                 setNewFileName(""); 
                 setFileId(""); 
                 onInsert(); // Callback to handle after successful insertion
+                showToast('File inserted successfully!', 'success'); // Show success toast
             } else {
                 const errorMessage = await response.text();
                 setError(`Error inserting file: ${response.statusText} - ${errorMessage}`);
+                showToast(`Error inserting file: ${response.statusText}`, 'error'); // Show error toast
             }
         } catch (error) {
             setError(`Error inserting file: ${error.message}`);
+            showToast(`Error inserting file: ${error.message}`, 'error'); // Show error toast
         } finally {
             setLoading(false);
         }
