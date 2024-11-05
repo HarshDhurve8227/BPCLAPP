@@ -22,9 +22,10 @@ export default function RackAdmin() {
         try {
             const racks = await Promise.all(rackDataPromises);
             const combinedRackData = rackNames.reduce((acc, rackName, index) => {
-                acc[rackName] = racks[index];
+                acc[rackName] = racks[index]; // Store files in the state for each rack
                 return acc;
             }, {});
+            console.log('Combined Rack Data:', combinedRackData); // Debug log
             setRackData(combinedRackData);  // Update the state with fetched data
         } catch (error) {
             setError("Error fetching rack data.");
@@ -39,7 +40,11 @@ export default function RackAdmin() {
                 setError(`Failed to fetch ${rackName}: ${response.statusText}`);
                 return [];
             }
-            return await response.json();  // Return the data for that rack
+            const data = await response.json();
+
+            // Extract and flatten the data to just the files array
+            const files = data.length > 0 ? data[0].files : [];
+            return files;
         } catch (error) {
             console.error(`Error fetching ${rackName} data:`, error);
             setError(`Error fetching ${rackName}: ${error.message}`);
@@ -117,7 +122,7 @@ export default function RackAdmin() {
                                     <tbody>
                                         {files.length > 0 ? (
                                             files.map((file, index) => (
-                                                <tr key={file.id}>
+                                                <tr key={file._id}> {/* Use _id from MongoDB for key */}
                                                     <td>{index + 1}</td>
                                                     <td>{file.name}</td>
                                                     <td>
