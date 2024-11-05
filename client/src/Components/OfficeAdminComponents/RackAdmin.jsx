@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import './RackAdmin.css';
 import RackAdminInsert from './RackAdminInsert';
 
@@ -11,12 +11,13 @@ export default function RackAdmin() {
 
     useEffect(() => {
         fetchAllRackData();
-    }, []);
+    }, []);  // Empty dependency means it runs on mount
 
+    // Fetch all rack data
     const fetchAllRackData = async () => {
         const rackNames = ['Rack1A', 'Rack1B', 'Rack1C', 'Rack1D', 'Rack2A', 'Rack2B', 'Rack2C', 'Rack2D'];
         const rackDataPromises = rackNames.map(rackName => fetchRackData(rackName));
-        
+
         try {
             const racks = await Promise.all(rackDataPromises);
             const combinedRackData = rackNames.reduce((acc, rackName, index) => {
@@ -25,26 +26,27 @@ export default function RackAdmin() {
             }, {});
             setRackData(combinedRackData);
         } catch (error) {
-            setError("Error fetching rack data."); // Set a more general error message
+            setError("Error fetching rack data.");  // General error message
         }
     };
-    
 
+    // Fetch data for individual rack
     const fetchRackData = async (rackName) => {
         try {
             const response = await fetch(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/racks/${rackName}`);
             if (!response.ok) {
-                setError(`Failed to fetch ${rackName}: ${response.statusText}`); // Set error message
-                return []; // Return empty array on error
+                setError(`Failed to fetch ${rackName}: ${response.statusText}`);  // Specific error message
+                return [];
             }
             return await response.json();
         } catch (error) {
             console.error(`Error fetching ${rackName} data:`, error);
-            setError(`Error fetching ${rackName}: ${error.message}`); // Set error message
+            setError(`Error fetching ${rackName}: ${error.message}`);
             return [];
         }
     };
 
+    // Search term handler
     const handleSearchChange = (event) => {
         const term = event.target.value;
         setSearchTerm(term);
@@ -52,6 +54,7 @@ export default function RackAdmin() {
             setOpenRack(null);
             return;
         }
+
         const matchingRacks = Object.keys(rackData).filter(rackName =>
             rackData[rackName]?.some(file => file.name?.toLowerCase().includes(term.toLowerCase()))
         );
@@ -59,14 +62,24 @@ export default function RackAdmin() {
         setOpenRack(matchingRacks.length > 0 ? matchingRacks[0] : null);
     };
 
+    // Toggle cupboard open/close
     const toggleCupboard = (cupboardName) => {
         setOpenCupboard(openCupboard === cupboardName ? null : cupboardName);
         setOpenRack(null);
     };
 
+    // Memoize filtered files for better performance
+    const filteredFiles = useCallback((rackName) => {
+        return (rackData[rackName] || []).filter(file =>
+            file.name?.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    }, [rackData, searchTerm]);
+
     return (
         <>
-            {error && <div className="alert alert-danger">{error}</div>} {/* Display error message */}
+            {error && <div className="alert alert-danger">{error}</div>}  {/* Display error message */}
+
+            {/* Search Section */}
             <div className="search-container">
                 <div className="search-bar">
                     <input
@@ -137,6 +150,7 @@ export default function RackAdmin() {
         </>
     );
 
+    // Render individual racks
     function renderRack(rackName) {
         const files = filteredFiles(rackName);
         const isRackOpen = openRack === rackName;
@@ -202,12 +216,6 @@ export default function RackAdmin() {
                     </div>
                 </div>
             </div>
-        );
-    }
-
-    function filteredFiles(rackName) {
-        return (rackData[rackName] || []).filter(file =>
-            file.name?.toLowerCase().includes(searchTerm.toLowerCase())
         );
     }
 }
