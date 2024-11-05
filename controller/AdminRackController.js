@@ -1,19 +1,41 @@
+import  Rack1A  from '../models/CupboardRacks/Rack1A.js'; // Import your models here
+import  Rack1B  from '../models/CupboardRacks/Rack1B.js';
+import  Rack1C  from '../models/CupboardRacks/Rack1C.js';
+import  Rack1D  from '../models/CupboardRacks/Rack1D.js';
+import  Rack2A  from '../models/CupboardRacks/Rack2A.js';
+import  Rack2B  from '../models/CupboardRacks/Rack2B.js';
+import  Rack2C  from '../models/CupboardRacks/Rack2C.js';
+import  Rack2D  from '../models/CupboardRacks/Rack2D.js';
+
+const racks = {
+    'rack1A': Rack1A,
+    'rack1B': Rack1B,
+    'rack1C': Rack1C,
+    'rack1D': Rack1D,
+    'rack2A': Rack2A,
+    'rack2B': Rack2B,
+    'rack2C': Rack2C,
+    'rack2D': Rack2D,
+
+    // Add other racks here...
+};
+
 // Fetch rack data for a specific rack
 export const getRackData = async (req, res) => {
     const { rackName } = req.params;
-    console.log(`Received request for rack: ${rackName}`); // Log the requested rack name
+    console.log(`Received request for rack: ${rackName}`);
     
-    const RackModel = racks[rackName];  // Dynamically access the model from racks
+    const RackModel = racks[rackName];  // Dynamically access the model
 
     if (!RackModel) {
-        return res.status(404).json({ message: 'Rack model not found' });
+        return res.status(404).json({ message: `Rack model for '${rackName}' not found` });
     }
 
     try {
-        const data = await RackModel.find();  // Retrieve all data from the model
-        res.status(200).json(data);  // Send back the data
+        const data = await RackModel.find();  // Fetch all entries from the collection
+        res.status(200).json(data);  // Send the retrieved data as a response
     } catch (error) {
-        console.error(`Error fetching rack data for ${rackName}:`, error);  // Log error for debugging
+        console.error(`Error fetching rack data for ${rackName}:`, error);
         res.status(500).json({ message: 'Internal server error' });
     }
 };
@@ -21,32 +43,37 @@ export const getRackData = async (req, res) => {
 // Insert data for a specific rack
 export const insertRackData = async (req, res) => {
     const { rackName } = req.params;
-    console.log(`Received request to insert into rack: ${rackName}`);  // Log the rack for insertion
+    console.log(`Received request to insert into rack: ${rackName}`);
     
-    const RackModel = racks[rackName];  // Dynamically access the model from racks
+    const RackModel = racks[rackName];  // Dynamically access the model
 
     if (!RackModel) {
-        return res.status(404).json({ message: 'Rack model not found' });
+        return res.status(404).json({ message: `Rack model for '${rackName}' not found` });
     }
 
-    const { files } = req.body;  // Expecting `files` from the request body
-    
-    // Validation for files
+    const { files } = req.body;
+
+    // Basic validation for files
     if (!files || !Array.isArray(files) || files.length === 0) {
         return res.status(400).json({ message: 'Files are required and must be an array' });
     }
 
-    // Validate each file if needed (example, check for file type or size)
-    // Example: Ensure the files have a correct structure or content
-    // You can expand this section based on the file validation needed
+    // Validate individual file structure (example)
+    const invalidFiles = files.filter(file => !file.id || !file.name);
+    if (invalidFiles.length > 0) {
+        return res.status(400).json({
+            message: 'Each file must have an id and name',
+            invalidFiles
+        });
+    }
 
     const newEntry = new RackModel({ files });
 
     try {
-        await newEntry.save();  // Save the new entry to the model
-        res.status(201).json(newEntry);  // Send back the saved entry as a response
+        await newEntry.save();
+        res.status(201).json(newEntry);  // Send the newly created entry as the response
     } catch (error) {
-        console.error(`Error inserting rack data into ${rackName}:`, error);  // Log error for debugging
-        res.status(400).json({ message: 'Bad request' });
+        console.error(`Error inserting rack data for ${rackName}:`, error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 };
