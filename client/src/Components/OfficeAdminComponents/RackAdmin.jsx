@@ -41,9 +41,13 @@ export default function RackAdmin() {
                 return [];
             }
             const data = await response.json();
+            console.log(`Fetched data for ${rackName}:`, data); // Debug log
 
-            // Extract and flatten the data to just the files array
-            const files = data.length > 0 ? data[0].files : [];
+            // Flatten the files from each rack's data structure
+            const files = data.reduce((acc, rack) => {
+                return acc.concat(rack.files || []);  // Concatenate all files from each rack
+            }, []);
+            
             return files;
         } catch (error) {
             console.error(`Error fetching ${rackName} data:`, error);
