@@ -25,7 +25,6 @@ export default function RackAdmin() {
                 acc[rackName] = racks[index]; // Store files in the state for each rack
                 return acc;
             }, {});
-            console.log('Combined Rack Data:', combinedRackData); // Debug log
             setRackData(combinedRackData);  // Update the state with fetched data
         } catch (error) {
             setError("Error fetching rack data.");
@@ -41,7 +40,6 @@ export default function RackAdmin() {
                 return [];
             }
             const data = await response.json();
-            console.log(`Fetched data for ${rackName}:`, data); // Debug log
 
             // Flatten the files from each rack's data structure
             const files = data.reduce((acc, rack) => {
@@ -64,15 +62,19 @@ export default function RackAdmin() {
 
     // Memoize filtered files to optimize performance and apply search across all racks
     const filteredFiles = useCallback(() => {
-        return Object.keys(rackData).reduce((acc, rackName) => {
+        if (!searchTerm) return rackData; // Return all rack data if no search term is set
+
+        const filteredResults = {};
+        // Iterate over all racks and filter based on search term
+        Object.keys(rackData).forEach(rackName => {
             const filtered = (rackData[rackName] || []).filter(file =>
                 file.name?.toLowerCase().includes(searchTerm.toLowerCase())
             );
             if (filtered.length > 0) {
-                acc[rackName] = filtered;
+                filteredResults[rackName] = filtered;
             }
-            return acc;
-        }, {});
+        });
+        return filteredResults;
     }, [rackData, searchTerm]);
 
     // Toggle cupboard open/close
@@ -86,17 +88,20 @@ export default function RackAdmin() {
         const files = (filteredFiles()[rackName] || []);
         const isRackOpen = openRack === rackName;
 
+        // Open rack automatically if files match the search term
+        const shouldOpenRack = files.length > 0 && searchTerm !== ""; // Automatically open if there are matching files
+
         return (
             <div className="rack" key={rackName}>
                 <div className="accordion" id={`accordion${rackName}`}>
                     <div className="accordion-item">
                         <h2 className="accordion-header" id={`heading${rackName}`}>
                             <button
-                                className={`accordion-button ${isRackOpen ? '' : 'collapsed'}`}
+                                className={`accordion-button ${shouldOpenRack ? '' : 'collapsed'}`}
                                 type="button"
                                 data-bs-toggle="collapse"
                                 data-bs-target={`#collapse${rackName}`}
-                                aria-expanded={isRackOpen}
+                                aria-expanded={shouldOpenRack}
                                 aria-controls={`collapse${rackName}`}
                                 onClick={() => setOpenRack(isRackOpen ? null : rackName)}
                             >
@@ -105,7 +110,7 @@ export default function RackAdmin() {
                         </h2>
                         <div
                             id={`collapse${rackName}`}
-                            className={`accordion-collapse collapse ${isRackOpen ? "show" : ""}`}
+                            className={`accordion-collapse collapse ${shouldOpenRack ? "show" : ""}`}
                             aria-labelledby={`heading${rackName}`}
                         >
                             <div className="accordion-body">
