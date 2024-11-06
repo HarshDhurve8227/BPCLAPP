@@ -20,7 +20,7 @@ export default function RackAdminUpdate({ onUpdate }) {
 
             try {
                 const response = await fetch(
-                    `https://bpcl2024-a36b07a626d7.herokuapp.com/api/racks/${rackName}/files/${fileId}`
+                    `https://bpcl2024-a36b07a626d7.herokuapp.com/api/racks/${rackName}/${fileId}`
                 );
                 if (!response.ok) throw new Error("Failed to fetch file data.");
                 const data = await response.json();
@@ -55,7 +55,7 @@ export default function RackAdminUpdate({ onUpdate }) {
         try {
             // Make an API request to update the file on the server here
             const response = await fetch(
-                `https://bpcl2024-a36b07a626d7.herokuapp.com/api/racks/${rackName}/files/${fileId}`,
+                `https://bpcl2024-a36b07a626d7.herokuapp.com/api/racks/${rackName}/${fileId}`,
                 {
                     method: "PUT",
                     headers: {

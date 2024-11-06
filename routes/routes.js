@@ -59,7 +59,7 @@ routers.get('/equipment/get/:id', getEquipments);
 // Rack routes
 routers.post('/racks/:rackName', insertRackDataa); // Route for inserting rack data
 routers.get('/racks/:rackName', getRackDataa); // Route for fetching rack data
-routers.put('/racks/:rackName/files/:fileId', updateRackDataa);
+routers.put('/racks/:rackName/:fileId', updateRackDataa);
  // Route for updating rack data
 
 

@@ -72,7 +72,7 @@ export const insertRackData = async (req, res) => {
   }
 };
 
-export const getRackData = async (req, res) => {
+export const getRackData= async (req, res) => {
   const { rackNumber } = req.params;
   const RackModel = rackModels[rackNumber];
 
