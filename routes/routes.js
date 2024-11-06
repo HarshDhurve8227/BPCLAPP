@@ -62,7 +62,9 @@ routers.get('/racks/:rackName', getRackDataa); // Route for fetching rack data
 routers.put('/racks/:rackName/:fileId', updateRackDataa);
  // Route for updating rack data
 
-
+ routers.get('/racks/:rackName/:fileId', getRackDataa
+       
+);
 
 
 export default routers;

@@ -4,34 +4,39 @@ import { useParams } from "react-router-dom";  // Import useParams to get route 
 // This component will handle updating file id and name
 export default function RackAdminUpdate({ onUpdate }) {
     // Get rackName and fileId from route parameters
-    const { rackName, fileId } = useParams();
+    const { rackName, fileId } = useParams();  // Extract parameters from URL
 
-    // Initialize state with current file data
+    // State for file name and error messages
     const [fileName, setFileName] = useState("");
     const [error, setError] = useState("");
 
-    // Fetch the current file data when the component mounts or params change
+    // Fetch the current file data when the component mounts or parameters change
     useEffect(() => {
-        const fetchFileData = async () => {
-            if (!rackName || !fileId) {
-                setError("Invalid rack name or file ID.");
-                return;
-            }
+        // If rackName or fileId is not present, show an error
+        if (!rackName || !fileId) {
+            setError("Invalid rack name or file ID.");
+            return;
+        }
 
+        const fetchFileData = async () => {
             try {
+                // Log for debugging
+                console.log("Rack Name: ", rackName);
+                console.log("File ID: ", fileId);
+
                 const response = await fetch(
                     `https://bpcl2024-a36b07a626d7.herokuapp.com/api/racks/${rackName}/${fileId}`
                 );
                 if (!response.ok) throw new Error("Failed to fetch file data.");
                 const data = await response.json();
-                setFileName(data.name);
+                setFileName(data.name);  // Assuming the response contains `name`
             } catch (error) {
-                setError(error.message);
+                setError(error.message);  // Display error message if fetch fails
             }
         };
 
         fetchFileData();
-    }, [rackName, fileId]); // Rerun the effect when rackName or fileId changes
+    }, [rackName, fileId]);  // Only re-run when rackName or fileId changes
 
     // Handle file name change
     const handleFileNameChange = (event) => {
@@ -47,13 +52,12 @@ export default function RackAdminUpdate({ onUpdate }) {
             return;
         }
 
-        // Construct the updated file object
         const updatedFile = {
-            name: fileName, // Send only the updated name field, fileId is part of the URL
+            name: fileName,  // Send the updated name in the body
         };
 
         try {
-            // Make an API request to update the file on the server here
+            // Make an API request to update the file on the server
             const response = await fetch(
                 `https://bpcl2024-a36b07a626d7.herokuapp.com/api/racks/${rackName}/${fileId}`,
                 {
@@ -94,7 +98,7 @@ export default function RackAdminUpdate({ onUpdate }) {
                         type="text"
                         className="form-control"
                         id="fileId"
-                        value={fileId}
+                        value={fileId}  // File ID displayed in the form (read-only)
                         disabled
                     />
                 </div>
