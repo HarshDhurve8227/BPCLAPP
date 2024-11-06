@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";  // Import useParams to get route params
 
-// This component will handle updating file id and name
+// This component will handle updating file name by _id
 export default function RackAdminUpdate({ onUpdate }) {
-    // Get rackName and fileId from route parameters
+    // Get rackName and file _id from route parameters
     const { rackName, _id } = useParams();  // Extract parameters from URL
 
     // State for file name and error messages
@@ -12,7 +12,7 @@ export default function RackAdminUpdate({ onUpdate }) {
 
     // Fetch the current file data when the component mounts or parameters change
     useEffect(() => {
-        // If rackName or fileId is not present, show an error
+        // If rackName or _id is not present, show an error
         if (!rackName || !_id) {
             setError("Invalid rack name or file ID.");
             return;
@@ -29,15 +29,16 @@ export default function RackAdminUpdate({ onUpdate }) {
                 );
                 if (!response.ok) throw new Error("Failed to fetch file data.");
                 const data = await response.json();
-                // Assuming the response contains `name` field
-                setFileName(data.files[0].name);  // Make sure the response is structured as expected
+
+                // Assuming the response contains the file data (including `name` field)
+                setFileName(data.name);  // Directly set the name of the file
             } catch (error) {
                 setError(error.message);  // Display error message if fetch fails
             }
         };
 
         fetchFileData();
-    }, [rackName, _id]);  // Only re-run when rackName or fileId (_id) changes
+    }, [rackName, _id]);  // Only re-run when rackName or _id changes
 
     // Handle file name change
     const handleFileNameChange = (event) => {
@@ -99,7 +100,7 @@ export default function RackAdminUpdate({ onUpdate }) {
                         type="text"
                         className="form-control"
                         id="fileId"
-                        value={_id}  // File ID (_id) displayed in the form (read-only)
+                        value={_id}  // File _id displayed in the form (read-only)
                         disabled
                     />
                 </div>

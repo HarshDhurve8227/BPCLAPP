@@ -22,6 +22,40 @@ const racks = {
 
 // Fetch rack data for a specific rack
 export const getRackDataa = async (req, res) => {
+    let { rackName } = req.params;
+
+    // Log the raw rack name received from the request
+    console.log(`Received request for rack: '${rackName}'`);
+
+    // Trim any extra spaces or newline characters from rackName
+    rackName = rackName.trim();
+
+    // Ensure the rack name matches the exact case (no need to modify, just trim it)
+    const RackModel = racks[rackName];
+
+    if (!RackModel) {
+        // If the rack model doesn't exist, return a 404 error
+        return res.status(404).json({ message: `Rack model for '${rackName}' not found` });
+    }
+
+    try {
+        // Fetch data from the appropriate Rack model (mongoose collection)
+        const data = await RackModel.find();
+
+        // Modify the data to exclude _id and __v fields
+        const modifiedData = data.map(item => {
+            const { _id, __v, ...rest } = item.toObject(); // Convert to plain object and exclude unwanted fields
+            return rest;
+        });
+
+        res.status(200).json(modifiedData); // Return the modified data
+    } catch (error) {
+        console.error(`Error fetching rack data for ${rackName}:`, error.message);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+export const getRackDataaByyId = async (req, res) => {
     let { rackName, _id } = req.params;
 
     // Log the raw rack name and file ID received from the request
@@ -39,7 +73,7 @@ export const getRackDataa = async (req, res) => {
     }
 
     try {
-        // Fetch the data from the appropriate Rack model (mongoose collection)
+        // Fetch data from the appropriate Rack model (mongoose collection)
         const data = await RackModel.find();
 
         // Modify the data to exclude _id and __v fields for all racks
@@ -49,7 +83,7 @@ export const getRackDataa = async (req, res) => {
         });
 
         // Now, find the specific file using _id from the files array
-        const rackData = modifiedData.find(rack => 
+        const rackData = modifiedData.find(rack =>
             rack.files && rack.files.some(file => file._id.toString() === _id)
         );
 
@@ -71,6 +105,7 @@ export const getRackDataa = async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
+
 
 // Insert data for a specific rack
 export const insertRackDataa = async (req, res) => {
@@ -126,11 +161,11 @@ export const insertRackDataa = async (req, res) => {
 };
 
 export const updateRackDataa = async (req, res) => {
-    const { rackName, fileId } = req.params;
+    const { rackName, _id } = req.params;  // _id is passed in the URL
     const { name } = req.body;  // File name to update
 
     // Log the raw request
-    console.log(`Received request to update file in rack: '${rackName}', fileId: '${fileId}'`);
+    console.log(`Received request to update file in rack: '${rackName}', fileId: '${_id}'`);
 
     // Trim any extra spaces or newline characters from rackName
     rackName = rackName.trim();
@@ -148,25 +183,19 @@ export const updateRackDataa = async (req, res) => {
         return res.status(400).json({ message: 'File name is required and must be a non-empty string' });
     }
 
-    // Validate that the fileId is a number (check for type coercion issues)
-    const parsedFileId = parseInt(fileId);
-    if (isNaN(parsedFileId)) {
-        return res.status(400).json({ message: `Invalid fileId: '${fileId}'` });
-    }
-
     try {
-        // Find the specific rack by name and check for file in the files array using fileId
-        const rack = await RackModel.findOne({ "files.id": parsedFileId });
+        // Find the rack and look for the file by its _id
+        const rack = await RackModel.findOne({ "files._id": _id });
 
         if (!rack) {
-            return res.status(404).json({ message: `File with ID '${fileId}' not found in rack '${rackName}'` });
+            return res.status(404).json({ message: `File with _id '${_id}' not found in rack '${rackName}'` });
         }
 
         // Find the file to update within the files array
-        const file = rack.files.find(file => file.id === parsedFileId);
+        const file = rack.files.find(file => file._id.toString() === _id);
 
         if (!file) {
-            return res.status(404).json({ message: `File with ID '${fileId}' not found` });
+            return res.status(404).json({ message: `File with _id '${_id}' not found` });
         }
 
         // Update the file name
