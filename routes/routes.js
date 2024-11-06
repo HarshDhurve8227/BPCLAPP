@@ -20,7 +20,7 @@ import {
     deleteEquipment
 } from '../controller/AmcController.js';
 
-import { getRackDataa , insertRackDataa } from '../controller/AdminRackController.js';
+import { getRackDataa , insertRackDataa , updateRackDataa} from '../controller/AdminRackController.js';
 
 
 
@@ -59,6 +59,7 @@ routers.get('/equipment/get/:id', getEquipments);
 // Rack routes
 routers.post('/racks/:rackName', insertRackDataa); // Route for inserting rack data
 routers.get('/racks/:rackName', getRackDataa); // Route for fetching rack data
+routers.put('/racks/:rackName/files/:fileId', updateRackDataa);
  // Route for updating rack data
 
 

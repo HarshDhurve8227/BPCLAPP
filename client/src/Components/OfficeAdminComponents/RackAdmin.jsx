@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import './RackAdmin.css';
 import RackAdminInsert from './RackAdminInsert';
+import RackAdminUpdate from './RackAdminUpdate'; // Import the update component
 
 export default function RackAdmin() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -8,6 +9,7 @@ export default function RackAdmin() {
     const [openRack, setOpenRack] = useState(null);
     const [rackData, setRackData] = useState({}); // Rack data state
     const [error, setError] = useState(""); // Error state
+    const [fileToUpdate, setFileToUpdate] = useState(null); // State for the file to update
 
     // Fetch all rack data when component mounts
     useEffect(() => {
@@ -83,6 +85,11 @@ export default function RackAdmin() {
         setOpenRack(null);  // Close rack when cupboard is toggled
     };
 
+    // Handle file update click
+    const handleUpdateClick = (file) => {
+        setFileToUpdate(file); // Set the file to update
+    };
+
     // Render individual racks
     function renderRack(rackName) {
         const files = (filteredFiles()[rackName] || []);
@@ -127,11 +134,11 @@ export default function RackAdmin() {
                                     <tbody>
                                         {files.length > 0 ? (
                                             files.map((file, index) => (
-                                                <tr key={file._id}> {/* Use _id from MongoDB for key */}
+                                                <tr key={file._id}>
                                                     <td>{index + 1}</td>
                                                     <td>{file.name}</td>
                                                     <td>
-                                                        <button className="btn btn-primary">Update</button>
+                                                        <button className="btn btn-primary" onClick={() => handleUpdateClick(file)}>Update</button>
                                                     </td>
                                                     <td>
                                                         <button className="btn btn-danger">Delete</button>
@@ -171,6 +178,13 @@ export default function RackAdmin() {
                     <button className="btn btn-primary">Search</button>
                 </div>
             </div>
+
+            {/* Update File Modal */}
+            {fileToUpdate && (
+                <div className="update-modal">
+                    <RackAdminUpdate file={fileToUpdate} onUpdate={fetchAllRackData} />
+                </div>
+            )}
 
             <div className="accordion" id="accordionCupboards">
                 {/* Cupboard 1 */}

@@ -107,3 +107,62 @@ export const insertRackDataa = async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
+
+export const updateRackDataa = async (req, res) => {
+    const { rackName, fileId } = req.params;
+    const { name } = req.body;  // File name to update
+
+    // Log the raw request
+    console.log(`Received request to update file in rack: '${rackName}', fileId: '${fileId}'`);
+
+    // Trim any extra spaces or newline characters from rackName
+    rackName = rackName.trim();
+
+    // Ensure the rack name matches the exact case (no need to modify, just trim it)
+    const RackModel = racks[rackName];
+
+    if (!RackModel) {
+        // If the rack model doesn't exist, return a 404 error
+        return res.status(404).json({ message: `Rack model for '${rackName}' not found` });
+    }
+
+    // Validate that the name is not empty and is a string
+    if (!name || typeof name !== 'string' || name.trim() === '') {
+        return res.status(400).json({ message: 'File name is required and must be a non-empty string' });
+    }
+
+    // Validate that the fileId is a number (check for type coercion issues)
+    const parsedFileId = parseInt(fileId);
+    if (isNaN(parsedFileId)) {
+        return res.status(400).json({ message: `Invalid fileId: '${fileId}'` });
+    }
+
+    try {
+        // Find the specific rack by name and check for file in the files array using fileId
+        const rack = await RackModel.findOne({ "files.id": parsedFileId });
+
+        if (!rack) {
+            return res.status(404).json({ message: `File with ID '${fileId}' not found in rack '${rackName}'` });
+        }
+
+        // Find the file to update within the files array
+        const file = rack.files.find(file => file.id === parsedFileId);
+
+        if (!file) {
+            return res.status(404).json({ message: `File with ID '${fileId}' not found` });
+        }
+
+        // Update the file name
+        file.name = name.trim();
+
+        // Save the updated rack
+        await rack.save();
+
+        // Return the updated file as part of the response
+        res.status(200).json({ message: 'File updated successfully', file: file });
+
+    } catch (error) {
+        console.error(`Error updating file in ${rackName}:`, error.message);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
