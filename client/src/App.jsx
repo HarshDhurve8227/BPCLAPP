@@ -61,7 +61,7 @@ function App() {
             <Route path="/amcupdate/:id" element={<PrivateRoute element={<AMCUpdate />} />} />
             
             <Route path="/rackadmin" element={<PrivateRoute element={<RackAdmin />} />} />
-            <Route path="/rackadminupdate/:rackName/:fileId" element={<PrivateRoute element={<RackAdminUpdate />} />} />
+            <Route path="/rackadminupdate/:rackName/_id" element={<PrivateRoute element={<RackAdminUpdate />} />} />
 
             
 
