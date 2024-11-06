@@ -22,53 +22,38 @@ const racks = {
 
 // Fetch rack data for a specific rack
 export const getRackDataa = async (req, res) => {
-    const { rackName, fileId } = req.params;
+    let { rackName } = req.params;
 
-    // Log the raw rack name and fileId received from the request
-    console.log(`Received request for rack: '${rackName}', fileId: '${fileId}'`);
+    // Log the raw rack name received from the request
+    console.log(`Received request for rack: '${rackName}'`);
 
-    // Trim any extra spaces or newline characters from rackName and fileId
+    // Trim any extra spaces or newline characters from rackName
     rackName = rackName.trim();
-    fileId = fileId.trim();
 
     // Ensure the rack name matches the exact case (no need to modify, just trim it)
     const RackModel = racks[rackName];
 
     if (!RackModel) {
         // If the rack model doesn't exist, return a 404 error
-        return res.status(404).json({ message: `Rack model for '${rackName}' not found` });
+        return res.status(404).json({ message: `Rack model for '${rackName}' not found `});
     }
 
     try {
-        // Fetch the rack data from the appropriate Rack model (mongoose collection)
+        // Fetch data from the appropriate Rack model (mongoose collection)
         const data = await RackModel.find();
 
-        // Check if data was found
-        if (!data || data.length === 0) {
-            return res.status(404).json({ message: `No data found for rack: ${rackName}` });
-        }
+        // Modify the data to exclude _id and __v fields
+        const modifiedData = data.map(item => {
+            const { _id, __v, ...rest } = item.toObject(); // Convert to plain object and exclude unwanted fields
+            return rest;
+        });
 
-        // Find the file inside the rack that matches the fileId
-        const rack = data[0]; // Assuming `data` is an array and you want the first item
-        const file = rack.files.find(file => file.id === parseInt(fileId));  // Matching by file.id
-
-        if (!file) {
-            // If the file is not found, return a 404 error
-            return res.status(404).json({ message: `File with id '${fileId}' not found in rack '${rackName}'` });
-        }
-
-        // Exclude _id and __v from the file object
-        const { _id, __v, ...fileData } = file.toObject();
-
-        // Return the found file data
-        res.status(200).json(fileData);
+        res.status(200).json(modifiedData); // Return the modified data
     } catch (error) {
         console.error(`Error fetching rack data for ${rackName}:`, error.message);
         res.status(500).json({ message: 'Internal server error' });
     }
 };
-
-
 // Insert data for a specific rack
 export const insertRackDataa = async (req, res) => {
     let { rackName } = req.params;
