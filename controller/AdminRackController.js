@@ -22,10 +22,10 @@ const racks = {
 
 // Fetch rack data for a specific rack
 export const getRackDataa = async (req, res) => {
-    let { rackName, _id } = req.params;
+    let { rackName } = req.params;
 
-    // Log the raw rack name and file ID received from the request
-    console.log(`Received request for rack: '${rackName}' and fileId: '${_id}'`);
+    // Log the raw rack name received from the request
+    console.log(`Received request for rack: '${rackName}'`);
 
     // Trim any extra spaces or newline characters from rackName
     rackName = rackName.trim();
@@ -35,37 +35,20 @@ export const getRackDataa = async (req, res) => {
 
     if (!RackModel) {
         // If the rack model doesn't exist, return a 404 error
-        return res.status(404).json({ message: `Rack model for '${rackName}' not found` });
+        return res.status(404).json({ message:` Rack model for '${rackName}' not found` });
     }
 
     try {
-        // Fetch the data from the appropriate Rack model (mongoose collection)
+        // Fetch data from the appropriate Rack model (mongoose collection)
         const data = await RackModel.find();
 
-        // Modify the data to exclude _id and __v fields for all racks
+        // Modify the data to exclude _id and __v fields
         const modifiedData = data.map(item => {
-            const { _id, __v, ...rest } = item.toObject(); // Exclude _id and __v fields
+            const { _id, __v, ...rest } = item.toObject(); // Convert to plain object and exclude unwanted fields
             return rest;
         });
 
-        // Now, find the specific file using _id from the files array
-        const rackData = modifiedData.find(rack => 
-            rack.files && rack.files.some(file => file._id.toString() === _id)
-        );
-
-        if (!rackData) {
-            return res.status(404).json({ message: `File with ID '${_id}' not found in rack '${rackName}'` });
-        }
-
-        // Find the file that matches the given _id
-        const file = rackData.files.find(file => file._id.toString() === _id);
-
-        if (!file) {
-            return res.status(404).json({ message: `File with ID '${_id}' not found` });
-        }
-
-        // Return the found file
-        res.status(200).json(file);
+        res.status(200).json(modifiedData); // Return the modified data
     } catch (error) {
         console.error(`Error fetching rack data for ${rackName}:`, error.message);
         res.status(500).json({ message: 'Internal server error' });
