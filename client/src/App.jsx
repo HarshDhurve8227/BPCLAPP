@@ -25,6 +25,8 @@ import AMC from './Components/AmcComponents/AMC';
 import AMCInsert from './Components/AmcComponents/AMCInsert';
 import AMCUpdate from './Components/AmcComponents/AMCUpdate';
 import RackAdmin from './Components/OfficeAdminComponents/RackAdmin';
+import RackAdminUpdate from './Components/OfficeAdminComponents/RackAdminUpdate';
+
 
 
 
@@ -59,6 +61,8 @@ function App() {
             <Route path="/amcupdate/:id" element={<PrivateRoute element={<AMCUpdate />} />} />
             
             <Route path="/rackadmin" element={<PrivateRoute element={<RackAdmin />} />} />
+            <Route path="/rackadminupdate/:rackName/:fileId" element={<PrivateRoute element={<RackAdminUpdate />} />} />
+
             
 
 

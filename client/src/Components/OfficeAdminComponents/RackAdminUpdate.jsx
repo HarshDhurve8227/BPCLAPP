@@ -1,11 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";  // Import useParams to get route params
 
 // This component will handle updating file id and name
-export default function RackAdminUpdate({ file, rackName, onUpdate }) {
+export default function RackAdminUpdate({ onUpdate }) {
+    // Get rackName and fileId from route parameters
+    const { rackName, fileId } = useParams();
+
     // Initialize state with current file data
-    const [fileId, setFileId] = useState(file._id);
-    const [fileName, setFileName] = useState(file.name);
+    const [fileName, setFileName] = useState("");
     const [error, setError] = useState("");
+
+    // Fetch the current file data when the component mounts or params change
+    useEffect(() => {
+        const fetchFileData = async () => {
+            if (!rackName || !fileId) {
+                setError("Invalid rack name or file ID.");
+                return;
+            }
+
+            try {
+                const response = await fetch(
+                    `https://bpcl2024-a36b07a626d7.herokuapp.com/api/racks/${rackName}/files/${fileId}`
+                );
+                if (!response.ok) throw new Error("Failed to fetch file data.");
+                const data = await response.json();
+                setFileName(data.name);
+            } catch (error) {
+                setError(error.message);
+            }
+        };
+
+        fetchFileData();
+    }, [rackName, fileId]); // Rerun the effect when rackName or fileId changes
 
     // Handle file name change
     const handleFileNameChange = (event) => {
@@ -27,14 +53,17 @@ export default function RackAdminUpdate({ file, rackName, onUpdate }) {
         };
 
         try {
-            // You can make an API request to update the file on the server here
-            const response = await fetch(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/racks/${rackName}/files/${fileId}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(updatedFile),
-            });
+            // Make an API request to update the file on the server here
+            const response = await fetch(
+                `https://bpcl2024-a36b07a626d7.herokuapp.com/api/racks/${rackName}/files/${fileId}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(updatedFile),
+                }
+            );
 
             if (!response.ok) {
                 throw new Error("Failed to update file.");
