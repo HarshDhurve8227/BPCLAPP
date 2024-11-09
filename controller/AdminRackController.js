@@ -246,3 +246,4 @@ export const deleterackdataa = async (req, res) => {
         console.error('Error deleting file from rack:', error);
         res.status(500).json({ message: 'Error deleting file from rack', error: error.message });
     }
+}
