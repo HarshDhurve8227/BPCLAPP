@@ -215,49 +215,33 @@ export const updateRackDataa = async (req, res) => {
 
 
 export const deleterackdataa = async (req, res) => {
-    let { rackName, fileId } = req.params;
-
-    // Log the incoming request to ensure correct parameters are passed
-    console.log(`Received request to delete from rack: '${rackName}' and fileId: '${fileId}'`);
-
-    // Trim the rackName to remove any extra spaces
-    rackName = rackName.trim();
-    console.log(rackName)
-
-    // Ensure the rack model for the given rackName exists
-    const RackModel = racks[rackName]; // Assuming this is a dynamic model lookup based on rackName
-
-    if (!RackModel) {
-        return res.status(404).json({ message: `Rack model for '${rackName}' not found` });
-    }
+    const { rackName, fileId } = req.params;
+    console.log(`Received request to delete file with ID: ${fileId} from rack: ${rackName}`);
 
     try {
         // Find the rack by rackName
-        const rack = await RackModel.findOne({ name: rackName });
-
+        const rack = await Rack.findOne({ name: rackName });
         if (!rack) {
             return res.status(404).json({ message: `Rack '${rackName}' not found` });
         }
 
-        // Find the file in the rack's files array by fileId
-        const fileIndex = rack.files.findIndex(file => file._id.toString() === fileId);
+        console.log(`Rack found: ${rack.name}, Files: ${rack.files.length}`);
 
+        // Find the file in the rack
+        const fileIndex = rack.files.findIndex(file => file._id.toString() === fileId);
         if (fileIndex === -1) {
-            return res.status(404).json({ message: `File with ID '${fileId}' not found in rack '${rackName}'` });
+            return res.status(404).json({ message: 'File not found in this rack' });
         }
 
-        // Optionally delete the file from the File collection if you have a separate 'File' model
-        await File.findByIdAndDelete(fileId); // Uncomment if needed
+        console.log(`File found: ${rack.files[fileIndex]._id}`);
 
-        // Remove the file from the rack's 'files' array
+        // Remove the file
         rack.files.splice(fileIndex, 1);
-
-        // Save the updated rack document
         await rack.save();
 
         res.status(200).json({ message: 'File deleted successfully from rack' });
     } catch (error) {
-        console.error(`Error deleting file from rack '${rackName}':`, error.message);
-        res.status(500).json({ message: 'Internal server error', error: error.message });
+        console.error('Error deleting file from rack:', error);
+        res.status(500).json({ message: 'Error deleting file from rack', error: error.message });
     }
 };
