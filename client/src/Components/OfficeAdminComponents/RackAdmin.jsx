@@ -90,6 +90,27 @@ export default function RackAdmin() {
         setFileToUpdate(file); // Set the file to update
     };
 
+    // Handle delete click
+    const handleDeleteClick = async (fileId) => {
+        if (window.confirm("Are you sure you want to delete this file?")) {
+            try {
+                const response = await fetch(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/racks/:rackName/files/${fileId}`, {
+                    method: 'DELETE',
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to delete file');
+                }
+
+                // Refresh the rack data after successful deletion
+                fetchAllRackData();
+                alert("File deleted successfully");
+            } catch (error) {
+                alert("Error deleting file: " + error.message);
+            }
+        }
+    };
+
     // Render individual racks
     function renderRack(rackName) {
         const files = (filteredFiles()[rackName] || []);
@@ -141,7 +162,9 @@ export default function RackAdmin() {
                                                         <button className="btn btn-primary" onClick={() => handleUpdateClick(file)}>Update</button>
                                                     </td>
                                                     <td>
-                                                        <button className="btn btn-danger">Delete</button>
+                                                        <button className="btn btn-danger" onClick={() => handleDeleteClick(file._id)}>
+                                                            Delete
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             ))
