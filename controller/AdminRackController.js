@@ -212,3 +212,37 @@ export const updateRackDataa = async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
+
+
+export const deleterackdataa = async (req, res) => {
+    const { rackName, fileId } = req.params;
+
+    try {
+        // Find the rack by rackName, and ensure the file exists in that rack
+        const rack = await Rack.findOne({ name: rackName });
+
+        if (!rack) {
+            return res.status(404).json({ message: `Rack ${rackName} not found` });
+        }
+
+        // Find the index of the file within the rack's files array
+        const fileIndex = rack.files.findIndex(file => file._id.toString() === fileId);
+
+        if (fileIndex === -1) {
+            return res.status(404).json({ message: 'File not found in this rack' });
+        }
+
+        // Optionally, you can delete the file document if it's stored separately in a 'File' model
+        // await File.findByIdAndDelete(fileId);
+
+        // Remove the file from the rack's 'files' array
+        rack.files.splice(fileIndex, 1);
+
+        // Save the updated rack document
+        await rack.save();
+
+        res.status(200).json({ message: 'File deleted successfully from rack' });
+    } catch (error) {
+        console.error('Error deleting file from rack:', error);
+        res.status(500).json({ message: 'Error deleting file from rack', error: error.message });
+    }

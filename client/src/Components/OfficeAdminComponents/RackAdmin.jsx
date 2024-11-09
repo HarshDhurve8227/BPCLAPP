@@ -91,7 +91,7 @@ export default function RackAdmin() {
     };
 
     // Handle delete click
-    const handleDeleteClick = async (fileId , rackName) => {
+    const handleDeleteClick = async (fileId, rackName) => {
         if (window.confirm("Are you sure you want to delete this file?")) {
             try {
                 const response = await fetch(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/racks/${rackName}/files/${fileId}`, {
@@ -162,7 +162,10 @@ export default function RackAdmin() {
                                                         <button className="btn btn-primary" onClick={() => handleUpdateClick(file)}>Update</button>
                                                     </td>
                                                     <td>
-                                                        <button className="btn btn-danger" onClick={() => handleDeleteClick(file._id)}>
+                                                        <button 
+                                                            className="btn btn-danger" 
+                                                            onClick={() => handleDeleteClick(file._id, rackName)} // Pass both fileId and rackName here
+                                                        >
                                                             Delete
                                                         </button>
                                                     </td>

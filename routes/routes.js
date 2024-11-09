@@ -20,7 +20,7 @@ import {
     deleteEquipment
 } from '../controller/AmcController.js';
 
-import { getRackDataa , getRackDataaByyId , insertRackDataa , updateRackDataa} from '../controller/AdminRackController.js';
+import { getRackDataa , getRackDataaByyId , insertRackDataa , updateRackDataa , deleterackdataa} from '../controller/AdminRackController.js';
 
 
 
@@ -61,23 +61,8 @@ routers.post('/racks/:rackName', insertRackDataa); // Route for inserting rack d
 routers.get('/racks/:rackName', getRackDataa); // Route for fetching rack data
 routers.put('/racks/:rackName/:_id', updateRackDataa);
 
-routers.delete('/racks/:rackName/files/:fileId', async (req, res) => {
-    const { fileId } = req.params;
-
-    try {
-        // Assuming files are stored in a collection and related to rack data
-        const file = await File.findByIdAndDelete(fileId);
-
-        if (!file) {
-            return res.status(404).json({ message: 'File not found' });
-        }
-
-        res.status(200).json({ message: 'File deleted successfully' });
-    } catch (error) {
-        console.error('Error deleting file:', error);
-        res.status(500).json({ message: 'Error deleting file', error: error.message });
-    }
-});
+routers.delete('/racks/:rackName/files/:fileId', deleterackdataa
+);
  // Route for updating rack data
 
  routers.get('/racks/:rackName/:_id', getRackDataaByyId
