@@ -94,7 +94,7 @@ export default function RackAdmin() {
     const handleDeleteClick = async (fileId, rackName) => {
         if (window.confirm("Are you sure you want to delete this file?")) {
             try {
-                const response = await fetch(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/racks/${rackName}/files/${fileId}`, {
+                const response = await fetch(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/racks/${rackName}/${fileId}`, {
                     method: 'DELETE',
                 });
 
