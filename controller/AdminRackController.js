@@ -222,6 +222,7 @@ export const deleterackdataa = async (req, res) => {
 
     // Trim the rackName to remove any extra spaces
     rackName = rackName.trim();
+    console.log(rackName)
 
     // Ensure the rack model for the given rackName exists
     const RackModel = racks[rackName]; // Assuming this is a dynamic model lookup based on rackName
