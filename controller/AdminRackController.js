@@ -217,11 +217,8 @@ export const updateRackDataa = async (req, res) => {
 export const deleterackdataa = async (req, res) => {
     const { rackName, fileId } = req.params;
 
-    console.log('Received Rack Name:', rackName); // Log rackName
-    console.log('Received File ID:', fileId);     // Log fileId
-
-    // Log the fileId to check if it's passed correctly
-    console.log(`Parsed File ID: ${fileId}`); // Log fileId as string
+    console.log('Received Rack Name:', rackName);  // Log the rack name
+    console.log('Received File ID:', fileId);  // Log the fileId
 
     try {
         // Check if the rack exists in the racks object
@@ -241,8 +238,14 @@ export const deleterackdataa = async (req, res) => {
         // Log the full files array to confirm the file structure
         console.log('Files in the Rack:', rack.files);
 
-        // Find the file in the rack using the fileId (match with file.id)
-        const fileIndex = rack.files.findIndex(file => file.id === parseInt(fileId)); // Compare with file.id
+        // If the fileId is in ObjectId format, try comparing with _id or file.id
+        const fileObjectId = mongoose.Types.ObjectId(fileId); // Convert the fileId to ObjectId
+
+        // Find the file in the rack using ObjectId (if you're using _id) or id (if you're using the numeric field)
+        const fileIndex = rack.files.findIndex(file => 
+            file._id.equals(fileObjectId) || file.id === parseInt(fileId)  // Check both _id (ObjectId) and id (numeric)
+        );
+
         console.log(`Index of the file to be deleted: ${fileIndex}`);
 
         if (fileIndex === -1) {
