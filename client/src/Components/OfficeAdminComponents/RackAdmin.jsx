@@ -98,11 +98,17 @@ export default function RackAdmin() {
     const handleDeleteClick = async (fileId, rackName) => {
         if (window.confirm("Are you sure you want to delete this file?")) {
             try {
+                console.log(`Attempting to delete file with ID: ${fileId} from rack: ${rackName}`);
+    
                 const response = await fetch(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/racks/${rackName}/${fileId}`, {
                     method: 'DELETE',
                 });
     
+                // Log the response from the backend to understand what is being returned
                 if (!response.ok) {
+                    // If response is not ok, log the error message
+                    const errorText = await response.text(); // Get the error response text if any
+                    console.error('Failed to delete file. Status:', response.status, 'Error:', errorText);
                     throw new Error('Failed to delete file');
                 }
     
@@ -110,10 +116,13 @@ export default function RackAdmin() {
                 fetchAllRackData();
                 alert("File deleted successfully");
             } catch (error) {
+                // Log the error to help with debugging
+                console.error('Error deleting file:', error);
                 alert("Error deleting file: " + error.message);
             }
         }
     };
+    
     
     
     // Render individual racks

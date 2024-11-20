@@ -215,40 +215,50 @@ export const updateRackDataa = async (req, res) => {
 
 
 export const deleterackdataa = async (req, res) => {
+    // Extract rackName and fileId from the URL params
     const { rackName, fileId } = req.params;
 
-    console.log('Rack Name:', rackName);
-    console.log('File ID:', fileId);
+    // Log the received rackName and fileId to ensure they are correct
+    console.log('Received Rack Name:', rackName); // Log the rack name
+    console.log('Received File ID:', fileId);     // Log the file ID
 
-    // Convert fileId to number (if you expect fileId to be a number)
+    // Convert fileId to a number (if you expect it to be a number)
     const fileIdNumber = parseInt(fileId, 10);
 
-    console.log(`Received request to delete file with ID: ${fileIdNumber} from rack: ${rackName}`);
+    console.log(`Parsed File ID: ${fileIdNumber}`); // Log the parsed fileId to see the number
 
     try {
-        // Find the rack by rackName
+        // Find the rack by rackName in the database
         const rack = await Rack.findOne({ name: rackName });
         if (!rack) {
+            console.log(`Rack not found: ${rackName}`); // Log if rack is not found
             return res.status(404).json({ message: `Rack '${rackName}' not found` });
         }
 
-        console.log(`Rack found: ${rack.name}, Files: ${rack.files.length}`);
+        console.log(`Rack found: ${rack.name}, Files: ${rack.files.length}`); // Log the found rack info
 
-        // Find the file in the rack using 'id' from files array (which is a number)
+        // Debugging: Log the files array in the rack to see if file exists
+        console.log('Files in this rack:', rack.files);
+
+        // Find the file in the rack using the fileId (which is expected to be a number)
         const fileIndex = rack.files.findIndex(file => file.id === fileIdNumber);
+        console.log(`Index of the file to be deleted: ${fileIndex}`); // Log the index of the file to delete
+
         if (fileIndex === -1) {
+            console.log(`File with ID ${fileIdNumber} not found in the rack`); // Log if file is not found
             return res.status(404).json({ message: 'File not found in this rack' });
         }
 
-        console.log(`File found with ID: ${fileIdNumber}`);
+        console.log(`File found with ID: ${fileIdNumber}, Deleting...`); // Log before deletion
 
-        // Remove the file
+        // Remove the file from the rack
         rack.files.splice(fileIndex, 1);
         await rack.save();
 
+        console.log('File successfully deleted'); // Log after file is deleted
         res.status(200).json({ message: 'File deleted successfully from rack' });
     } catch (error) {
-        console.error('Error deleting file from rack:', error);
+        console.error('Error deleting file from rack:', error); // Log any errors
         res.status(500).json({ message: 'Error deleting file from rack', error: error.message });
     }
 };
