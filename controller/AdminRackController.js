@@ -217,11 +217,13 @@ export const updateRackDataa = async (req, res) => {
 };
 
 
+import mongoose from 'mongoose'; // Ensure mongoose is imported
+
 export const deleterackdataa = async (req, res) => {
     const { rackName, fileId } = req.params;
 
-    console.log('Received Rack Name:', rackName);  // Log the rack name
-    console.log('Received File ID:', fileId);  // Log the fileId
+    console.log('Received Rack Name:', rackName);  // Log rackName
+    console.log('Received File ID:', fileId);  // Log fileId
 
     try {
         // Check if the rack exists in the racks object
@@ -241,12 +243,12 @@ export const deleterackdataa = async (req, res) => {
         // Log the full files array to confirm the file structure
         console.log('Files in the Rack:', rack.files);
 
-        // If the fileId is in ObjectId format, try comparing with _id or file.id
-        const fileObjectId = mongoose.Types.ObjectId(fileId); // Convert the fileId to ObjectId
+        // Convert fileId to a mongoose ObjectId (if it's not already in the correct format)
+        const fileObjectId = new mongoose.Types.ObjectId(fileId); // Use `new` for the ObjectId
 
-        // Find the file in the rack using ObjectId (if you're using _id) or id (if you're using the numeric field)
-        const fileIndex = rack.files.findIndex(file => 
-            file._id.equals(fileObjectId) || file.id === parseInt(fileId)  // Check both _id (ObjectId) and id (numeric)
+        // Find the file in the rack using ObjectId (for _id) or compare the file.id (for the numeric field)
+        const fileIndex = rack.files.findIndex(file =>
+            file._id.equals(fileObjectId) || file.id === parseInt(fileId)  // Match both _id and id fields
         );
 
         console.log(`Index of the file to be deleted: ${fileIndex}`);
@@ -258,13 +260,13 @@ export const deleterackdataa = async (req, res) => {
 
         // Remove the file from the rack
         console.log(`File found with ID: ${fileId}, Deleting...`);
-        rack.files.splice(fileIndex, 1); // Remove the file from the array
+        rack.files.splice(fileIndex, 1);  // Remove the file from the array
         await rack.save();  // Save the updated rack data to the database
 
         console.log('File successfully deleted');
         res.status(200).json({ message: 'File deleted successfully from rack' });
     } catch (error) {
-        console.error('Error deleting file from rack:', error); // Log any errors
+        console.error('Error deleting file from rack:', error);  // Log any errors
         res.status(500).json({ message: 'Error deleting file from rack', error: error.message });
     }
 };
