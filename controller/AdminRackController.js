@@ -219,10 +219,11 @@ export const deleterackdataa = async (req, res) => {
 
     console.log('Rack Name:', rackName);
     console.log('File ID:', fileId);
-    console.log('Trimmed Rack Name:', rackName.trim());
-    console.log('Trimmed File ID:', fileId.trim());
 
-    console.log(`Received request to delete file with ID: ${fileId} from rack: ${rackName}`);
+    // Convert fileId to number (if you expect fileId to be a number)
+    const fileIdNumber = parseInt(fileId, 10);
+
+    console.log(`Received request to delete file with ID: ${fileIdNumber} from rack: ${rackName}`);
 
     try {
         // Find the rack by rackName
@@ -233,13 +234,13 @@ export const deleterackdataa = async (req, res) => {
 
         console.log(`Rack found: ${rack.name}, Files: ${rack.files.length}`);
 
-        // Find the file in the rack
-        const fileIndex = rack.files.findIndex(file => file._id.toString() === fileId);
+        // Find the file in the rack using 'id' from files array (which is a number)
+        const fileIndex = rack.files.findIndex(file => file.id === fileIdNumber);
         if (fileIndex === -1) {
             return res.status(404).json({ message: 'File not found in this rack' });
         }
 
-        console.log(`File found: ${rack.files[fileIndex]._id}`);
+        console.log(`File found with ID: ${fileIdNumber}`);
 
         // Remove the file
         rack.files.splice(fileIndex, 1);
