@@ -220,9 +220,9 @@ export const deleterackdataa = async (req, res) => {
     console.log('Received Rack Name:', rackName); // Log rackName
     console.log('Received File ID:', fileId);     // Log fileId
 
-    // Convert fileId to a number if needed (or keep it as a string depending on your actual data type)
-    const fileIdNumber = parseInt(fileId, 10);
-    console.log(`Parsed File ID: ${fileIdNumber}`); // Log parsed fileId
+    // No need to convert fileId into a number, since it seems to be a string
+    // fileId should be directly compared as a string
+    console.log(`Parsed File ID: ${fileId}`); // Log fileId as string
 
     try {
         // Check if the rack exists in the racks object
@@ -239,17 +239,17 @@ export const deleterackdataa = async (req, res) => {
             return res.status(404).json({ message: `Rack '${rackName}' not found in database` });
         }
 
-        // Find the file in the rack using the fileId
-        const fileIndex = rack.files.findIndex(file => file.id === fileIdNumber);
+        // Find the file in the rack using the fileId (match as string)
+        const fileIndex = rack.files.findIndex(file => file.id.toString() === fileId); // Compare as string
         console.log(`Index of the file to be deleted: ${fileIndex}`);
 
         if (fileIndex === -1) {
-            console.log(`File with ID ${fileIdNumber} not found in the rack`);
+            console.log(`File with ID ${fileId} not found in the rack`);
             return res.status(404).json({ message: 'File not found in this rack' });
         }
 
         // Remove the file from the rack
-        console.log(`File found with ID: ${fileIdNumber}, Deleting...`);
+        console.log(`File found with ID: ${fileId}, Deleting...`);
         rack.files.splice(fileIndex, 1); // Remove the file from the array
         await rack.save();  // Save the updated rack data to the database
 
