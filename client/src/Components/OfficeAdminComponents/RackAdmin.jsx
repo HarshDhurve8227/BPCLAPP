@@ -12,9 +12,13 @@ export default function RackAdmin() {
     const [fileToUpdate, setFileToUpdate] = useState(null); // State for the file to update
 
     // Fetch all rack data when component mounts
+
     useEffect(() => {
         fetchAllRackData();
-    }, []);  // Empty dependency means it runs on mount
+
+    }, []);
+    
+    // Empty dependency means it runs on mount
 
     // Fetch all rack data from the backend
     const fetchAllRackData = async () => {
@@ -97,11 +101,11 @@ export default function RackAdmin() {
                 const response = await fetch(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/racks/${rackName}/${fileId}`, {
                     method: 'DELETE',
                 });
-
+    
                 if (!response.ok) {
                     throw new Error('Failed to delete file');
                 }
-
+    
                 // Refresh the rack data after successful deletion
                 fetchAllRackData();
                 alert("File deleted successfully");
@@ -110,7 +114,8 @@ export default function RackAdmin() {
             }
         }
     };
-
+    
+    
     // Render individual racks
     function renderRack(rackName) {
         const files = (filteredFiles()[rackName] || []);

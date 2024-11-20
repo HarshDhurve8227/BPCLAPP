@@ -216,6 +216,12 @@ export const updateRackDataa = async (req, res) => {
 
 export const deleterackdataa = async (req, res) => {
     const { rackName, fileId } = req.params;
+
+    console.log('Rack Name:', rackName);
+    console.log('File ID:', fileId);
+    console.log('Trimmed Rack Name:', rackName.trim());
+    console.log('Trimmed File ID:', fileId.trim());
+
     console.log(`Received request to delete file with ID: ${fileId} from rack: ${rackName}`);
 
     try {
