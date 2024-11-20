@@ -1,3 +1,5 @@
+import mongoose from 'mongoose';
+
 import Rack1A from '../models/CupboardRacks/Rack1A.js';
 import Rack1B from '../models/CupboardRacks/Rack1B.js';
 import Rack1C from '../models/CupboardRacks/Rack1C.js';
@@ -6,6 +8,7 @@ import Rack2A from '../models/CupboardRacks/Rack2A.js';
 import Rack2B from '../models/CupboardRacks/Rack2B.js';
 import Rack2C from '../models/CupboardRacks/Rack2C.js';
 import Rack2D from '../models/CupboardRacks/Rack2D.js';
+
 
 // Define your racks with exact casing to match collection names
 const racks = {
