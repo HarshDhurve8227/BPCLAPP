@@ -217,10 +217,10 @@ export const updateRackDataa = async (req, res) => {
 export const deleterackdataa = async (req, res) => {
     const { rackName, fileId } = req.params;
 
-    console.log('Received Rack Name:', rackName); // Log rackName to confirm
-    console.log('Received File ID:', fileId);     // Log fileId to confirm
+    console.log('Received Rack Name:', rackName); // Log rackName
+    console.log('Received File ID:', fileId);     // Log fileId
 
-    // Convert fileId to a number if needed
+    // Convert fileId to a number if needed (or keep it as a string depending on your actual data type)
     const fileIdNumber = parseInt(fileId, 10);
     console.log(`Parsed File ID: ${fileIdNumber}`); // Log parsed fileId
 
@@ -232,15 +232,12 @@ export const deleterackdataa = async (req, res) => {
             return res.status(404).json({ message: `Rack '${rackName}' not found` });
         }
 
-        // Find the rack in the database by rackName
-        const rack = await RackModel.findOne({ name: rackName });
+        // Fetch the rack data just like in the getRackDataa controller
+        const rack = await RackModel.findOne(); // We don't need to search by name here
         if (!rack) {
             console.log(`Rack not found in the database: ${rackName}`);
             return res.status(404).json({ message: `Rack '${rackName}' not found in database` });
         }
-
-        console.log(`Rack found: ${rack.name}, Files: ${rack.files.length}`);
-        console.log('Files in this rack:', rack.files);
 
         // Find the file in the rack using the fileId
         const fileIndex = rack.files.findIndex(file => file.id === fileIdNumber);
@@ -253,8 +250,8 @@ export const deleterackdataa = async (req, res) => {
 
         // Remove the file from the rack
         console.log(`File found with ID: ${fileIdNumber}, Deleting...`);
-        rack.files.splice(fileIndex, 1);
-        await rack.save();
+        rack.files.splice(fileIndex, 1); // Remove the file from the array
+        await rack.save();  // Save the updated rack data to the database
 
         console.log('File successfully deleted');
         res.status(200).json({ message: 'File deleted successfully from rack' });
@@ -262,4 +259,4 @@ export const deleterackdataa = async (req, res) => {
         console.error('Error deleting file from rack:', error); // Log any errors
         res.status(500).json({ message: 'Error deleting file from rack', error: error.message });
     }
-}
+};
