@@ -218,7 +218,6 @@ export const updateRackDataa = async (req, res) => {
 
 import mongoose from 'mongoose';
 
-
 export const deleterackdataa = async (req, res) => {
     const { rackName, fileId } = req.params;
 
@@ -226,40 +225,47 @@ export const deleterackdataa = async (req, res) => {
     console.log('Received File ID:', fileId);  // Log fileId
 
     try {
-        // Ensure that Rack1A is used based on the rackName
-        const RackModel = rackName === 'Rack1A' ? Rack1A : null;  // For now assuming only Rack1A exists
+        // Check if the rack name is correct and map it to the right model
+        const RackModel = racks[rackName];  // Dynamically pick the correct rack model based on rackName
         if (!RackModel) {
             console.log(`Rack not found: ${rackName}`);
             return res.status(404).json({ message: `Rack '${rackName}' not found` });
         }
 
-        // Fetch the rack data
-        let rack = await RackModel.findOne(); // No need for .populate() since files are embedded
+        // Fetch the rack data by its rackName
+        let rack = await RackModel.findOne({});  // Adjust query as needed (e.g., by rackName if needed)
         if (!rack) {
             console.log(`Rack not found in the database: ${rackName}`);
             return res.status(404).json({ message: `Rack '${rackName}' not found in database` });
         }
 
-        // Log the full rack document to check the contents
+        // Log the full rack document to check what fields are returned
         console.log('Full Rack Document:', rack);
 
-        // Ensure files array exists and log it
-        console.log('Files in the Rack:', rack.files);
-
+        // Check if the files array exists and is populated
         if (!rack.files || rack.files.length === 0) {
             console.log('No files found in the rack.');
             return res.status(404).json({ message: 'No files found in this rack' });
         }
 
-        // Convert fileId to a mongoose ObjectId if it's a valid ObjectId format, or keep as string
-        const fileObjectId = new mongoose.Types.ObjectId(fileId); // This should work since fileId is a valid ObjectId string
+        // Log files to see what is inside
+        console.log('Files in the Rack:', rack.files);
 
-        // Check if fileId matches in the files array
-        const fileIndex = rack.files.findIndex(file =>
-            file._id && file._id.toString() === fileId // Make sure to compare ObjectId as string
+        // Convert fileId to a mongoose ObjectId (if it is a valid ObjectId format)
+        let fileObjectId;
+        try {
+            fileObjectId = new mongoose.Types.ObjectId(fileId);
+        } catch (error) {
+            console.log(`Invalid ObjectId format: ${fileId}`);
+            return res.status(400).json({ message: 'Invalid file ID format' });
+        }
+
+        // Find the file by ObjectId or id in the files array
+        const fileIndex = rack.files.findIndex(file => 
+            file._id.toString() === fileObjectId.toString() || (file.id && file.id === parseInt(fileId)) // Match by ObjectId or id
         );
 
-        console.log(`Index of the file to be deleted: ${fileIndex}`);
+        console.log('Index of the file to be deleted:', fileIndex);
 
         if (fileIndex === -1) {
             console.log(`File with ID ${fileId} not found in the rack`);
@@ -273,14 +279,13 @@ export const deleterackdataa = async (req, res) => {
 
         console.log('File successfully deleted');
 
-        // Refetch the rack to ensure it is updated before sending the response
-        rack = await RackModel.findOne(); // Refetch the rack after modification
+        // Refetch the rack after deletion to make sure the files array is updated
+        rack = await RackModel.findOne({});  // Refetch the rack after modification
         console.log('Updated Files in the Rack after deletion:', rack.files);
 
-        res.status(200).json({ message: 'File deleted successfully from rack' });
+        res.status(200).json({ message: 'File deleted successfully from rack', files: rack.files });
     } catch (error) {
         console.error('Error deleting file from rack:', error);  // Log any errors
         res.status(500).json({ message: 'Error deleting file from rack', error: error.message });
     }
 };
-
