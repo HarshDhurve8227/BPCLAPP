@@ -217,6 +217,7 @@ export const updateRackDataa = async (req, res) => {
 };
 
 
+import mongoose from 'mongoose';
 
 export const deleterackdataa = async (req, res) => {
     const { rackName, fileId } = req.params;
@@ -232,11 +233,11 @@ export const deleterackdataa = async (req, res) => {
             return res.status(404).json({ message: `Rack '${rackName}' not found` });
         }
 
-        // Convert fileId to a mongoose ObjectId (if it is a valid ObjectId format)
+        // Check if fileId is a valid ObjectId format
         let fileObjectId;
-        try {
-            fileObjectId = new mongoose.Types.ObjectId(fileId);
-        } catch (error) {
+        if (mongoose.Types.ObjectId.isValid(fileId)) {
+            fileObjectId = new mongoose.Types.ObjectId(fileId);  // Convert to ObjectId only if valid
+        } else {
             console.log(`Invalid ObjectId format: ${fileId}`);
             return res.status(400).json({ message: 'Invalid file ID format' });
         }
