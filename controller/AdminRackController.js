@@ -217,7 +217,7 @@ export const updateRackDataa = async (req, res) => {
 };
 
 import mongoose from 'mongoose';
-import Rack1A from './path_to_your_rack1A_model'; // Import the Rack1A model
+
 
 export const deleterackdataa = async (req, res) => {
     const { rackName, fileId } = req.params;
