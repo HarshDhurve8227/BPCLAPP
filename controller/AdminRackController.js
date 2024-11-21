@@ -240,8 +240,16 @@ export const deleterackdataa = async (req, res) => {
             return res.status(404).json({ message: `Rack '${rackName}' not found in database` });
         }
 
-        // Log the full files array to confirm the file structure
+        // Log the full rack document to check what fields are returned
+        console.log('Full Rack Document:', rack);
+
+        // Check if the files field exists and is an array
         console.log('Files in the Rack:', rack.files);
+
+        if (!rack.files || rack.files.length === 0) {
+            console.log('No files found in the rack.');
+            return res.status(404).json({ message: 'No files found in this rack' });
+        }
 
         // Convert fileId to a mongoose ObjectId (if it's not already in the correct format)
         const fileObjectId = new mongoose.Types.ObjectId(fileId); // Use new for the ObjectId
