@@ -216,8 +216,8 @@ export const updateRackDataa = async (req, res) => {
     }
 };
 
-
 import mongoose from 'mongoose';
+import Rack1A from './path_to_your_rack1A_model'; // Import the Rack1A model
 
 export const deleterackdataa = async (req, res) => {
     const { rackName, fileId } = req.params;
@@ -226,24 +226,24 @@ export const deleterackdataa = async (req, res) => {
     console.log('Received File ID:', fileId);  // Log fileId
 
     try {
-        // Check if the rack exists in the racks object
-        const RackModel = racks[rackName];  // Dynamically get the correct rack model
+        // Ensure that Rack1A is used based on the rackName
+        const RackModel = rackName === 'Rack1A' ? Rack1A : null;  // For now assuming only Rack1A exists
         if (!RackModel) {
             console.log(`Rack not found: ${rackName}`);
             return res.status(404).json({ message: `Rack '${rackName}' not found` });
         }
 
-        // Fetch the rack data just like in the getRackDataa controller
-        let rack = await RackModel.findOne(); // We don't need to search by name here
+        // Fetch the rack data
+        let rack = await RackModel.findOne(); // No need for .populate() since files are embedded
         if (!rack) {
             console.log(`Rack not found in the database: ${rackName}`);
             return res.status(404).json({ message: `Rack '${rackName}' not found in database` });
         }
 
-        // Log the full rack document to check what fields are returned
+        // Log the full rack document to check the contents
         console.log('Full Rack Document:', rack);
 
-        // Check if the files field exists and is an array
+        // Ensure files array exists and log it
         console.log('Files in the Rack:', rack.files);
 
         if (!rack.files || rack.files.length === 0) {
@@ -251,12 +251,12 @@ export const deleterackdataa = async (req, res) => {
             return res.status(404).json({ message: 'No files found in this rack' });
         }
 
-        // Convert fileId to a mongoose ObjectId (if it's not already in the correct format)
-        const fileObjectId = new mongoose.Types.ObjectId(fileId); // Use new for the ObjectId
+        // Convert fileId to a mongoose ObjectId if it's a valid ObjectId format, or keep as string
+        const fileObjectId = new mongoose.Types.ObjectId(fileId); // This should work since fileId is a valid ObjectId string
 
-        // Find the file in the rack using ObjectId (_id) or compare the file.id (for the numeric field)
+        // Check if fileId matches in the files array
         const fileIndex = rack.files.findIndex(file =>
-            file._id.equals(fileObjectId) || (file.id && file.id === parseInt(fileId))  // Ensure file.id is numeric
+            file._id && file._id.toString() === fileId // Make sure to compare ObjectId as string
         );
 
         console.log(`Index of the file to be deleted: ${fileIndex}`);
@@ -266,10 +266,10 @@ export const deleterackdataa = async (req, res) => {
             return res.status(404).json({ message: 'File not found in this rack' });
         }
 
-        // Remove the file from the rack
+        // Remove the file from the rack's files array
         console.log(`File found with ID: ${fileId}, Deleting...`);
-        rack.files.splice(fileIndex, 1);  // Remove the file from the array
-        await rack.save();  // Save the updated rack data to the database
+        rack.files.splice(fileIndex, 1); // Remove the file from the array
+        await rack.save(); // Save the updated rack data to the database
 
         console.log('File successfully deleted');
 
@@ -283,3 +283,4 @@ export const deleterackdataa = async (req, res) => {
         res.status(500).json({ message: 'Error deleting file from rack', error: error.message });
     }
 };
+
