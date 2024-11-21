@@ -217,7 +217,7 @@ export const updateRackDataa = async (req, res) => {
 };
 
 
-import mongoose from 'mongoose'; // Ensure mongoose is imported
+import mongoose from 'mongoose';
 
 export const deleterackdataa = async (req, res) => {
     const { rackName, fileId } = req.params;
@@ -234,7 +234,7 @@ export const deleterackdataa = async (req, res) => {
         }
 
         // Fetch the rack data just like in the getRackDataa controller
-        const rack = await RackModel.findOne(); // We don't need to search by name here
+        let rack = await RackModel.findOne(); // We don't need to search by name here
         if (!rack) {
             console.log(`Rack not found in the database: ${rackName}`);
             return res.status(404).json({ message: `Rack '${rackName}' not found in database` });
@@ -244,11 +244,11 @@ export const deleterackdataa = async (req, res) => {
         console.log('Files in the Rack:', rack.files);
 
         // Convert fileId to a mongoose ObjectId (if it's not already in the correct format)
-        const fileObjectId = new mongoose.Types.ObjectId(fileId); // Use `new` for the ObjectId
+        const fileObjectId = new mongoose.Types.ObjectId(fileId); // Use new for the ObjectId
 
-        // Find the file in the rack using ObjectId (for _id) or compare the file.id (for the numeric field)
+        // Find the file in the rack using ObjectId (_id) or compare the file.id (for the numeric field)
         const fileIndex = rack.files.findIndex(file =>
-            file._id.equals(fileObjectId) || file.id === parseInt(fileId)  // Match both _id and id fields
+            file._id.equals(fileObjectId) || (file.id && file.id === parseInt(fileId))  // Ensure file.id is numeric
         );
 
         console.log(`Index of the file to be deleted: ${fileIndex}`);
@@ -264,6 +264,11 @@ export const deleterackdataa = async (req, res) => {
         await rack.save();  // Save the updated rack data to the database
 
         console.log('File successfully deleted');
+
+        // Refetch the rack to ensure it is updated before sending the response
+        rack = await RackModel.findOne(); // Refetch the rack after modification
+        console.log('Updated Files in the Rack after deletion:', rack.files);
+
         res.status(200).json({ message: 'File deleted successfully from rack' });
     } catch (error) {
         console.error('Error deleting file from rack:', error);  // Log any errors
