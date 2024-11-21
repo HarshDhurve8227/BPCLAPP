@@ -216,7 +216,7 @@ export const updateRackDataa = async (req, res) => {
     }
 };
 
-import mongoose from 'mongoose';
+
 
 export const deleterackdataa = async (req, res) => {
     const { rackName, fileId } = req.params;
@@ -233,7 +233,7 @@ export const deleterackdataa = async (req, res) => {
         }
 
         // Fetch the rack data by its rackName
-        let rack = await RackModel.findOne({});  // Adjust query as needed (e.g., by rackName if needed)
+        let rack = await RackModel.find({});  // Adjust query as needed (e.g., by rackName if needed)
         if (!rack) {
             console.log(`Rack not found in the database: ${rackName}`);
             return res.status(404).json({ message: `Rack '${rackName}' not found in database` });
