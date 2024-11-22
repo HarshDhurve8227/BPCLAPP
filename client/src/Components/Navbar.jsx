@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import myLogo from './images/1723176521233.png';
 import './Navbar.css';
 import { AuthContext } from '../context/AuthContext';
@@ -9,16 +9,15 @@ export default function Navbar(props) {
   const [searchTerm, setSearchTerm] = useState('');
   const [highlighted, setHighlighted] = useState(false);
 
-
   const [showModal, setShowModal] = useState(false);
 
   const handleNotificationClick = (e) => {
-      e.preventDefault(); // Prevent default anchor behavior
-      setShowModal(true);
+    e.preventDefault(); // Prevent default anchor behavior
+    setShowModal(true);
   };
 
   const handleCloseModal = () => {
-      setShowModal(false);
+    setShowModal(false);
   };
 
   // Handle logout
@@ -51,7 +50,7 @@ export default function Navbar(props) {
         if (index !== -1) {
           element.innerHTML = `${innerHTML.slice(0, index)}<mark>${innerHTML.slice(index, index + searchTerm.length)}</mark>${innerHTML.slice(index + searchTerm.length)}`;
           setHighlighted(true);
-          
+
           // Remove highlight after 10 seconds
           setTimeout(() => {
             element.innerHTML = innerHTML;
@@ -62,15 +61,55 @@ export default function Navbar(props) {
     });
   };
 
+  // Add effect for handling dropdown submenus
+  useEffect(() => {
+    const submenus = document.querySelectorAll('.dropdown-submenu');
 
-  
+    // Store event handler functions to remove later
+    const handleMouseOver = (submenu) => {
+      submenu.querySelector('.dropdown-menu').style.display = 'block';
+    };
+
+    const handleMouseLeave = (submenu) => {
+      submenu.querySelector('.dropdown-menu').style.display = 'none';
+    };
+
+    const handleClick = (submenu, event) => {
+      event.preventDefault(); // Prevent default action for links
+      const dropdownMenu = submenu.querySelector('.dropdown-menu');
+      dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+    };
+
+    submenus.forEach((submenu) => {
+      const submenuLink = submenu.querySelector('.dropdown-item');
+
+      // Show the submenu on hover
+      submenuLink.addEventListener('mouseover', () => handleMouseOver(submenu));
+      submenu.addEventListener('mouseleave', () => handleMouseLeave(submenu));
+
+      // Optionally, toggle on click
+      submenuLink.addEventListener('click', (event) => handleClick(submenu, event));
+    });
+
+    // Cleanup event listeners
+    return () => {
+      submenus.forEach((submenu) => {
+        const submenuLink = submenu.querySelector('.dropdown-item');
+        submenuLink.removeEventListener('mouseover', () => handleMouseOver(submenu));
+        submenu.removeEventListener('mouseleave', () => handleMouseLeave(submenu));
+        submenuLink.removeEventListener('click', (event) => handleClick(submenu, event));
+      });
+    };
+  }, []);
 
   return (
     <>
       <div>
         <div className="container">
           <div className="scrolling-text">
-            <p className='text-danger' style={{ fontSize: '20px', fontWeight: 'bold' }}>www.bpspareslpgnagpur.com</p>
+            <p className="text-danger" style={{ fontSize: '20px', fontWeight: 'bold' }}>
+              www.bpspareslpgnagpur.com
+            </p>
           </div>
           <img id="resize-image" src={myLogo} alt="Logo" className="fixed-size-image" />
         </div>
@@ -105,7 +144,6 @@ export default function Navbar(props) {
                     aria-expanded="false"
                   >
                     SPARES
-                              
                   </button>
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <li>
@@ -138,16 +176,11 @@ export default function Navbar(props) {
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <li>
                       <a className="dropdown-item" href="/amc">
-                        Annual Maintainance Contract 
+                        Annual Maintainance Contract
                       </a>
                     </li>
-                   
                   </ul>
                 </li>
-
-
-                
-               
 
                 <li className="dropdown" style={{ padding: '10px', marginBottom: '5px' }}>
                   <button
@@ -165,25 +198,13 @@ export default function Navbar(props) {
                       </a>
                     </li>
 
-                    
                     <li>
                       <a className="dropdown-item" href="/rackadmin">
-                         Admin Racks 
+                        Admin Racks
                       </a>
                     </li>
-                   
-                  
-
-                   
                   </ul>
-
-                  </li>
-                
-
-
-                
-                  
-                
+                </li>
 
                 <li className="dropdown" style={{ padding: '10px', marginBottom: '5px' }}>
                   <button
@@ -196,12 +217,7 @@ export default function Navbar(props) {
                   </button>
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <li>
-                      <a
-                        className="dropdown-item"
-                        href="/about"
-                        aria-current="page"
-                        onClick={() => console.log('Action')}
-                      >
+                      <a className="dropdown-item" href="" aria-current="page" onClick={() => console.log('Action')}>
                         SOP LPG BULK HANDLING FORMATS 120411
                       </a>
                     </li>
@@ -210,96 +226,98 @@ export default function Navbar(props) {
                         SOP PLANNING FORMATS
                       </a>
                     </li>
-                    <li>
-                      <a className="dropdown-item" href="/adminandsecurity">
-                        SOP ADMIN & SECURITY FORMATS
-                      </a>
-                    </li>
+
                     <li>
                       <a className="dropdown-item" href="#">
-                        SOP BOTTLING OPS FORMAT 130411
+                      SOP BOTTLING OPS FORMAT 130411
                       </a>
+                    </li>
+                    <li className="dropdown-submenu">
+                      <a className="dropdown-item" href="#">
+                        SOP ADMIN & SECURITY FORMATS
+                      </a>
+                      <ul className="dropdown-menu">
+                        <li>
+                          <a className="dropdown-item" href="/AS11">
+                            Checklist For Packed Lorries
+                          </a>
+                        </li>
+                        <li>
+                          <a className="dropdown-item" href="">
+                            Checklist for bulk lpg tank trunks at unloading location
+                          </a>
+                        </li>
+
+                        <li>
+                          <a className="dropdown-item" href="">
+                            Packed Lorry In/Out Register
+                          </a>
+                        </li>
+
+                        <li>
+                          <a className="dropdown-item" href="">
+                            Tank lorry In/Out Register
+                          </a>
+                        </li>
+
+                        <li>
+                          <a className="dropdown-item" href="">
+                            Tank lorry Checklist
+                          </a>
+                        </li>
+
+                        <li>
+                          <a className="dropdown-item" href="">
+                            Material in Register
+                          </a>
+                        </li>
+
+                        <li>
+                          <a className="dropdown-item" href="">
+                            Material out Register 
+                          </a>
+                        </li>
+
+                        <li>
+                          <a className="dropdown-item" href="">
+                            Returnable Material Register
+                          </a>
+                        </li>
+
+                        <li>
+                          <a className="dropdown-item" href="">
+                            Handing over checklist to security
+                          </a>
+                        </li>
+
+                        <li>
+                          <a className="dropdown-item" href="">
+                            Security guard petrolling record
+                          </a>
+                        </li>
+
+                       
+                      </ul>
                     </li>
                   </ul>
                 </li>
               </ul>
 
-              
-            <>
-              <ul className="navbar-menu" style={{ display: 'flex', alignItems: 'center', marginLeft: '-20px', marginRight: '200px', marginTop: '10px', listStyle: 'none' }}>
-                <li className="notification" style={{ marginLeft: '15px', position: 'relative' }}>
-                    <a href="#" aria-label="Notifications" style={{ position: 'relative', textDecoration: 'none' }} onClick={handleNotificationClick}>
-                        <i className="fas fa-bell text-warning" style={{ fontSize: '1.8em' }}></i>
-                        <span className="badge" style={{
-                            position: 'absolute',
-                            top: '-10px',
-                            right: '-10px',
-                            backgroundColor: 'red',
-                            color: 'black',
-                            borderRadius: '50%',
-                            padding: '0',
-                            width: '20px',
-                            height: '20px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            fontSize: '0.8em',
-                            fontWeight: 'bold',
-                            lineHeight: '1',
-                            border: 'none',
-                            boxShadow: 'none'
-                        }}>3</span>
-                    </a>
-                </li>
-            </ul>
-
-            <NotificationModal show={showModal} handleClose={handleCloseModal} />
-        </>
-
-
-
-
-
-
-
-
-             
-
-
-
-              
-              
-
-
-              
-
-
-
-             
+              <NotificationModal show={showModal} handleClose={handleCloseModal} />
 
               <form className="d-flex" role="search" onSubmit={handleSearch}>
-
-
-              
-              
-              <input
-                 className="form-control me-2"
+                <input
+                  className="form-control me-2"
                   type="search"
-                   placeholder="Search"
-                    aria-label="Search"
-                      value={searchTerm}
-                     onChange={handleChange}
-                     style={{ width: '50%' }} // Set the width to 50%
-              />
-
-
-               <button className="btn btn-dark fs-5 custom-table-head" type="submit">
+                  placeholder="Search"
+                  aria-label="Search"
+                  value={searchTerm}
+                  onChange={handleChange}
+                  style={{ width: '50%' }} // Set the width to 50%
+                />
+                <button className="btn btn-dark fs-5 custom-table-head" type="submit">
                   Search
                 </button>
-
-
-              
-                
               </form>
 
               {/* Add the Logout Button */}

@@ -102,3 +102,20 @@ tr:hover {
         transform: translateX(-100%);
     }
 }
+
+/* Ensure that submenus are positioned properly */
+/* Ensure the submenu is hidden by default */
+.dropdown-submenu .dropdown-menu {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    min-width: 200px;
+    z-index: 1050; /* Make sure it is above the main dropdown */
+  }
+  
+  /* Show the submenu when hovering over the parent */
+  .dropdown-submenu:hover .dropdown-menu {
+    display: block;
+  }
+  
