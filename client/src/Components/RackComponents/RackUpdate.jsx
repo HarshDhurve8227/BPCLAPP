@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
-import { toast, Toaster } from 'react-hot-toast'; // Importing toast and Toaster
+import { toast, Toaster } from 'react-hot-toast';
 
 export default function RackUpdate() {
   const { rackNumber, _id } = useParams();
@@ -16,10 +16,16 @@ export default function RackUpdate() {
     closingStock: '',
   });
 
+  const [isSubmitted, setIsSubmitted] = useState(false); // Add state for form submission tracking
+
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        const response = await axios.get(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/rack/${rackNumber}/${_id}`);
+        const response = await axios.get(
+          `https://bpcl2024-a36b07a626d7.herokuapp.com/api/rack/${rackNumber}/${_id}`
+        );
+
+        // Check if the response contains data for the specific product
         if (Array.isArray(response.data) && response.data.length > 0) {
           const fetchedData = response.data[0];
           setFormData({
@@ -32,9 +38,11 @@ export default function RackUpdate() {
           });
         } else {
           console.error('No product data found.');
+          toast.error('No data found for the specified rack and ID.');
         }
       } catch (error) {
         console.error('Error fetching product data:', error);
+        toast.error('Failed to fetch data. Please try again.');
       }
     };
 
@@ -59,90 +67,139 @@ export default function RackUpdate() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/rackupdate/${rackNumber}/${_id}`, formData);
-      toast.success('Data updated successfully!'); // Show success toast
-      navigate(`/about`);
+      await axios.put(
+        `https://bpcl2024-a36b07a626d7.herokuapp.com/api/rackupdate/${rackNumber}/${_id}`,
+        formData
+      );
+      toast.success('Data updated successfully!');
+      setIsSubmitted(true); // Set submission status to true
     } catch (error) {
       console.error('Error updating product:', error);
-      toast.error('Failed to update data. Please try again.'); // Show error toast
+      toast.error('Failed to update data. Please try again.');
     }
   };
 
   return (
-    <div style={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      height: '100vh',
-      padding: '20px',
-      backgroundColor: '#f9f9f9'
-    }}>
-      <Toaster /> {/* Place the Toaster component here */}
-      <div style={{
-        maxWidth: '400px',
-        width: '100%',
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
         padding: '20px',
-        border: '1px solid #ccc',
-        borderRadius: '8px',
-        backgroundColor: '#fff',
-        boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)'
-      }}>
-        <h2 style={{
-          textAlign: 'center',
-          fontSize: '24px',
-          marginBottom: '20px'
-        }} className='custom-table-head'>
+        backgroundColor: '#f9f9f9',
+      }}
+    >
+      <Toaster /> {/* Place the Toaster component here */}
+      <div
+        style={{
+          maxWidth: '400px',
+          width: '100%',
+          padding: '20px',
+          border: '1px solid #ccc',
+          borderRadius: '8px',
+          backgroundColor: '#fff',
+          boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+        }}
+      >
+        <h2
+          style={{
+            textAlign: 'center',
+            fontSize: '24px',
+            marginBottom: '20px',
+          }}
+          className="custom-table-head"
+        >
           Update Product
         </h2>
 
-        <br></br>
+        <br />
 
         <form onSubmit={handleSubmit}>
           <div>
-            <label className='custom-table-head'>Section:</label>
-            <input type="text" name="section" value={formData.section} onChange={handleChange} required />
+            <label className="custom-table-head">Section:</label>
+            <input
+              type="text"
+              name="section"
+              value={formData.section}
+              onChange={handleChange}
+              required
+            />
           </div>
 
           <br />
           <div>
-            <label className='custom-table-head'>Material Name:</label>
-            <input type="text" name="materialName" value={formData.materialName} onChange={handleChange} required />
+            <label className="custom-table-head">Material Name:</label>
+            <input
+              type="text"
+              name="materialName"
+              value={formData.materialName}
+              onChange={handleChange}
+              required
+            />
           </div>
 
           <br />
           <div>
-            <label className='custom-table-head'>Available Stock:</label>
-            <input type="number" name="availableStock" value={formData.availableStock} onChange={handleChange} required />
+            <label className="custom-table-head">Available Stock:</label>
+            <input
+              type="number"
+              name="availableStock"
+              value={formData.availableStock}
+              onChange={handleChange}
+              required
+            />
           </div>
 
           <br />
           <div>
-            <label className='custom-table-head'>Issue:</label>
-            <input type="number" name="issue" value={formData.issue} onChange={handleChange} />
+            <label className="custom-table-head">Issue:</label>
+            <input
+              type="number"
+              name="issue"
+              value={formData.issue}
+              onChange={handleChange}
+            />
           </div>
 
           <br />
           <div>
-            <label className='custom-table-head'>Receipt:</label>
-            <input type="number" name="receit" value={formData.receit} onChange={handleChange} />
+            <label className="custom-table-head">Receipt:</label>
+            <input
+              type="number"
+              name="receit"
+              value={formData.receit}
+              onChange={handleChange}
+            />
           </div>
 
           <br />
           <div>
-            <label className='custom-table-head'>Closing Stock:</label>
-            <input type="number" name="closingStock" value={formData.closingStock} readOnly />
+            <label className="custom-table-head">Closing Stock:</label>
+            <input
+              type="number"
+              name="closingStock"
+              value={formData.closingStock}
+              readOnly
+            />
           </div>
 
           <br />
-          <button className='custom-table-head btn btn-outline-success' type="submit">Update</button>
+          <button className="custom-table-head btn btn-outline-success" type="submit">
+            Update
+          </button>
         </form>
 
-         {/* Conditional rendering of NavLink after submission */}
-      {isSubmitted && (
-        <NavLink to={`/about`} className='btn btn-primary' style={{ marginTop: '20px' }}>
-          Go to Store Racks
-        </NavLink>
-      )}
+        {/* Conditional rendering of NavLink after submission */}
+        {isSubmitted && (
+          <NavLink
+            to={`/about`}
+            className="btn btn-primary"
+            style={{ marginTop: '20px' }}
+          >
+            Go to Store Racks
+          </NavLink>
+        )}
       </div>
     </div>
   );
