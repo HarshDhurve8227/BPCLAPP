@@ -25,10 +25,15 @@ export default function RackUpdate() {
         const response = await axios.get(
           `https://bpcl2024-a36b07a626d7.herokuapp.com/api/rack/${rackNumber}/${_id}`
         );
-
-        // Check if the response contains the specific product data
+        
+        // Debugging: Check what data is returned
+        console.log("Fetched data:", response.data);
+        
         if (response.data) {
-          const fetchedData = response.data;
+          // If response is an array, pick the first item
+          const fetchedData = Array.isArray(response.data) ? response.data[0] : response.data;
+
+          // Update form data with fetched data
           setFormData({
             section: fetchedData.section || '',
             materialName: fetchedData.materialName || '',
