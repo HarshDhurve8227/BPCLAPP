@@ -28,22 +28,22 @@ export default function RackUpdate() {
         
         // Debugging: Check what data is returned
         console.log("Fetched data:", response.data);
-        
-        if (response.data) {
-          // If response is an array, pick the first item
-          const fetchedData = Array.isArray(response.data) ? response.data[0] : response.data;
 
-          // Update form data with fetched data
+        // Find the product by matching _id
+        const product = response.data.find(item => item._id === _id);
+
+        if (product) {
+          // Update form data with fetched product
           setFormData({
-            section: fetchedData.section || '',
-            materialName: fetchedData.materialName || '',
-            availableStock: fetchedData.availableStock || '',
-            issue: fetchedData.issue || '',
-            receit: fetchedData.receit || '',
-            closingStock: fetchedData.closingStock || '',
+            section: product.section || '',
+            materialName: product.materialName || '',
+            availableStock: product.availableStock || '',
+            issue: product.issue || '',
+            receit: product.receit || '',
+            closingStock: product.closingStock || '',
           });
         } else {
-          console.error('No product data found.');
+          console.error('No product found with the specified _id.');
           toast.error('No data found for the specified rack and ID.');
         }
       } catch (error) {
