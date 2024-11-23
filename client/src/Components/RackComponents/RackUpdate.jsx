@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast, Toaster } from 'react-hot-toast';
+import { NavLink } from 'react-router-dom';
 
 export default function RackUpdate() {
   const { rackNumber, _id } = useParams();
@@ -16,7 +17,7 @@ export default function RackUpdate() {
     closingStock: '',
   });
 
-  const [isSubmitted, setIsSubmitted] = useState(false); // Add state for form submission tracking
+  const [isSubmitted, setIsSubmitted] = useState(false); // Track form submission status
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -25,9 +26,9 @@ export default function RackUpdate() {
           `https://bpcl2024-a36b07a626d7.herokuapp.com/api/rack/${rackNumber}/${_id}`
         );
 
-        // Check if the response contains data for the specific product
-        if (Array.isArray(response.data) && response.data.length > 0) {
-          const fetchedData = response.data[0];
+        // Check if the response contains the specific product data
+        if (response.data) {
+          const fetchedData = response.data;
           setFormData({
             section: fetchedData.section || '',
             materialName: fetchedData.materialName || '',
@@ -90,7 +91,7 @@ export default function RackUpdate() {
         backgroundColor: '#f9f9f9',
       }}
     >
-      <Toaster /> {/* Place the Toaster component here */}
+      <Toaster /> {/* Toast notification component */}
       <div
         style={{
           maxWidth: '400px',
@@ -112,8 +113,6 @@ export default function RackUpdate() {
         >
           Update Product
         </h2>
-
-        <br />
 
         <form onSubmit={handleSubmit}>
           <div>
