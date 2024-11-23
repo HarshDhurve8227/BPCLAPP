@@ -136,6 +136,13 @@ export default function RackUpdate() {
           <br />
           <button className='custom-table-head btn btn-outline-success' type="submit">Update</button>
         </form>
+
+         {/* Conditional rendering of NavLink after submission */}
+      {isSubmitted && (
+        <NavLink to={`/about`} className='btn btn-primary' style={{ marginTop: '20px' }}>
+          Go to Store Racks
+        </NavLink>
+      )}
       </div>
     </div>
   );
