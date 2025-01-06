@@ -5,6 +5,7 @@ import { toast, Toaster } from 'react-hot-toast'; // Import toast and Toaster
 import './AMCInsert.css';
 
 export default function AMCUpdate() {
+    
     const [equipment, setEquipment] = useState({
         equipment: '',
         company: '',
@@ -22,34 +23,48 @@ export default function AMCUpdate() {
     const navigate = useNavigate();
     const { id } = useParams(); // Get the ID from the URL
 
-    // Fetch existing equipment details
+    // Log the ID to ensure it's being passed correctly
+    console.log('Equipment ID from URL:', id);
+
+    // Fetch existing equipment details when ID changes
     useEffect(() => {
         const fetchEquipment = async () => {
             try {
                 const response = await axios.get(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/equipment/get/${id}`);
 
+                // Log the fetched data to verify it's being returned correctly
+                console.log('Fetched Equipment Data:', response.data);
+
+                // Check if the fetched data is an array and find the correct item by ID
                 if (Array.isArray(response.data) && response.data.length > 0) {
-                    const fetchedData = response.data[0];
+                    const fetchedData = response.data.find(item => item._id === id);
+                    
+                    if (fetchedData) {
+                        const formatDate = (dateString) => {
+                            return dateString ? dateString.split('T')[0] : '';
+                        };
 
-                    const formatDate = (dateString) => {
-                        return dateString ? dateString.split('T')[0] : '';
-                    };
+                        setEquipment({
+                            equipment: fetchedData.equipment || '',
+                            company: fetchedData.company || '',
+                            validity: {
+                                from: formatDate(fetchedData.validity?.from) || '',
+                                to: formatDate(fetchedData.validity?.to) || ''
+                            },
+                            pms: fetchedData.pms || '',
+                            vendorCode: fetchedData.vendorCode || '',
+                            contractNumber: fetchedData.contractNumber || '',
+                            concernedPerson: fetchedData.concernedPerson || '',
+                            mobileNumber: fetchedData.mobileNumber || '',
+                            lastDateOfChecking: formatDate(fetchedData.lastDateOfChecking) || '',
+                            nextDueDate: formatDate(fetchedData.nextDueDate) || '',
+                        });
 
-                    setEquipment({
-                        equipment: fetchedData.equipment || '',
-                        company: fetchedData.company || '',
-                        validity: {
-                            from: formatDate(fetchedData.validity?.from) || '',
-                            to: formatDate(fetchedData.validity?.to) || ''
-                        },
-                        pms: fetchedData.pms || '',
-                        vendorCode: fetchedData.vendorCode || '',
-                        contractNumber: fetchedData.contractNumber || '',
-                        concernedPerson: fetchedData.concernedPerson || '',
-                        mobileNumber: fetchedData.mobileNumber || '',
-                        lastDateOfChecking: formatDate(fetchedData.lastDateOfChecking) || '',
-                        nextDueDate: formatDate(fetchedData.nextDueDate) || '',
-                    });
+                        // Log the updated equipment state to confirm it's set correctly
+                        console.log('Updated Equipment State:', fetchedData);
+                    } else {
+                        setError('No equipment data found for this ID.');
+                    }
                 } else {
                     setError('No equipment data found.');
                 }
@@ -59,7 +74,12 @@ export default function AMCUpdate() {
         };
 
         fetchEquipment();
-    }, [id]);
+    }, [id]); // Add id as a dependency to refetch when id changes
+
+    // Log the state after setting it to check if it's updated
+    useEffect(() => {
+        console.log('Equipment State:', equipment);
+    }, [equipment]);  // This will log the state whenever it updates
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -75,7 +95,7 @@ export default function AMCUpdate() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+     
         try {
             await axios.put(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/equipment/updated/${id}`, equipment);
             toast.success('Equipment updated successfully!'); // Success toast
@@ -95,7 +115,7 @@ export default function AMCUpdate() {
             backgroundColor: '#f9f9f9',
             paddingTop: '50px'
         }}>
-            <Toaster /> {/* Place the Toaster component here */}
+            <Toaster /> {/* Toast notifications */}
             <div style={{
                 backgroundColor: 'white',
                 padding: '20px',

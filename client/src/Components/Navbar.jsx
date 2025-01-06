@@ -243,55 +243,55 @@ export default function Navbar(props) {
                           </a>
                         </li>
                         <li>
-                          <a className="dropdown-item" href="">
+                          <a className="dropdown-item" href="/as10">
                             Checklist for bulk lpg tank trunks at unloading location
                           </a>
                         </li>
 
                         <li>
-                          <a className="dropdown-item" href="">
+                          <a className="dropdown-item" href="/as09">
                             Packed Lorry In/Out Register
                           </a>
                         </li>
 
                         <li>
-                          <a className="dropdown-item" href="">
+                          <a className="dropdown-item" href="/as08">
                             Tank lorry In/Out Register
                           </a>
                         </li>
 
                         <li>
-                          <a className="dropdown-item" href="">
+                          <a className="dropdown-item" href="/as06">
                             Tank lorry Checklist
                           </a>
                         </li>
 
                         <li>
-                          <a className="dropdown-item" href="">
+                          <a className="dropdown-item" href="/as12">
                             Material in Register
                           </a>
                         </li>
 
                         <li>
-                          <a className="dropdown-item" href="">
+                          <a className="dropdown-item" href="/as14">
                             Material out Register 
                           </a>
                         </li>
 
                         <li>
-                          <a className="dropdown-item" href="">
+                          <a className="dropdown-item" href="/as15">
                             Returnable Material Register
                           </a>
                         </li>
 
                         <li>
-                          <a className="dropdown-item" href="">
+                          <a className="dropdown-item" href="/as16">
                             Handing over checklist to security
                           </a>
                         </li>
 
                         <li>
-                          <a className="dropdown-item" href="">
+                          <a className="dropdown-item" href="/as17">
                             Security guard petrolling record
                           </a>
                         </li>
