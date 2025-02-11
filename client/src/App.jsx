@@ -1,5 +1,5 @@
 // App.js
-import React from 'react';
+import React , {useState} from 'react';
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'bootstrap/dist/js/bootstrap.bundle.min';
@@ -40,7 +40,11 @@ import SecurityGuardPatrolling from './Components/SOPAdminAndSecurity/AS17';
 
 
 
+
 function App() {
+
+  const [notificationCount, setNotificationCount] = useState(0);
+
   return (
     <AuthProvider>
       <Router>
@@ -64,7 +68,14 @@ function App() {
 
             <Route path="/insertproducts/:rackNumber" element={<PrivateRoute element={<RackInsert />} />} />
             <Route path="/rackupdate/:rackNumber/:_id" element={<PrivateRoute element={<RackUpdate />} />} />
-            <Route path="/amc" element={<PrivateRoute element={<AMC />} />} />
+             
+            <Route path="/amc" element={
+    <PrivateRoute> 
+      <AMC setNotificationCount={setNotificationCount} /> 
+    </PrivateRoute>
+  }
+/>
+
 
             <Route path="/amcinsert" element={<PrivateRoute element={<AMCInsert />} />} />
             <Route path="/amcupdate/:id" element={<PrivateRoute element={<AMCUpdate />} />} />

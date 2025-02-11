@@ -8,8 +8,8 @@ export default function Navbar(props) {
   const { logout } = useContext(AuthContext);
   const [searchTerm, setSearchTerm] = useState('');
   const [highlighted, setHighlighted] = useState(false);
-
   const [showModal, setShowModal] = useState(false);
+  const [notificationCount, setNotificationCount] = useState(0);  // New state for notification count
 
   const handleNotificationClick = (e) => {
     e.preventDefault(); // Prevent default anchor behavior
@@ -100,6 +100,12 @@ export default function Navbar(props) {
         submenuLink.removeEventListener('click', (event) => handleClick(submenu, event));
       });
     };
+  }, []);
+
+  // Set the notification count here, you can update it dynamically from the parent component
+  useEffect(() => {
+    // Example: Fetch notification count or pass from a parent component
+    setNotificationCount(3); // Set the notification count (this should be dynamic)
   }, []);
 
   return (
@@ -206,6 +212,14 @@ export default function Navbar(props) {
                   </ul>
                 </li>
 
+                {/* Notification Bell Icon */}
+                <li className="notification-bell" onClick={handleNotificationClick}>
+                  <div className="bell-icon">
+                    <i className="fa fa-bell"></i>
+                    <div className="badge">{notificationCount}</div>
+                  </div>
+                </li>
+
                 <li className="dropdown" style={{ padding: '10px', marginBottom: '5px' }}>
                   <button
                     id="dropdownMenuButton"
@@ -229,7 +243,7 @@ export default function Navbar(props) {
 
                     <li>
                       <a className="dropdown-item" href="#">
-                      SOP BOTTLING OPS FORMAT 130411
+                        SOP BOTTLING OPS FORMAT 130411
                       </a>
                     </li>
                     <li className="dropdown-submenu">
@@ -274,7 +288,7 @@ export default function Navbar(props) {
 
                         <li>
                           <a className="dropdown-item" href="/as14">
-                            Material out Register 
+                            Material out Register
                           </a>
                         </li>
 
@@ -292,11 +306,9 @@ export default function Navbar(props) {
 
                         <li>
                           <a className="dropdown-item" href="/as17">
-                            Security guard petrolling record
+                            Security guard patrolling record
                           </a>
                         </li>
-
-                       
                       </ul>
                     </li>
                   </ul>
@@ -321,7 +333,7 @@ export default function Navbar(props) {
               </form>
 
               {/* Add the Logout Button */}
-              <button className="btn btn-danger text-white ms-2" onClick={handleLogout}>
+              <button className="btn btn-danger fs-4" onClick={handleLogout}>
                 Logout
               </button>
             </div>

@@ -3,14 +3,15 @@ import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import './AMC.css';
 
-export default function AMC() {
+export default function AMC({ setNotificationCount }) {
     const [equipments, setEquipments] = useState([]);
     const [error, setError] = useState('');
 
+    // Fetch the equipment data
     const fetchEquipments = async () => {
         try {
             const response = await axios.get('https://bpcl2024-a36b07a626d7.herokuapp.com/api/equipment/get');
-            console.log('Fetched Equipments:', response.data);
+            console.log('Fetched Equipments:', response.data);  // Debugging statement
             setEquipments(response.data);
         } catch (error) {
             console.error('Fetch error:', error);
@@ -18,7 +19,9 @@ export default function AMC() {
         }
     };
 
+    // Log when the component is rendered
     useEffect(() => {
+        console.log('AMC component is rendering...');
         fetchEquipments();
     }, []);
 
@@ -28,6 +31,31 @@ export default function AMC() {
         const date = new Date(dateString);
         return date.toLocaleDateString('en-US'); // Change 'en-US' to your desired locale
     };
+
+    // Function to check if the Next Due Date exceeds the threshold
+    const checkAMCDate = (nextDueDate) => {
+        const nextDue = new Date(nextDueDate);
+        const today = new Date();
+        const differenceInTime = today.getTime() - nextDue.getTime();
+        const differenceInDays = differenceInTime / (1000 * 3600 * 24); // Convert to days
+        return differenceInDays > 0; // Return true if the notification should be triggered
+    };
+
+    // Function to send WhatsApp message
+    const sendWhatsAppMessage = (mobileNumber) => {
+        const message = encodeURIComponent("This is a notification regarding AMC status.");
+        const url = `https://wa.me/${mobileNumber}?text=${message}`;
+        window.open(url, "_blank");
+    };
+
+    // Calculate the number of notifications
+    const notifications = equipments.filter(item => checkAMCDate(item.nextDueDate));
+
+    // Log notifications to ensure the count is correct
+    useEffect(() => {
+        console.log('Number of Notifications:', notifications.length);
+        setNotificationCount(notifications.length); // Pass the notification count to the parent component
+    }, [equipments, notifications.length, setNotificationCount]);
 
     return (
         <div>
@@ -70,29 +98,46 @@ export default function AMC() {
                     </thead>
                     <tbody className='custom-table-body'>
                         {equipments.length > 0 ? (
-                            equipments.map((item, index) => (
-                                <tr key={index}>
-                                    <td>{item.equipment || 'N/A'}</td>
-                                    <td>{item.company || 'N/A'}</td>
-                                    <td>{formatDate(item.validity?.from)}</td>
-                                    <td>{formatDate(item.validity?.to)}</td>
-                                    <td>{item.pms || 'N/A'}</td>
-                                    <td>{item.vendorCode || 'N/A'}</td>
-                                    <td>{item.contractNumber || 'N/A'}</td>
-                                    <td>{item.concernedPerson || 'N/A'}</td>
-                                    <td>{item.mobileNumber || 'N/A'}</td>
-                                    <td>{formatDate(item.lastDateOfChecking)}</td>
-                                    <td>{formatDate(item.nextDueDate)}</td>
-                                    <td>
-                                        <NavLink to={`/amcupdate/${item._id}`}>
-                                            <button className="btn btn-primary">Update</button>
-                                        </NavLink>
-                                    </td>
-                                    <td>
-                                        <button className="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                            ))
+                            equipments.map((item, index) => {
+                                const amcNotification = checkAMCDate(item.nextDueDate);
+
+                                return (
+                                    <tr key={index}>
+                                        <td>{item.equipment || 'N/A'}</td>
+                                        <td>{item.company || 'N/A'}</td>
+                                        <td>{formatDate(item.validity?.from)}</td>
+                                        <td>{formatDate(item.validity?.to)}</td>
+                                        <td>{item.pms || 'N/A'}</td>
+                                        <td>{item.vendorCode || 'N/A'}</td>
+                                        <td>{item.contractNumber || 'N/A'}</td>
+                                        <td>{item.concernedPerson || 'N/A'}</td>
+                                        <td>{item.mobileNumber || 'N/A'}</td>
+                                        <td>{formatDate(item.lastDateOfChecking)}</td>
+                                        <td>{formatDate(item.nextDueDate)}</td>
+                                        <td>
+                                            <NavLink to={`/amcupdate/${item._id}`}>
+                                                <button className="btn btn-primary">Update</button>
+                                            </NavLink>
+                                        </td>
+                                        <td>
+                                            <button className="btn btn-danger">Delete</button>
+                                        </td>
+
+                                        {/* Display Notification if Next Due Date exceeds */}
+                                        {amcNotification && (
+                                            <td colSpan="12" className="text-danger">
+                                                AMC exceeds for the equipment with Next Due Date: {formatDate(item.nextDueDate)}
+                                                <button
+                                                    className="btn btn-outline-info ms-3"
+                                                    onClick={() => sendWhatsAppMessage(item.mobileNumber)}
+                                                >
+                                                    Send WhatsApp Message
+                                                </button>
+                                            </td>
+                                        )}
+                                    </tr>
+                                );
+                            })
                         ) : (
                             <tr>
                                 <td colSpan="12">No equipment data available.</td>
