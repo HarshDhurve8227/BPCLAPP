@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
+import NotificationModal from '../NotificationModal';
 import './AMC.css';
 
 export default function AMC({ setNotificationCount }) {
     const [equipments, setEquipments] = useState([]);
     const [error, setError] = useState('');
+    const [notifications, setNotifications] = useState([]);
+    const [showModal, setShowModal] = useState(false);
 
     // Fetch the equipment data
     const fetchEquipments = async () => {
@@ -25,37 +28,42 @@ export default function AMC({ setNotificationCount }) {
         fetchEquipments();
     }, []);
 
-    // Format date function
+    // Format date function to display in 'MM/DD/YYYY'
     const formatDate = (dateString) => {
         if (!dateString) return 'N/A';
         const date = new Date(dateString);
-        return date.toLocaleDateString('en-US'); // Change 'en-US' to your desired locale
+        // Check if date is valid before formatting
+        if (isNaN(date.getTime())) return 'Invalid Date';
+        return date.toLocaleDateString('en-US'); // Ensure it's in 'MM/DD/YYYY' format
     };
 
     // Function to check if the Next Due Date exceeds the threshold
     const checkAMCDate = (nextDueDate) => {
-        const nextDue = new Date(nextDueDate);
+        const nextDue = new Date(nextDueDate); // Ensure this is a valid date object
         const today = new Date();
         const differenceInTime = today.getTime() - nextDue.getTime();
         const differenceInDays = differenceInTime / (1000 * 3600 * 24); // Convert to days
         return differenceInDays > 0; // Return true if the notification should be triggered
     };
 
-    // Function to send WhatsApp message
-    const sendWhatsAppMessage = (mobileNumber) => {
-        const message = encodeURIComponent("This is a notification regarding AMC status.");
+    // Function to send WhatsApp message with equipment name and Next Due Date
+    const sendWhatsAppMessage = (mobileNumber, equipmentName, nextDueDate) => {
+        const formattedNextDueDate = formatDate(nextDueDate); // Correctly format the date
+        const message = encodeURIComponent(`AMC exceeds for the ${equipmentName} with Next Due Date: ${formattedNextDueDate}.`);
         const url = `https://wa.me/${mobileNumber}?text=${message}`;
         window.open(url, "_blank");
     };
 
-    // Calculate the number of notifications
-    const notifications = equipments.filter(item => checkAMCDate(item.nextDueDate));
+    // Handle Notification Modal
+    const handleShowModal = () => setShowModal(true);
+    const handleCloseModal = () => setShowModal(false);
 
-    // Log notifications to ensure the count is correct
+    // Calculate the number of notifications and store them
     useEffect(() => {
-        console.log('Number of Notifications:', notifications.length);
-        setNotificationCount(notifications.length); // Pass the notification count to the parent component
-    }, [equipments, notifications.length, setNotificationCount]);
+        const amcNotifications = equipments.filter(item => checkAMCDate(item.nextDueDate));
+        setNotifications(amcNotifications);
+        setNotificationCount(amcNotifications.length); // Pass the notification count to the parent component
+    }, [equipments, setNotificationCount]);
 
     return (
         <div>
@@ -64,6 +72,17 @@ export default function AMC({ setNotificationCount }) {
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <button onClick={() => window.location.href = '/amcinsert'} className="custom-table-head btn btn-outline-success">Insert New Line</button>
             <br />
+            
+            {/* Notification Bell with Badge */}
+            <ul className="navbar-nav ms-auto">
+                <li className="notification-bell" onClick={handleShowModal}>
+                    <div className="bell-icon">
+                        <i className="fa fa-bell"></i>
+                        <div className="badge">{notifications.length}</div> {/* Display notification count */}
+                    </div>
+                </li>
+            </ul>
+
             <div className="table-wrapper">
                 <table className="table table-striped table-hover mt-3 fs-5">
                     <thead>
@@ -100,7 +119,6 @@ export default function AMC({ setNotificationCount }) {
                         {equipments.length > 0 ? (
                             equipments.map((item, index) => {
                                 const amcNotification = checkAMCDate(item.nextDueDate);
-
                                 return (
                                     <tr key={index}>
                                         <td>{item.equipment || 'N/A'}</td>
@@ -122,19 +140,6 @@ export default function AMC({ setNotificationCount }) {
                                         <td>
                                             <button className="btn btn-danger">Delete</button>
                                         </td>
-
-                                        {/* Display Notification if Next Due Date exceeds */}
-                                        {amcNotification && (
-                                            <td colSpan="12" className="text-danger">
-                                                AMC exceeds for the equipment with Next Due Date: {formatDate(item.nextDueDate)}
-                                                <button
-                                                    className="btn btn-outline-info ms-3"
-                                                    onClick={() => sendWhatsAppMessage(item.mobileNumber)}
-                                                >
-                                                    Send WhatsApp Message
-                                                </button>
-                                            </td>
-                                        )}
                                     </tr>
                                 );
                             })
@@ -146,6 +151,14 @@ export default function AMC({ setNotificationCount }) {
                     </tbody>
                 </table>
             </div>
+
+            {/* Notification Modal */}
+            <NotificationModal 
+                show={showModal} 
+                handleClose={handleCloseModal} 
+                notifications={notifications}
+                sendWhatsAppMessage={sendWhatsAppMessage}
+            />
         </div>
     );
 }

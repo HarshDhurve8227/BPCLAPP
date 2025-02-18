@@ -9,10 +9,11 @@ export default function Navbar(props) {
   const [searchTerm, setSearchTerm] = useState('');
   const [highlighted, setHighlighted] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [notificationCount, setNotificationCount] = useState(0);  // New state for notification count
+  const [notificationCount, setNotificationCount] = useState(0); // New state for notification count
 
+  // Handle Notification click
   const handleNotificationClick = (e) => {
-    e.preventDefault(); // Prevent default anchor behavior
+    e.preventDefault();
     setShowModal(true);
   };
 
@@ -23,7 +24,7 @@ export default function Navbar(props) {
   // Handle logout
   const handleLogout = () => {
     logout();
-    window.location.href = '/'; // Redirect to login or home page after logout
+    window.location.href = '/'; // Redirect to home or login after logout
   };
 
   // Handle search input change
@@ -31,13 +32,13 @@ export default function Navbar(props) {
     setSearchTerm(e.target.value);
   };
 
-  // Handle search button click
+  // Handle search button click and highlight
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchTerm.trim() === '') return;
 
     // Find all elements that might contain the search term
-    const elements = document.querySelectorAll('table td'); // Adjust this selector based on your page structure
+    const elements = document.querySelectorAll('table td'); // Adjust the selector based on your layout
 
     elements.forEach((element) => {
       if (element.textContent.toLowerCase().includes(searchTerm.toLowerCase())) {
@@ -61,11 +62,10 @@ export default function Navbar(props) {
     });
   };
 
-  // Add effect for handling dropdown submenus
+  // Handle dropdown hover and click
   useEffect(() => {
     const submenus = document.querySelectorAll('.dropdown-submenu');
 
-    // Store event handler functions to remove later
     const handleMouseOver = (submenu) => {
       submenu.querySelector('.dropdown-menu').style.display = 'block';
     };
@@ -83,11 +83,9 @@ export default function Navbar(props) {
     submenus.forEach((submenu) => {
       const submenuLink = submenu.querySelector('.dropdown-item');
 
-      // Show the submenu on hover
       submenuLink.addEventListener('mouseover', () => handleMouseOver(submenu));
       submenu.addEventListener('mouseleave', () => handleMouseLeave(submenu));
 
-      // Optionally, toggle on click
       submenuLink.addEventListener('click', (event) => handleClick(submenu, event));
     });
 
@@ -102,10 +100,9 @@ export default function Navbar(props) {
     };
   }, []);
 
-  // Set the notification count here, you can update it dynamically from the parent component
+  // Set the notification count (dynamically can be updated here)
   useEffect(() => {
-    // Example: Fetch notification count or pass from a parent component
-    setNotificationCount(3); // Set the notification count (this should be dynamic)
+    setNotificationCount(3); // Example static count, replace with dynamic if needed
   }, []);
 
   return (
@@ -152,21 +149,9 @@ export default function Navbar(props) {
                     SPARES
                   </button>
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li>
-                      <a className="dropdown-item" href="/products" aria-current="page">
-                        Electrician
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="/firefight">
-                        FireFighting
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="/technician">
-                        Technician
-                      </a>
-                    </li>
+                    <li><a className="dropdown-item" href="/products">Electrician</a></li>
+                    <li><a className="dropdown-item" href="/firefight">FireFighting</a></li>
+                    <li><a className="dropdown-item" href="/technician">Technician</a></li>
                   </ul>
                 </li>
 
@@ -180,11 +165,7 @@ export default function Navbar(props) {
                     AMC
                   </button>
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li>
-                      <a className="dropdown-item" href="/amc">
-                        Annual Maintainance Contract
-                      </a>
-                    </li>
+                    <li><a className="dropdown-item" href="/amc">Annual Maintenance Contract</a></li>
                   </ul>
                 </li>
 
@@ -198,17 +179,8 @@ export default function Navbar(props) {
                     RACKS
                   </button>
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li>
-                      <a className="dropdown-item" href="/about">
-                        Store Racks
-                      </a>
-                    </li>
-
-                    <li>
-                      <a className="dropdown-item" href="/rackadmin">
-                        Admin Racks
-                      </a>
-                    </li>
+                    <li><a className="dropdown-item" href="/about">Store Racks</a></li>
+                    <li><a className="dropdown-item" href="/rackadmin">Admin Racks</a></li>
                   </ul>
                 </li>
 
@@ -230,93 +202,32 @@ export default function Navbar(props) {
                     SOP HANDLING
                   </button>
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li>
-                      <a className="dropdown-item" href="" aria-current="page" onClick={() => console.log('Action')}>
-                        SOP LPG BULK HANDLING FORMATS 120411
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        SOP PLANNING FORMATS
-                      </a>
-                    </li>
-
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        SOP BOTTLING OPS FORMAT 130411
-                      </a>
-                    </li>
+                    <li><a className="dropdown-item" href="" aria-current="page" onClick={() => console.log('Action')}>SOP LPG BULK HANDLING FORMATS 120411</a></li>
+                    <li><a className="dropdown-item" href="#">SOP PLANNING FORMATS</a></li>
+                    <li><a className="dropdown-item" href="#">SOP BOTTLING OPS FORMAT 130411</a></li>
                     <li className="dropdown-submenu">
-                      <a className="dropdown-item" href="#">
-                        SOP ADMIN & SECURITY FORMATS
-                      </a>
+                      <a className="dropdown-item" href="#">SOP ADMIN & SECURITY FORMATS</a>
                       <ul className="dropdown-menu">
-                        <li>
-                          <a className="dropdown-item" href="/AS11">
-                            Checklist For Packed Lorries
-                          </a>
-                        </li>
-                        <li>
-                          <a className="dropdown-item" href="/as10">
-                            Checklist for bulk lpg tank trunks at unloading location
-                          </a>
-                        </li>
-
-                        <li>
-                          <a className="dropdown-item" href="/as09">
-                            Packed Lorry In/Out Register
-                          </a>
-                        </li>
-
-                        <li>
-                          <a className="dropdown-item" href="/as08">
-                            Tank lorry In/Out Register
-                          </a>
-                        </li>
-
-                        <li>
-                          <a className="dropdown-item" href="/as06">
-                            Tank lorry Checklist
-                          </a>
-                        </li>
-
-                        <li>
-                          <a className="dropdown-item" href="/as12">
-                            Material in Register
-                          </a>
-                        </li>
-
-                        <li>
-                          <a className="dropdown-item" href="/as14">
-                            Material out Register
-                          </a>
-                        </li>
-
-                        <li>
-                          <a className="dropdown-item" href="/as15">
-                            Returnable Material Register
-                          </a>
-                        </li>
-
-                        <li>
-                          <a className="dropdown-item" href="/as16">
-                            Handing over checklist to security
-                          </a>
-                        </li>
-
-                        <li>
-                          <a className="dropdown-item" href="/as17">
-                            Security guard patrolling record
-                          </a>
-                        </li>
+                        <li><a className="dropdown-item" href="/AS11">Checklist For Packed Lorries</a></li>
+                        <li><a className="dropdown-item" href="/as10">Checklist for bulk lpg tank trunks at unloading location</a></li>
+                        <li><a className="dropdown-item" href="/as09">Packed Lorry In/Out Register</a></li>
+                        <li><a className="dropdown-item" href="/as08">Tank lorry In/Out Register</a></li>
+                        <li><a className="dropdown-item" href="/as06">Tank lorry Checklist</a></li>
+                        <li><a className="dropdown-item" href="/as12">Material in Register</a></li>
+                        <li><a className="dropdown-item" href="/as14">Material out Register</a></li>
+                        <li><a className="dropdown-item" href="/as15">Returnable Material Register</a></li>
+                        <li><a className="dropdown-item" href="/as16">Handing over checklist to security</a></li>
+                        <li><a className="dropdown-item" href="/as17">Security guard patrolling record</a></li>
                       </ul>
                     </li>
                   </ul>
                 </li>
               </ul>
 
+              {/* Notification Modal */}
               <NotificationModal show={showModal} handleClose={handleCloseModal} />
 
+              {/* Search Form */}
               <form className="d-flex" role="search" onSubmit={handleSearch}>
                 <input
                   className="form-control me-2"
@@ -332,7 +243,7 @@ export default function Navbar(props) {
                 </button>
               </form>
 
-              {/* Add the Logout Button */}
+              {/* Logout Button */}
               <button className="btn btn-danger fs-4" onClick={handleLogout}>
                 Logout
               </button>

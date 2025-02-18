@@ -70,11 +70,11 @@ function App() {
             <Route path="/rackupdate/:rackNumber/:_id" element={<PrivateRoute element={<RackUpdate />} />} />
              
             <Route path="/amc" element={
-    <PrivateRoute> 
-      <AMC setNotificationCount={setNotificationCount} /> 
-    </PrivateRoute>
-  }
-/>
+  <PrivateRoute
+  element ={  <AMC setNotificationCount={setNotificationCount} /> }
+  />
+} />
+
 
 
             <Route path="/amcinsert" element={<PrivateRoute element={<AMCInsert />} />} />
