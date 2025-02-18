@@ -5,6 +5,7 @@ import NotificationModal from '../NotificationModal';
 import './AMC.css';
 
 export default function AMC({ setNotificationCount }) {
+
     const [equipments, setEquipments] = useState([]);
     const [error, setError] = useState('');
     const [notifications, setNotifications] = useState([]);
@@ -16,6 +17,7 @@ export default function AMC({ setNotificationCount }) {
             const response = await axios.get('https://bpcl2024-a36b07a626d7.herokuapp.com/api/equipment/get');
             console.log('Fetched Equipments:', response.data);  // Debugging statement
             setEquipments(response.data);
+            setError('');  // Clear any previous errors
         } catch (error) {
             console.error('Fetch error:', error);
             setError('Failed to fetch equipment: ' + error.message);
@@ -30,27 +32,59 @@ export default function AMC({ setNotificationCount }) {
 
     // Format date function to display in 'MM/DD/YYYY'
     const formatDate = (dateString) => {
-        if (!dateString) return 'N/A';
+        if (!dateString) return 'N/A';  // If no date, return 'N/A'
+        
         const date = new Date(dateString);
-        // Check if date is valid before formatting
-        if (isNaN(date.getTime())) return 'Invalid Date';
-        return date.toLocaleDateString('en-US'); // Ensure it's in 'MM/DD/YYYY' format
+        console.log('Parsing Date:', dateString, 'Result:', date);  // Debugging statement
+
+        // Check if date is valid
+        if (isNaN(date.getTime())) {
+            console.error('Invalid Date:', dateString);
+            return 'Invalid Date';
+        }
+
+        // Format the date in MM/DD/YYYY
+        const month = date.getMonth() + 1; // Months are 0-indexed
+        const day = date.getDate();
+        const year = date.getFullYear();
+        
+        // Return formatted date with leading zeroes where needed
+        return `${month < 10 ? '0' + month : month}/${day < 10 ? '0' + day : day}/${year}`;
     };
 
     // Function to check if the Next Due Date exceeds the threshold
     const checkAMCDate = (nextDueDate) => {
         const nextDue = new Date(nextDueDate); // Ensure this is a valid date object
         const today = new Date();
+
+        // Check if the next due date is valid
+        if (isNaN(nextDue.getTime())) {
+            console.error('Invalid Date:', nextDueDate);
+            return false; // Return false if invalid date
+        }
+
         const differenceInTime = today.getTime() - nextDue.getTime();
         const differenceInDays = differenceInTime / (1000 * 3600 * 24); // Convert to days
-        return differenceInDays > 0; // Return true if the notification should be triggered
+
+        // Trigger notification if the next due date is in the past (difference > 0)
+        return differenceInDays > 0;
     };
 
     // Function to send WhatsApp message with equipment name and Next Due Date
     const sendWhatsAppMessage = (mobileNumber, equipmentName, nextDueDate) => {
+        // Log the received parameters for debugging
+        console.log('Sending WhatsApp Message:', { mobileNumber, equipmentName, nextDueDate });
+
+        if (!equipmentName || !nextDueDate) {
+            console.error('Missing parameters for WhatsApp message:', { equipmentName, nextDueDate });
+            return;
+        }
+
         const formattedNextDueDate = formatDate(nextDueDate); // Correctly format the date
-        const message = encodeURIComponent(`AMC exceeds for the ${equipmentName} with Next Due Date: ${formattedNextDueDate}.`);
+        const message = encodeURIComponent(`AMC has expired for the equipment: ${equipmentName} with Next Due Date: ${formattedNextDueDate}.`);
+        // Ensure the message URL is correctly encoded and passed to WhatsApp
         const url = `https://wa.me/${mobileNumber}?text=${message}`;
+        // Open WhatsApp in a new tab or window
         window.open(url, "_blank");
     };
 
@@ -139,6 +173,14 @@ export default function AMC({ setNotificationCount }) {
                                         </td>
                                         <td>
                                             <button className="btn btn-danger">Delete</button>
+                                        </td>
+                                        <td>
+                                            <button
+                                                className="btn btn-warning"
+                                                onClick={() => sendWhatsAppMessage(item.mobileNumber, item.equipment, item.nextDueDate)}
+                                            >
+                                                Send WhatsApp
+                                            </button>
                                         </td>
                                     </tr>
                                 );
