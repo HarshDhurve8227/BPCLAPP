@@ -10,7 +10,7 @@ const equipmentSchema = new mongoose.Schema({
     pms: {
         type: String,
         required: true,
-        enum: ['Monthly', 'Quarterly'], // Define valid options
+        enum: ['Monthly', 'Quarterly', 'Yearly', 'Fortnightly'], // Define valid options
     },
     vendorCode: { type: String, required: true },
     contractNumber: { type: String, required: true },

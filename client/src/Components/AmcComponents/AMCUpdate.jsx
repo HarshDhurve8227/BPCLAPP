@@ -5,8 +5,9 @@ import { toast, Toaster } from 'react-hot-toast'; // Import toast and Toaster
 import './AMCInsert.css';
 
 export default function AMCUpdate() {
-    
+
     const [equipment, setEquipment] = useState({
+  
         equipment: '',
         company: '',
         validity: { from: '', to: '' },
@@ -17,6 +18,7 @@ export default function AMCUpdate() {
         mobileNumber: '',
         lastDateOfChecking: '',
         nextDueDate: '',
+
     });
 
     const [error, setError] = useState('');
@@ -29,6 +31,8 @@ export default function AMCUpdate() {
     // Fetch existing equipment details when ID changes
     useEffect(() => {
         const fetchEquipment = async () => {
+
+
             try {
                 const response = await axios.get(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/equipment/get/${id}`);
 
@@ -153,16 +157,18 @@ export default function AMCUpdate() {
                         <label className="custom-table-head">
                             Validity To:
                             <input type="date" name="to" value={equipment.validity.to} onChange={handleChange} />
-                        </label>
-                    </div>
-                    <br />
-                    <div>
+                        </label>      
+                    </div>           
+                    <br />          
+                    <div>            
                         <label className="custom-table-head">
                             PMS:
                             <select name="pms" value={equipment.pms} onChange={handleChange}>
                                 <option value="">Select PMS</option>
                                 <option value="Monthly">Monthly</option>
                                 <option value="Quarterly">Quarterly</option>
+                                <option value="Quarterly">Yearly</option>
+                <option value="Quarterly">Fortnightly</option>
                             </select>
                         </label>
                     </div>
@@ -214,4 +220,5 @@ export default function AMCUpdate() {
             </div>
         </div>
     );
-}
+  }
+  

@@ -111,6 +111,8 @@ export default function AMCInsert() {
                 <option value="">Select PMS</option>
                 <option value="Monthly">Monthly</option>
                 <option value="Quarterly">Quarterly</option>
+                <option value="Quarterly">Yearly</option>
+                <option value="Quarterly">Fortnightly</option>
               </select>
             </label>
           </div>
