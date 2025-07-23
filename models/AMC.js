@@ -11,7 +11,9 @@ const equipmentSchema = new mongoose.Schema({
         type: String,
         required: true,
         enum: ['Monthly', 'Quarterly', 'Yearly', 'Fortnightly'], // Define valid options
+
     },
+
     vendorCode: { type: String, required: true },
     contractNumber: { type: String, required: true },
     concernedPerson: { type: String, required: true },

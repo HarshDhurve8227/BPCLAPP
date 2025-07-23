@@ -103,16 +103,20 @@ const TankLorryChecklist = () => {
               onChange={(e) => handleInputChange(e, 'driverName')}
             />
           </div>
+
+
           <div>
             <label>Transporter: </label>
             <input
               type="text"
               value={formData.transporter}
-              onChange={(e) => handleInputChange(e, 'transporter')}
+              onChange={(e) => handleInputChange(e, 'transporter')}  
             />
           </div>
         </div>
 
+      
+                                   
         {/* Checkpoints */}
         <table className="checklist-table">
           <thead>
@@ -149,6 +153,7 @@ const TankLorryChecklist = () => {
         </table>
 
         {/* Signature Fields */}
+
         <div className="signatures">
           <div>
             <label>Checked by: </label>
@@ -158,6 +163,7 @@ const TankLorryChecklist = () => {
               onChange={(e) => handleInputChange(e, 'checkedBy')}
             />
           </div>
+
           <div>
             <label>Supervisor: </label>
             <input

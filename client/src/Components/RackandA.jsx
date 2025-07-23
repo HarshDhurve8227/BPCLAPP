@@ -4,6 +4,8 @@ import axios from "axios";
 import './Product.css';
 import { NavLink } from "react-router-dom";
 
+
+
 export default function About() {
   const technicianKosanRacks = [1, 2];
   const technicianRacks = [3, 4, 5, 6, 14, 15, 16, 17, 23, 24];

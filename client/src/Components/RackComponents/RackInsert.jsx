@@ -9,12 +9,14 @@ export default function RackInsert() {
   const { rackNumber } = useParams();
 
   const [formData, setFormData] = useState({
+
     section: '',
     materialName: '',
     availableStock: '',
     issue: '',
     receit: 0,
     closingStock: '',
+    
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);

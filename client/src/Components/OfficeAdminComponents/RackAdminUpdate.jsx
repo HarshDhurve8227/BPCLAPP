@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import { useParams } from "react-router-dom";  // Import useParams to get route params
 
 // This component will handle updating file name by _id
@@ -45,13 +46,17 @@ export default function RackAdminUpdate({ onUpdate }) {
         setFileName(event.target.value);
     };
 
+
     // Handle form submission to update file details
-    const handleUpdate = async (event) => {
+    const handleUpdate = async (event) => { 
+
         event.preventDefault();
 
         if (!fileName.trim()) {
+
             setError("File name cannot be empty.");
             return;
+
         }
 
         const updatedFile = {

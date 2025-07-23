@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import './Login.css'
+import './Login.css';
+import logo from './images/1723176521233.png';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -22,8 +23,8 @@ const Login = () => {
 
       const data = await response.json();
       if (response.ok) {
-        login(data.token); // Update AuthContext with the new token
-        navigate('/home'); // Redirect to home page on successful login
+        login(data.token);
+        navigate('/home');
       } else {
         console.error('Login failed:', data.message);
       }
@@ -33,96 +34,36 @@ const Login = () => {
   };
 
   return (
-    <section className="vh-100">
-  <div className="container-fluid h-custom">
-    <div className="row d-flex justify-content-center align-items-center h-100">
-      <div className="col-md-9 col-lg-6 col-xl-5">
-        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-          className="img-fluid" alt="Sample image"/>
-      </div>
-      <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+    <div className="login-container">
+      <div className="login-card">
+        <img src={logo} alt="BPCL Logo" className="bpcl-logo" />
+        <h2>Welcome Back</h2>
+        <p className="subtitle">Sign in to continue to <strong>BPCL Portal</strong></p>
         <form onSubmit={handleSubmit}>
-          <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-            <p className="lead fw-normal mb-0 me-3">Sign in with <span className='text-danger'>BPCL </span>  </p>
-            <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-floating mx-1">
-              <i className="fab fa-facebook-f"></i>
-            </button>
-
-            <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-floating mx-1">
-              <i className="fab fa-twitter"></i>
-            </button>
-
-            <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-floating mx-1">
-              <i className="fab fa-linkedin-in"></i>
-            </button>
-          </div>
-
-          <div className="divider d-flex align-items-center my-4">
-            <p className="text-center fw-bold mx-3 mb-0">Or</p>
-          </div>
-
-          <div data-mdb-input-init className="form-outline mb-4">
           <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-        required
-            />
-            <label className="form-label" htmlFor="form3Example3">Email address</label>
-          </div>
-
-          <div data-mdb-input-init className="form-outline mb-3">
+            type="email"
+            placeholder="Email address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="input-field"
+          />
           <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-        required
-      />
-            <label className="form-label" htmlFor="form3Example4">Password</label>
-          </div>
-
-          <div className="d-flex justify-content-between align-items-center">
-            <div className="form-check mb-0">
-              <input className="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-              <label className="form-check-label" htmlFor="form2Example3">
-                Remember me
-              </label>
-            </div>
-            <a href="#!" className="text-body">Forgot password?</a>
-          </div>
-
-          <div className="text-center text-lg-start mt-4 pt-2">
-            <button type="submit" data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-lg"
-              style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' }}>Login</button>
-            <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="/register"
-                className="link-danger">Register</a></p>
-          </div>
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className="input-field"
+          />
+          <button type="submit" className="login-btn">Login</button>
         </form>
+        <div className="bottom-text">
+          <p>Don't have an account? <a href="/register">Register</a></p>
+        </div>
       </div>
     </div>
-  </div>
-  <div className="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
-    <div className="text-white mb-3 mb-md-0"></div>
-    <div>
-      <a href="#!" className="text-white me-4">
-        <i className="fab fa-facebook-f"></i>
-      </a>
-      <a href="#!" className="text-white me-4">
-        <i className="fab fa-twitter"></i>
-      </a>
-      <a href="#!" className="text-white me-4">
-        <i className="fab fa-google"></i>
-      </a>
-      <a href="#!" className="text-white">
-        <i className="fab fa-linkedin-in"></i>
-      </a>
-    </div>
-  </div>
-</section>
+  );
+};
 
-  )
-}
-
-export default Login
+export default Login;

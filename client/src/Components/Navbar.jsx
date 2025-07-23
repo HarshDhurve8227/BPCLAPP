@@ -114,7 +114,7 @@ export default function Navbar(props) {
               www.bpspareslpgnagpur.com
             </p>
           </div>
-          <img id="resize-image" src={myLogo} alt="Logo" className="fixed-size-image" />
+          
         </div>
 
         <nav className="navbar navbar-expand-lg bg-info">
@@ -135,14 +135,14 @@ export default function Navbar(props) {
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
                   <a className="nav-link active text-white fs-4" aria-current="page" href="/home">
-                    {props.title}
+                  {props.title}
                   </a>
                 </li>
 
                 <li className="dropdown" style={{ padding: '10px', marginBottom: '5px' }}>
                   <button
                     id="dropdownMenuButton"
-                    className="btn btn-dark btn-outline-warning dropdown-toggle nav-link active text-dark"
+                    className="btn btn-dark  dropdown-toggle nav-link active text-dark"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
@@ -158,7 +158,7 @@ export default function Navbar(props) {
                 <li className="dropdown" style={{ padding: '10px', marginBottom: '5px' }}>
                   <button
                     id="dropdownMenuButton"
-                    className="btn btn-dark btn-outline-warning dropdown-toggle nav-link active text-dark"
+                    className="btn btn-dark  dropdown-toggle nav-link active text-dark"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
@@ -172,7 +172,7 @@ export default function Navbar(props) {
                 <li className="dropdown" style={{ padding: '10px', marginBottom: '5px' }}>
                   <button
                     id="dropdownMenuButton"
-                    className="btn btn-dark btn-outline-warning dropdown-toggle nav-link active text-dark"
+                    className="btn btn-dark  dropdown-toggle nav-link active text-dark"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
@@ -195,7 +195,7 @@ export default function Navbar(props) {
                 <li className="dropdown" style={{ padding: '10px', marginBottom: '5px' }}>
                   <button
                     id="dropdownMenuButton"
-                    className="btn btn-dark btn-outline-warning dropdown-toggle nav-link active text-dark"
+                    className="btn btn-dark  dropdown-toggle nav-link active text-dark"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
@@ -238,13 +238,13 @@ export default function Navbar(props) {
                   onChange={handleChange}
                   style={{ width: '50%' }} // Set the width to 50%
                 />
-                <button className="btn btn-dark fs-5 custom-table-head" type="submit">
+                <button className="btn btn-dark fs-10 " type="submit">
                   Search
                 </button>
               </form>
 
               {/* Logout Button */}
-              <button className="btn btn-danger fs-4" onClick={handleLogout}>
+              <button className="btn btn-danger fs-10" onClick={handleLogout}>
                 Logout
               </button>
             </div>

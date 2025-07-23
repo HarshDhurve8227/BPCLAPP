@@ -1,4 +1,8 @@
 import express from 'express';
+
+import { notifyOverdueAMCs } from '../controller/notifyController.js';
+
+
 import {
     CreateUser,
     GetUser,
@@ -6,7 +10,9 @@ import {
     DeleteUser,
     getProductById
 } from '../controller/UserController.js';
+
 import { saveChecklist } from '../controller/ChecklistController.js';
+
 import {
     insertRackData,
     getRackData,
@@ -21,11 +27,6 @@ import {
 } from '../controller/AmcController.js';
 
 import { getRackDataa , getRackDataaByyId , insertRackDataa , updateRackDataa , deleterackdataa} from '../controller/AdminRackController.js';
-
-
-
-
-
 
 const routers = express.Router();
 
@@ -48,6 +49,7 @@ routers.post('/checklist', (req, res, next) => {
     next();
 }, saveChecklist);
 
+
 // Equipment routes
 routers.post('/equipment/add', addEquipment);
 routers.get('/equipment/get', getEquipments);
@@ -68,6 +70,10 @@ routers.delete('/racks/:rackName/:fileId', deleterackdataa
  routers.get('/racks/:rackName/:_id', getRackDataaByyId
        
 );
+
+routers.get('/notify-overdue', notifyOverdueAMCs); // manual trigger
+
+
 
 
 export default routers;

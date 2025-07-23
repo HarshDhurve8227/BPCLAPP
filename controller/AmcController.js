@@ -2,6 +2,7 @@ import Equipment from "../models/AMC.js";
 
 // Create a new equipment
 export const addEquipment = async (req, res) => {
+
     const equipmentData = req.body;
 
     try {
@@ -12,7 +13,10 @@ export const addEquipment = async (req, res) => {
         console.error('Error adding equipment:', error);
         res.status(500).json({ success: false, message: 'Error adding equipment', error: error.message });
     }
+
 };
+
+
 
 // Get all equipment
 export const getEquipments = async (req, res) => {
@@ -23,6 +27,8 @@ export const getEquipments = async (req, res) => {
         res.status(500).json({ message: 'Error retrieving equipment', error });
     }
 };
+
+
 
 // Update an equipment
 export const updateEquipment = async (req, res) => {
@@ -39,6 +45,8 @@ export const updateEquipment = async (req, res) => {
         res.status(500).json({ message: 'Error updating equipment', error });
     }
 };
+
+
 
 // Delete an equipment
 export const deleteEquipment = async (req, res) => {

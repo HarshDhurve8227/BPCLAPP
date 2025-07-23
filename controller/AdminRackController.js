@@ -8,7 +8,8 @@ import Rack2A from '../models/CupboardRacks/Rack2A.js';
 import Rack2B from '../models/CupboardRacks/Rack2B.js';
 import Rack2C from '../models/CupboardRacks/Rack2C.js';
 import Rack2D from '../models/CupboardRacks/Rack2D.js';
-
+                                                                                                                                                               
+                  
 
 // Define your racks with exact casing to match collection names
 const racks = {
@@ -23,8 +24,10 @@ const racks = {
     // Add other racks here...
 };
 
+
 // Fetch rack data for a specific rack
 export const getRackDataa = async (req, res) => {
+
     let { rackName } = req.params;
 
     // Log the raw rack name received from the request
@@ -39,7 +42,9 @@ export const getRackDataa = async (req, res) => {
     if (!RackModel) {
         // If the rack model doesn't exist, return a 404 error
         return res.status(404).json({ message: `Rack model for '${rackName}' not found` });
+
     }
+
 
     try {
         // Fetch data from the appropriate Rack model (mongoose collection)
@@ -108,8 +113,9 @@ export const getRackDataaByyId = async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
-
-
+     
+     
+            
 // Insert data for a specific rack
 export const insertRackDataa = async (req, res) => {
     let { rackName } = req.params;
@@ -161,6 +167,8 @@ export const insertRackDataa = async (req, res) => {
         console.error(`Error inserting rack data for ${rackName}:`, error.message);
         res.status(500).json({ message: 'Internal server error' });
     }
+
+
 };
 
 export const updateRackDataa = async (req, res) => {
@@ -216,6 +224,7 @@ export const updateRackDataa = async (req, res) => {
     }
 };
 
+      
 
 import mongoose from 'mongoose';
 
@@ -275,3 +284,4 @@ export const deleterackdataa = async (req, res) => {
         res.status(500).json({ message: 'Error deleting rack document', error: error.message });
     }
 };
+

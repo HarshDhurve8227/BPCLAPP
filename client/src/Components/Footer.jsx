@@ -3,7 +3,6 @@ import {
   MDBFooter,
   MDBContainer,
   MDBIcon,
-  MDBInput,
   MDBCol,
   MDBRow,
   MDBBtn
@@ -11,162 +10,68 @@ import {
 
 export default function Footer() {
   return (
-    <MDBFooter className='text-center' color='white' bgColor='dark'>
-      <MDBContainer className='p-4'>
-        <section className='mb-4'>
-          <MDBBtn outline color="light" floating className='m-1' href='#!' role='button'>
+    <MDBFooter className='text-center text-lg-start text-muted bg-dark text-white'>
+      <section className='d-flex justify-content-center justify-content-lg-between p-4 border-bottom'>
+        <div className='me-5 d-none d-lg-block'>
+          <span>Get connected with us on social networks:</span>
+        </div>
+        <div>
+          <MDBBtn outline color='light' floating className='m-1' href='#!'>
             <MDBIcon fab icon='facebook-f' />
           </MDBBtn>
-
-          <MDBBtn outline color="light" floating className='m-1' href='#!' role='button'>
+          <MDBBtn outline color='light' floating className='m-1' href='#!'>
             <MDBIcon fab icon='twitter' />
           </MDBBtn>
-
-          <MDBBtn outline color="light" floating className='m-1' href='#!' role='button'>
-            <MDBIcon fab icon='google' />
-          </MDBBtn>
-
-          <MDBBtn outline color="light" floating className='m-1' href='#!' role='button'>
-            <MDBIcon fab icon='instagram' />
-          </MDBBtn>
-
-          <MDBBtn outline color="light" floating className='m-1' href='#!' role='button'>
+          <MDBBtn outline color='light' floating className='m-1' href='#!'>
             <MDBIcon fab icon='linkedin-in' />
           </MDBBtn>
-
-          <MDBBtn outline color="light" floating className='m-1' href='#!' role='button'>
-            <MDBIcon fab icon='github' />
+          <MDBBtn outline color='light' floating className='m-1' href='#!'>
+            <MDBIcon fab icon='instagram' />
           </MDBBtn>
-        </section>
+        </div>
+      </section>
 
-        
-
-        <section className='mb-4'>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt distinctio earum repellat quaerat
-            voluptatibus placeat nam, commodi optio pariatur est quia magnam eum harum corrupti dicta, aliquam
-            sequi voluptate quas.
-          </p>
-        </section>
-
-        <section className=''>
-          <MDBRow>
-            <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-              <h5 className='text-uppercase'>Links</h5>
-
-              <ul className='list-unstyled mb-0'>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 1
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 2
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 3
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 4
-                  </a>
-                </li>
-              </ul>
+      <section className=''>
+        <MDBContainer className='text-center text-md-start mt-5'>
+          <MDBRow className='mt-3'>
+            <MDBCol md='3' lg='4' xl='3' className='mb-4'>
+              <h6 className='text-uppercase fw-bold mb-4'>
+                <MDBIcon icon='cubes' className='me-3' />
+                Bharat Petroleum (LPG Division)
+              </h6>
+              <p>
+                Empowering India’s kitchens with clean energy. Delivering LPG with safety, service and speed across the nation.
+              </p>
             </MDBCol>
 
-            <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-              <h5 className='text-uppercase'>Links</h5>
-
-              <ul className='list-unstyled mb-0'>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 1
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 2
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 3
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 4
-                  </a>
-                </li>
-              </ul>
+            <MDBCol md='2' lg='2' xl='2' className='mb-4'>
+              <h6 className='text-uppercase fw-bold mb-4'>Quick Links</h6>
+              <p><a href='#!' className='text-white'>Home</a></p>
+              <p><a href='#!' className='text-white'>About Us</a></p>
+              <p><a href='#!' className='text-white'>Services</a></p>
+              <p><a href='#!' className='text-white'>Support</a></p>
             </MDBCol>
 
-            <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-              <h5 className='text-uppercase'>Links</h5>
-
-              <ul className='list-unstyled mb-0'>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 1
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 2
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 3
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 4
-                  </a>
-                </li>
-              </ul>
+            <MDBCol md='3' lg='2' xl='2' className='mb-4'>
+              <h6 className='text-uppercase fw-bold mb-4'>Useful</h6>
+              <p><a href='#!' className='text-white'>Your Account</a></p>
+              <p><a href='#!' className='text-white'>Feedback</a></p>
+              <p><a href='#!' className='text-white'>Safety Guidelines</a></p>
+              <p><a href='#!' className='text-white'>FAQs</a></p>
             </MDBCol>
 
-            <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-              <h5 className='text-uppercase'>Links</h5>
-
-              <ul className='list-unstyled mb-0'>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 1
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 2
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 3
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 4
-                  </a>
-                </li>
-              </ul>
+            <MDBCol md='4' lg='3' xl='3' className='mb-md-0 mb-4'>
+              <h6 className='text-uppercase fw-bold mb-4'>Contact</h6>
+              <p><MDBIcon icon='home' className='me-2' /> BPCL LPG Plant, India</p>
+              <p><MDBIcon icon='envelope' className='me-2' /> support@bpcl.in</p>
+              <p><MDBIcon icon='phone' className='me-2' /> +91 1800 22 4344</p>
             </MDBCol>
           </MDBRow>
-        </section>
-      </MDBContainer>
+        </MDBContainer>
+      </section>
 
-      <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-        © 2020 Copyright:
-        <a className='text-white' href='https://mdbootstrap.com/'>
-          MDBootstrap.com
-        </a>
+      <div className='text-center p-4' style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)' }}>
+        © {new Date().getFullYear()} BPCL | All rights reserved.
       </div>
     </MDBFooter>
   );

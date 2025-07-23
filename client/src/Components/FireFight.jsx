@@ -38,7 +38,7 @@ export default function FireFight() {
             // If user cancels, exit the function
             return;
         }
-
+  
         console.log(`Deleting product with id: ${id}`);
 
         try {
