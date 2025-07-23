@@ -53,7 +53,7 @@ const ChecklistForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:4000/api/checklist', formData);
+      await axios.post('https://bpcl2024-a36b07a626d7.herokuapp.com/api/checklist', formData);
       alert('Form saved successfully!');
     } catch (error) {
       console.error('Error saving form:', error);

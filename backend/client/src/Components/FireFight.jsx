@@ -12,7 +12,7 @@ export default function FireFight() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const fetchUser = await axios.get(`http://localhost:4000/api/${department}/product`);
+                const fetchUser = await axios.get(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/${department}/product`);
                 const response = fetchUser.data;
                 console.log('API Response:', response); // Log the response to check its structure
                 
@@ -38,11 +38,11 @@ export default function FireFight() {
             // If user cancels, exit the function
             return;
         }
-
+  
         console.log(`Deleting product with id: ${id}`);
 
         try {
-            const response = await axios.delete(`http://localhost:4000/api/${department}/delete/${id}`);
+            const response = await axios.delete(`https://bpcl2024-a36b07a626d7.herokuapp.com/api/${department}/delete/${id}`);
 
             if (response.data.success) {
                 console.log(response.data.message);

@@ -5,6 +5,13 @@ import cors from 'cors';
 import routers from './routes/routes.js';
 import authrouter from './routes/Authroutes.js';
 import path from 'path';
+import cron from 'node-cron';
+import { checkExpiredAMCsAndNotify } from './controller/amcCronJob.js';
+
+// index.js or server.js
+
+
+
 
 dotenv.config();
 const app = express();
@@ -26,6 +33,7 @@ app.use(cors());
 app.use('/api', routers);
 app.use('/api/auth', authrouter);
 
+
 const PORT = process.env.PORT || 4000;
 
 // Serve static files in production
@@ -45,6 +53,12 @@ if (process.env.NODE_ENV === 'production') {
 } else {
     console.log('Running in development mode');
 }
+
+// Cron job: runs every day at 8:00 AM
+cron.schedule('0 8 * * *', () => {
+    console.log('🕗 Running AMC expiry check...');
+    checkExpiredAMCsAndNotify();
+  });
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

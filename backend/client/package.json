@@ -19,10 +19,13 @@
     "jwt-decode": "^4.0.0",
     "mdb-react-ui-kit": "^8.0.0",
     "mdb-ui-kit": "^7.3.2",
+    "node-cron": "^4.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hot-toast": "^2.4.1",
     "react-router-dom": "^6.26.2",
+    "react-toastify": "^10.0.6",
+    "twilio": "^5.7.1",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
