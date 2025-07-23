@@ -1,0 +1,287 @@
+
+
+import Rack1A from '../models/CupboardRacks/Rack1A.js';
+import Rack1B from '../models/CupboardRacks/Rack1B.js';
+import Rack1C from '../models/CupboardRacks/Rack1C.js';
+import Rack1D from '../models/CupboardRacks/Rack1D.js';
+import Rack2A from '../models/CupboardRacks/Rack2A.js';
+import Rack2B from '../models/CupboardRacks/Rack2B.js';
+import Rack2C from '../models/CupboardRacks/Rack2C.js';
+import Rack2D from '../models/CupboardRacks/Rack2D.js';
+                                                                                                                                                               
+                  
+
+// Define your racks with exact casing to match collection names
+const racks = {
+    'Rack1A': Rack1A,
+    'Rack1B': Rack1B,
+    'Rack1C': Rack1C,
+    'Rack1D': Rack1D,
+    'Rack2A': Rack2A,
+    'Rack2B': Rack2B,
+    'Rack2C': Rack2C,
+    'Rack2D': Rack2D,
+    // Add other racks here...
+};
+
+
+// Fetch rack data for a specific rack
+export const getRackDataa = async (req, res) => {
+
+    let { rackName } = req.params;
+
+    // Log the raw rack name received from the request
+    console.log(`Received request for rack: '${rackName}'`);
+
+    // Trim any extra spaces or newline characters from rackName
+    rackName = rackName.trim();
+
+    // Ensure the rack name matches the exact case (no need to modify, just trim it)
+    const RackModel = racks[rackName];
+
+    if (!RackModel) {
+        // If the rack model doesn't exist, return a 404 error
+        return res.status(404).json({ message: `Rack model for '${rackName}' not found` });
+
+    }
+
+
+    try {
+        // Fetch data from the appropriate Rack model (mongoose collection)
+        const data = await RackModel.find();
+
+        // Modify the data to exclude _id and __v fields
+        const modifiedData = data.map(item => {
+            const { _id, __v, ...rest } = item.toObject(); // Convert to plain object and exclude unwanted fields
+            return rest;
+        });
+
+        res.status(200).json(modifiedData); // Return the modified data
+    } catch (error) {
+        console.error(`Error fetching rack data for ${rackName}:`, error.message);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+export const getRackDataaByyId = async (req, res) => {
+    let { rackName, _id } = req.params;
+
+    // Log the raw rack name and file ID received from the request
+    console.log(`Received request for rack: '${rackName}' and fileId: '${_id}'`);
+
+    // Trim any extra spaces or newline characters from rackName
+    rackName = rackName.trim();
+
+    // Ensure the rack name matches the exact case (no need to modify, just trim it)
+    const RackModel = racks[rackName];
+
+    if (!RackModel) {
+        // If the rack model doesn't exist, return a 404 error
+        return res.status(404).json({ message: `Rack model for '${rackName}' not found` });
+    }
+
+    try {
+        // Fetch data from the appropriate Rack model (mongoose collection)
+        const data = await RackModel.find();
+
+        // Modify the data to exclude _id and __v fields for all racks
+        const modifiedData = data.map(item => {
+            const { _id, __v, ...rest } = item.toObject(); // Exclude _id and __v fields
+            return rest;
+        });
+
+        // Now, find the specific file using _id from the files array
+        const rackData = modifiedData.find(rack =>
+            rack.files && rack.files.some(file => file._id.toString() === _id)
+        );
+
+        if (!rackData) {
+            return res.status(404).json({ message: `File with ID '${_id}' not found in rack '${rackName}'` });
+        }
+
+        // Find the file that matches the given _id
+        const file = rackData.files.find(file => file._id.toString() === _id);
+
+        if (!file) {
+            return res.status(404).json({ message: `File with ID '${_id}' not found` });
+        }
+
+        // Return the found file
+        res.status(200).json(file);
+    } catch (error) {
+        console.error(`Error fetching rack data for ${rackName}:`, error.message);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+     
+     
+            
+// Insert data for a specific rack
+export const insertRackDataa = async (req, res) => {
+    let { rackName } = req.params;
+
+    // Log the raw rack name received from the request
+    console.log(`Received request to insert into rack: '${rackName}'`);
+
+    // Trim any extra spaces or newline characters from rackName
+    rackName = rackName.trim();
+
+    // Ensure the rack name matches the exact case (no need to modify)
+    const RackModel = racks[rackName];
+
+    if (!RackModel) {
+        // If the rack model doesn't exist, return a 404 error
+        return res.status(404).json({ message: `Rack model for '${rackName}' not found` });
+    }
+
+    const { files } = req.body;
+
+    // Validate that files are provided and are in array format
+    if (!files || !Array.isArray(files) || files.length === 0) {
+        return res.status(400).json({ message: 'Files are required and must be an array' });
+    }
+
+    // Validate individual files (check if file has a valid id and name)
+    const invalidFiles = files.filter(file => {
+        if (typeof file.id !== 'number' || typeof file.name !== 'string' || file.name.trim() === '') {
+            return true;
+        }
+        return false;
+    });
+
+    if (invalidFiles.length > 0) {
+        // Return a 400 error if any file is invalid
+        return res.status(400).json({
+            message: 'Each file must have a valid id and name',
+            invalidFiles
+        });
+    }
+
+    const newEntry = new RackModel({ files });
+
+    try {
+        // Save the new rack entry into the database
+        await newEntry.save();
+        res.status(201).json(newEntry); // Return the newly created entry
+    } catch (error) {
+        console.error(`Error inserting rack data for ${rackName}:`, error.message);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+
+
+};
+
+export const updateRackDataa = async (req, res) => {
+    const { rackName, _id } = req.params;  // _id is passed in the URL
+    const { name } = req.body;  // File name to update
+
+    // Log the raw request
+    console.log(`Received request to update file in rack: '${rackName}', fileId: '${_id}'`);
+
+    // Trim any extra spaces or newline characters from rackName
+    rackName = rackName.trim();
+
+    // Ensure the rack name matches the exact case (no need to modify, just trim it)
+    const RackModel = racks[rackName];
+
+    if (!RackModel) {
+        // If the rack model doesn't exist, return a 404 error
+        return res.status(404).json({ message: `Rack model for '${rackName}' not found` });
+    }
+
+    // Validate that the name is not empty and is a string
+    if (!name || typeof name !== 'string' || name.trim() === '') {
+        return res.status(400).json({ message: 'File name is required and must be a non-empty string' });
+    }
+
+    try {
+        // Find the rack and look for the file by its _id
+        const rack = await RackModel.findOne({ "files._id": _id });
+
+        if (!rack) {
+            return res.status(404).json({ message: `File with _id '${_id}' not found in rack '${rackName}'` });
+        }
+
+        // Find the file to update within the files array
+        const file = rack.files.find(file => file._id.toString() === _id);
+
+        if (!file) {
+            return res.status(404).json({ message: `File with _id '${_id}' not found` });
+        }
+
+        // Update the file name
+        file.name = name.trim();
+
+        // Save the updated rack
+        await rack.save();
+
+        // Return the updated file as part of the response
+        res.status(200).json({ message: 'File updated successfully', file: file });
+
+    } catch (error) {
+        console.error(`Error updating file in ${rackName}:`, error.message);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+      
+
+import mongoose from 'mongoose';
+
+export const deleterackdataa = async (req, res) => {
+    const { rackName, fileId } = req.params;
+
+    console.log('Received Rack Name:', rackName);  // Log rackName
+    console.log('Received File ID:', fileId);  // Log fileId
+
+    try {
+        // Check if the rack name is correct and map it to the right model
+        const RackModel = racks[rackName];  // Dynamically pick the correct rack model based on rackName
+        if (!RackModel) {
+            console.log(`Rack not found: ${rackName}`);
+            return res.status(404).json({ message: `Rack '${rackName}' not found` });
+        }
+
+        // Check if fileId is a valid ObjectId format
+        let fileObjectId;
+        if (mongoose.Types.ObjectId.isValid(fileId)) {
+            fileObjectId = new mongoose.Types.ObjectId(fileId);  // Convert to ObjectId only if valid
+        } else {
+            console.log(`Invalid ObjectId format: ${fileId}`);
+            return res.status(400).json({ message: 'Invalid file ID format' });
+        }
+
+        // Find the rack document by its fileId inside the files array
+        const rack = await RackModel.findOne({ "files._id": fileObjectId });
+
+        if (!rack) {
+            console.log(`Rack not found in the database for fileId: ${fileId}`);
+            return res.status(404).json({ message: `Rack containing file with ID '${fileId}' not found` });
+        }
+
+        // Log the full rack document to check what fields are returned
+        console.log('Full Rack Document:', rack);
+
+        // Check if the file exists inside the rack (in the files array)
+        const fileExists = rack.files.some(file => file._id.toString() === fileObjectId.toString());
+
+        if (!fileExists) {
+            console.log(`File with ID ${fileId} not found in the rack`);
+            return res.status(404).json({ message: 'File not found in this rack' });
+        }
+
+        // Delete the entire rack document based on its _id
+        console.log(`File found in rack, deleting the entire rack document...`);
+
+        await RackModel.deleteOne({ _id: rack._id });
+
+        console.log('Rack document successfully deleted');
+
+        res.status(200).json({ message: 'Rack document deleted successfully' });
+
+    } catch (error) {
+        console.error('Error deleting rack document:', error);  // Log any errors
+        res.status(500).json({ message: 'Error deleting rack document', error: error.message });
+    }
+};
+

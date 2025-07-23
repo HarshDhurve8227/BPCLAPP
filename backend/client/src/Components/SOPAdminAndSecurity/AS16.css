@@ -1,0 +1,67 @@
+.handing-over-checklist-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  
+  .form-heading {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .category-heading {
+    font-size: 20px;
+    margin-top: 20px;
+    font-weight: bold;
+  }
+  
+  .checklist-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .checklist-table th,
+  .checklist-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .checklist-table input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+  }
+  
+  .date-time,
+  .handover-takenover,
+  .signatures {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .date-time input,
+  .handover-takenover input,
+  .signatures input {
+    width: 200px;
+    padding: 8px;
+  }
+  
+  .no-print {
+    text-align: center;
+  }
+  
+  button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  

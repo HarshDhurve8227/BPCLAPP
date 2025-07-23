@@ -1,0 +1,67 @@
+.tank-lorry-checklist-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  
+  .form-heading {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .basic-info,
+  .signatures {
+    margin-bottom: 20px;
+  }
+  
+  .basic-info div,
+  .signatures div {
+    margin-bottom: 10px;
+  }
+  
+  input[type="text"],
+  input[type="date"],
+  input[type="time"] {
+    width: 40%;
+    padding: 8px;
+    margin-top: 5px;
+  }
+  
+  .checklist-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .checklist-table th,
+  .checklist-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .checklist-table input[type="checkbox"] {
+    margin: 0 10px;
+  }
+  
+  .checklist-table input[type="text"] {
+    width: 80%;
+    padding: 5px;
+  }
+  
+  .no-print {
+    text-align: center;
+  }
+  
+  button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
