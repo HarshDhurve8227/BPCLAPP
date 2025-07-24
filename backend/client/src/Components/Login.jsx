@@ -38,7 +38,7 @@ const Login = () => {
       <div className="login-card">
         <img src={logo} alt="BPCL Logo" className="bpcl-logo" />
         <h2>Welcome Back</h2>
-        <p className="subtitle">Sign in to continue to <strong>BPCL Nagpur LPG BOTTLING PLANT</strong></p>
+        <p className="subtitle">Sign in to continue to <strong>BPCL LPG BOTTLING PLANT NAGPUR</strong></p>
         <form onSubmit={handleSubmit}>
           <input
             type="email"

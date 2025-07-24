@@ -49,13 +49,7 @@ export default function Home() {
             <p>Reliable supply for hotels, hospitals, and industrial applications.</p>
           </div>
 
-          <div className="feature-card">
-            <div className="feature-icon">
-              <img src="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/96/external-factory-industry-vitaliy-gorbachev-lineal-color-vitaly-gorbachev.png" alt="Bulk Supply" />
-            </div>
-            <h3>Bulk Solutions</h3>
-            <p>Customized energy solutions for diverse business needs.</p>
-          </div>
+          
         </div>
       </section>
 
@@ -76,13 +70,7 @@ export default function Home() {
             />
             <div className="gallery-caption">Automated Bottling Line</div>
           </div>
-          <div className="gallery-item">
-            <img
-              src="https://images.unsplash.com/photo-1629904853716-f0bc54eea6a4?auto=format&fit=crop&w=1470&q=80"
-              alt="BPCL Storage"
-            />
-            <div className="gallery-caption">Secure Storage Tanks</div>
-          </div>
+          
           <div className="gallery-item">
             <img
               src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1470&q=80"

@@ -1,0 +1,68 @@
+.packed-lorry-register-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.form-heading {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+h4 {
+    margin-top: 30px;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.register-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.register-table th,
+.register-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
+
+.register-table input[type="text"],
+.register-table input[type="number"],
+.register-table input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+}
+
+.officer-signature {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.officer-signature label {
+    font-weight: bold;
+}
+
+.officer-signature input {
+    width: 50%;
+    padding: 8px;
+}
+
+.no-print {
+    text-align: center;
+}
+
+button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
